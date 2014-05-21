@@ -1,6 +1,6 @@
 \documentclass[jou,apacite]{apa6}
 
-\title{PsyTurk: a flexible system for running behavioral experiments online through Amazon Mechanical Turk}
+\title{PsiTurk: a framework for running behavioral experiments}
 \shorttitle{APA style}
 
 \twoauthors{Author One}{Author Two}
@@ -15,27 +15,59 @@
 \maketitle
 \section{Introduction}
 GET DATA, FAST
-psiTurk takes the hassle out of collecting behavioral data online. Test your code, post HITs, serve secure ads, pay participants. psiTurk lets you focus on your research rather than software development.
+psiTurk takes the hassle out of collecting behavioral data online.
+Test your code, post HITs, serve secure ads, pay participants.
+psiTurk lets you focus on your research rather than software development.
 
-Amazon Mechanical Turk (AMT) is an online platform that lets you post a wide variety of tasks to a large pool of participants. Instead of spending weeks to run experiments in the lab, it lets you collect data of a large number of people within a couple of hours. Workers get paid a fixed amount for each HIT which is determined by the requester. Requesters can also make bonus payments to specific workers. Amazon collects a 10\% fee for each payment.
-AMT provides some very basic templates that you can use to design HITs (particularly questionnaires), but these will most likely not serve your purposes as an experimenter. The psiTurk toolbox is designed to help you run fully-customized and dynamic web-experiments on AMT. Specifically, it allows you to:
+Amazon Mechanical Turk (AMT) is an online platform that lets you post a wide variety of tasks to a large pool of participants.
+Instead of spending weeks to run experiments in the lab, it lets you collect data of a large number of people within a couple of hours.
+Workers get paid a fixed amount for each HIT which is determined by the requester.
+Requesters can also make bonus payments to specific workers. Amazon collects a 10\% fee for each payment.
+AMT provides some very basic templates that you can use to design HITs (particularly questionnaires), but these will most likely not serve your purposes as an experimenter.
+The psiTurk toolbox is designed to help you run fully-customized and dynamic web-experiments on AMT.
+Specifically, it allows you to:
 1. Run a web server for your experiment
 2. Test your experiment
 3. Interact with AMT to recruit, post HITs, filter, and pay participants (AMT workers)
 4. Manage databases and export data
 psiTurk also includes a powerful interactive command interface that lets you manage most of your AMT activity.
-%From the blog post: What experimenters want from online data collection 
-We got some great feedback from the community, with 201 people responding. The complete results are posted below.
-We heard from a wide range of academic fields. While most respondents (unsurprisingly) hailed from psychology, we also heard from researchers in linguistics, marketing, neuroscience, and economics. Most researchers (85\%) had some experience collecting behavioral data online in their labs.
+
+% From the blog post: What experimenters want from online data collection 
+We got some great feedback from the community, with 201 people responding.
+The complete results are posted below.
+We heard from a wide range of academic fields.
+While most respondents (unsurprisingly) hailed from psychology, we also heard from researchers in linguistics, marketing, neuroscience, and economics.
+Most researchers (85\%) had some experience collecting behavioral data online in their labs.
 There were two key insights we got from this data.
-First, there is a clear interest in and acceptance of the use of online data in research. This is interesting because even a few years ago there was much more skepticism that random people doing your experiment over the Internet would give valid data. Nearly 40\% suggested they treat papers reporting data collected online identically to that collected in a lab. Nearly all respondents selected large sample sizes (93\%) and a more diverse population (98\%) as potential advantages of collecting data online, with most listing a more diverse population (60\%) and cost (75\%) as factors as well. However, some researchers felt that online data is unreliable (35\%), the population is unrepresentative (25\%), and the technology required to collect data online is too complex (26\%). Half of respondents also stated that the experiment designs they were interested in do not work well online, and researchers outside the US indicated having difficulties using services like Amazon Mechanical Turk.
-Second, it appears there remain significant software challenges in helping most researchers do behavioral data collection online. The majority of our respondents listed Qualtrics, a service for conducting online surveys, as the tool they were currently most likely to use. At the same time, 79\% of respondents were interested in running full experiments online including multiple trials, fixation crosses, etc…
-The vast majority (94\%) of those surveyed indicated they were interested in new tools which simplified online data collection. Of the features people hoped such software would include, 90\% listed the ability to block repeat participation, and 70\% listed the ability to automatically pay people (incidentally, these are all features of our lab’s psiTurkpackage). In addition, 64\% said the availability of example code that one could use to jump-start their own experiment design was important (also a feature of psiTurk’s Experiment Exchange). A majority of participants thought a cloud-based solution with a GUI interface would be the preferred form for this type of software to take and 64\% indicated a general lack of experience or knowledge about web-based programming (e.g., Javascript, HTML, etc…). Interestingly, this is currently not how psiTurk works! (Stay tuned though, as we are currently developing greater cloud-compatibility.)
+First, there is a clear interest in and acceptance of the use of online data in research.
+This is interesting because even a few years ago there was much more skepticism that random people doing your experiment over the Internet would give valid data.
+Nearly 40\% suggested they treat papers reporting data collected online identically to that collected in a lab.
+Nearly all respondents selected large sample sizes (93\%) and a more diverse population (98\%) as potential advantages of collecting data online, with most listing a more diverse population (60\%) and cost (75\%) as factors as well.
+However, some researchers felt that online data is unreliable (35\%), the population is unrepresentative (25\%), and the technology required to collect data online is too complex (26\%).
+Half of respondents also stated that the experiment designs they were interested in do not work well online, and researchers outside the US indicated having difficulties using services like Amazon Mechanical Turk.
+Second, it appears there remain significant software challenges in helping most researchers do behavioral data collection online.
+The majority of our respondents listed Qualtrics, a service for conducting online surveys, as the tool they were currently most likely to use.
+At the same time, 79\% of respondents were interested in running full experiments online including multiple trials, fixation crosses, etc.
+The vast majority (94\%) of those surveyed indicated they were interested in new tools which simplified online data collection.
+Of the features people hoped such software would include, 90\% listed the ability to block repeat participation, and 70\% listed the ability to automatically pay people (incidentally, these are all features of our lab’s psiTurkpackage).
+In addition, 64\% said the availability of example code that one could use to jump-start their own experiment design was important (also a feature of psiTurk’s Experiment Exchange).
+A majority of participants thought a cloud-based solution with a GUI interface would be the preferred form for this type of software to take and 64\% indicated a general lack of experience or knowledge about web-based programming (e.g., Javascript, HTML, etc).
+Interestingly, this is currently not how psiTurk works! (Stay tuned though, as we are currently developing greater cloud-compatibility.)
 Anyway, that take home seems to be that the acceptance of online data collection is increasing, but the tools for doing this are still lacking in ways most relevant to behavioral researchers.
-We conducted this study exactly because our lab is working on open-source tools to help with this. While our approach doesn’t solve every problem that exists in the community, it does seem to tap many of the concerns these respondents have. This is definitely an interesting space for future development and there seems to be a market for tools which simplify online data collection and which provide services for those outside the US who can’t leverage the Amazon Mechanical Turk platform.
-%how to use AMT, what you have to do server wise
-psiTurk experiments can be hosted on almost anything that has an internet connection and a public port, such as an office computer or laptop. You’ll need a static IP to prevent your experiment’s URL from changing. Users without one (e.g., most home users) can use a dynamic DNS service to forward a URL to their dynamic IP. Here’s a list of free DDNS providers. You also may need to forward a port from your home routers to you personal computer.
-To run your experiment in a web browser you need to have at least some basic web programming skills (especially using HTML, CSS, and JavaScript). Once you mastered the basics, you can take advantage of the vast number of libraries and tools that can help you to build sharp and sophisticated experiments with the support of a large community of users. To get you started, psiTurk provides a fully functioning example experiment (Getting up and running with the basic Stroop task) that you can use as a template for your own study. psiTurk also includes a library of basic Javascript functions (psiTurk API) that you can insert into your code to handle page transitions, load images, and record data.
+We conducted this study exactly because our lab is working on open-source tools to help with this.
+While our approach doesn’t solve every problem that exists in the community, it does seem to tap many of the concerns these respondents have.
+This is definitely an interesting space for future development and there seems to be a market for tools which simplify online data collection and which provide services for those outside the US who can't leverage the Amazon Mechanical Turk platform.
+
+% how to use AMT, what you have to do server wise
+psiTurk experiments can be hosted on almost anything that has an internet connection and a public port, such as an office computer or laptop.
+You'll need a static IP to prevent your experiment's URL from changing. 
+Users without one (e.g., most home users) can use a dynamic DNS service to forward a URL to their dynamic IP.
+Here's a list of free DDNS providers.
+You also may need to forward a port from your home routers to you personal computer.
+To run your experiment in a web browser you need to have at least some basic web programming skills (especially using HTML, CSS, and JavaScript).
+Once you mastered the basics, you can take advantage of the vast number of libraries and tools that can help you to build sharp and sophisticated experiments with the support of a large community of users.
+To get you started, psiTurk provides a fully functioning example experiment (Getting up and running with the basic Stroop task) that you can use as a template for your own study.
+psiTurk also includes a library of basic Javascript functions (psiTurk API) that you can insert into your code to handle page transitions, load images, and record data.
 Other frameworks 
 
 \section{What problems does psiTurk solve?}
@@ -76,10 +108,23 @@ The experiment exchange allows researchers to share the code for psiTurk-compati
 \subsection{example subsection...}
 
 \section{View of the AMT worker}
-%Ads
-%This covers a bit of the view from the experimenter as well and how the ad works 
-%Taken from the psiturk website which also has graphics that we could use: http://psiturk.org/ad_server/
-In the standard use of Amazon Mechanical Turk, the "crowd" views your task or experiment on the Amazon Mechanical Turk webpage. For more complex designs or applications, this usually means you need a dedicated server or servers running that can provide that information to the crowd. When using psiTurk, your local computer, laptop, or lab machine is turned into a web server. In order to advertise your task, you post the HTML containing your "Ad" to the psiturk.org cloud service. It is quite literally the digital equivalent of hanging a poster for your experiment on bulletin boards around your university. Crowdworkers first interact  with you restudy ad hosted on the psiTurk Secure Ad Server. this ensures that all participants can view the ad and there are no browser security errors. If a worker agrees to perform the task, the psiTurk Secure Ad Server will then forward the participant seamlessly to your local computer which is running the psiTurk command line tool. Participants will complete the task, sending their data to your computer or database. Directly forwarding workers to your personal computer or server ensures data is only accessible to you, eliminating privacy concerns. another advantage of the psiTurk Secure Ad Server is that (similar to Google Analytics) it records information about who is accessing your ads, how many people decide not to do the task, the geographic location of crowd workers, prevents same worker from doing the task more than once, etc... This data can be particularly useful and important for researchers. 
+
+% Ads
+% This covers a bit of the view from the experimenter as well and how the ad works 
+% Taken from the psiturk website which also has graphics that we could use: http://psiturk.org/ad_server/
+
+In the standard use of Amazon Mechanical Turk, the "crowd" views your task or experiment on the Amazon Mechanical Turk webpage.
+For more complex designs or applications, this usually means you need a dedicated server or servers running that can provide that information to the crowd.
+When using psiTurk, your local computer, laptop, or lab machine is turned into a web server.
+In order to advertise your task, you post the HTML containing your "Ad" to the psiturk.org cloud service.
+It is quite literally the digital equivalent of hanging a poster for your experiment on bulletin boards around your university.
+Crowdworkers first interact  with you restudy ad hosted on the psiTurk Secure Ad Server.
+This ensures that all participants can view the ad and there are no browser security errors.
+If a worker agrees to perform the task, the psiTurk Secure Ad Server will then forward the participant seamlessly to your local computer which is running the psiTurk command line tool.
+Participants will complete the task, sending their data to your computer or database.
+Directly forwarding workers to your personal computer or server ensures data is only accessible to you, eliminating privacy concerns.
+Another advantage of the psiTurk Secure Ad Server is that (similar to Google Analytics) it records information about who is accessing your ads, how many people decide not to do the task, the geographic location of crowd workers, prevents same worker from doing the task more than once, etc... 
+This data can be particularly useful and important for researchers. 
 
 
 \section{View of the experimenter}
@@ -87,16 +132,16 @@ In the standard use of Amazon Mechanical Turk, the "crowd" views your task or ex
 \section{What are the limitations of psiTurk?}
 doesn't force particular javascript gui stuff
 multiperson real-time experiments (Doug?) 
-no WINDOZ
-showing videos is difficult (flash? html5? Slow connections? reload videos?) 
-how to pay people when they don’t finish hit completely?
+No Windows
+Showing videos is difficult (flash? html5? Slow connections? reload videos?) 
+How to pay people when they don’t finish hit completely?
 
 \section{Future directions}
-counterbalancing (integrate PlanOut (Facebook’s counterbalancing tool))
+counterbalancing (integrate PlanOut (Facebook's counterbalancing tool))
 Optimal Experimental Design/ Design of Experiments tools
-better multi-person/multi-session exp (websockets; doug?)?
+Better multi-person/multi-session exp (websockets; doug?)?
 Automate catch trials? How far did the worker get? Do we count them in the N? 
-limiting/throttling number of people doing the experiment at once
+Limiting/throttling number of people doing the experiment at once
 Video support
 
 \bibliography{sample}

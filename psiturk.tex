@@ -13,7 +13,7 @@
 
 \begin{document}
 \maketitle
-\section{Introduction}
+\section{Introduction, AC}
 GET DATA, FAST
 psiTurk takes the hassle out of collecting behavioral data online.
 Test your code, post HITs, serve secure ads, pay participants.
@@ -60,19 +60,11 @@ We conducted this study exactly because our lab is working on open-source tools 
 While our approach doesn't solve every problem that exists in the community, it does seem to tap many of the concerns these respondents have.
 This is definitely an interesting space for future development and there seems to be a market for tools which simplify online data collection and which provide services for those outside the US who can't leverage the Amazon Mechanical Turk platform.
 
-% how to use AMT, what you have to do server wise
-psiTurk experiments can be hosted on almost anything that has an internet connection and a public port, such as an office computer or laptop.
-You'll need a static IP to prevent your experiment's URL from changing. 
-Users without one (e.g., most home users) can use a dynamic DNS service to forward a URL to their dynamic IP.
-Here's a list of free DDNS providers.
-You also may need to forward a port from your home routers to you personal computer.
-To run your experiment in a web browser you need to have at least some basic web programming skills (especially using HTML, CSS, and JavaScript).
-Once you mastered the basics, you can take advantage of the vast number of libraries and tools that can help you to build sharp and sophisticated experiments with the support of a large community of users.
-To get you started, psiTurk provides a fully functioning example experiment (Getting up and running with the basic Stroop task) that you can use as a template for your own study.
-psiTurk also includes a library of basic Javascript functions (psiTurk API) that you can insert into your code to handle page transitions, load images, and record data.
-Other frameworks 
 
-\section{What problems does psiTurk solve?}
+
+\section{What problems does psiTurk solve?, AC}
+In a nutshell... [maybe add table]
+
 Flexible database options
 Server-side solutions
 Automatic bonusing
@@ -86,26 +78,7 @@ Templates (consent, instructions, errors, debrief)
 Includes industry standards (Bootstrap, jQuery, d3, etc) 
 Prevent same worker from performing your experiment multiple times
 
-SSL hosted Ad Server removes need to deal with complex web security issues (https, data mining on workers) 
-Participants recruited via Mechanical Turk first interact with your task via ads. Ads are simply the digital version of hanging a poster or flyer around your university building in order to recruit participants. Technically, ads are snippets of HTML code that describe what your task is about and what you're offering for compensation. As a result, they are the front line for any subject recruitment online. It's easy to overlook the importance of a good ad, and making that ad visible to as many participants as possible.
 
-The psiTurk Ad Server is a cloud-based solution for delivering ads to participants securely, while providing experiments useful information about who is taking their experiment, where they are connecting from, and possibly what other experiments they have completed.
-Automatically record if participant is switching between windows during the task
-Save data from experiment incrementally to maximize data collection
-Prevent users for quitting then restarting experiment
-Extendable Python based API: easily add new functionality
-Library of experiments you can adapt or replicate
-Fully open-source development helps catch bugs
-Easy to use interactive command line
-Simplifies paying participants quickly, including bonuses
-Automatically fill in conditions randomly and evenly
-Easily switch between AMT's sandbox and live site
-Since everything runs locally easy to debug/test (even w/o Internet!)
-Run experiments on local computer (via tunnel) (can run offline and online)
-Perfect for laboratory-based courses with undergrads (replicating studies)
-%Experiment exchange, "Get a head start", "friction-free replication", Standardization across labs/research groups aids replicability/code sharing
-psiTurk's experiment exchange is like an "app store" for experiment designs. Share your code, help others replicate, or check out someone else's experiment as a starting place for coding your own. The experiment exchange also allows researchers to quickly download psiTurk-compatible experiments and re-run them online. Same population, same task code, direct replication, better science.
-The experiment exchange allows researchers to share the code for psiTurk-compatible experiments. Other researchers can easily download the code from the exchange and re-run them online using the same population and task code. In addition, researchers can use the experiment exchange to learn about the code used in other people's experiments. 
 
 \subsection{example subsection...}
 
@@ -130,7 +103,48 @@ This data can be particularly useful and important for researchers.
 
 
 \section{View of the experimenter}
+SSL hosted Ad Server removes need to deal with complex web security issues (https, data mining on workers) 
+Participants recruited via Mechanical Turk first interact with your task via ads. Ads are simply the digital version of hanging a poster or flyer around your university building in order to recruit participants. Technically, ads are snippets of HTML code that describe what your task is about and what you're offering for compensation. As a result, they are the front line for any subject recruitment online. It's easy to overlook the importance of a good ad, and making that ad visible to as many participants as possible.
+
+
+% how to use AMT, what you have to do server wise
+psiTurk experiments can be hosted on almost anything that has an internet connection and a public port, such as an office computer or laptop.
+You'll need a static IP to prevent your experiment's URL from changing. 
+Users without one (e.g., most home users) can use a dynamic DNS service to forward a URL to their dynamic IP.
+Here's a list of free DDNS providers.
+You also may need to forward a port from your home routers to you personal computer.
+To run your experiment in a web browser you need to have at least some basic web programming skills (especially using HTML, CSS, and JavaScript).
+Once you mastered the basics, you can take advantage of the vast number of libraries and tools that can help you to build sharp and sophisticated experiments with the support of a large community of users.
+To get you started, psiTurk provides a fully functioning example experiment (Getting up and running with the basic Stroop task) that you can use as a template for your own study.
+psiTurk also includes a library of basic Javascript functions (psiTurk API) that you can insert into your code to handle page transitions, load images, and record data.
+Other frameworks 
+
+The psiTurk Ad Server is a cloud-based solution for delivering ads to participants securely, while providing experiments useful information about who is taking their experiment, where they are connecting from, and possibly what other experiments they have completed.
+Automatically record if participant is switching between windows during the task
+Save data from experiment incrementally to maximize data collection
+Prevent users for quitting then restarting experiment
+Extendable Python based API: easily add new functionality
+Library of experiments you can adapt or replicate
+Fully open-source development helps catch bugs
+Easy to use interactive command line
+Simplifies paying participants quickly, including bonuses
+Automatically fill in conditions randomly and evenly
+Easily switch between AMT's sandbox and live site
+Since everything runs locally easy to debug/test (even w/o Internet!)
+Run experiments on local computer (via tunnel) (can run offline and online)
+Perfect for laboratory-based courses with undergrads (replicating studies)
+%Experiment exchange, "Get a head start", "friction-free replication", Standardization across labs/research groups aids replicability/code sharing
+psiTurk's experiment exchange is like an "app store" for experiment designs. Share your code, help others replicate, or check out someone else's experiment as a starting place for coding your own. The experiment exchange also allows researchers to quickly download psiTurk-compatible experiments and re-run them online. Same population, same task code, direct replication, better science.
+The experiment exchange allows researchers to share the code for psiTurk-compatible experiments. Other researchers can easily download the code from the exchange and re-run them online using the same population and task code. In addition, researchers can use the experiment exchange to learn about the code used in other people's experiments. 
+
+
+
+
 \subsection{Command line interface (AR)}
+
+
+\subsection{Frontend: psiTurk.js}
+
 
 \section{What are the limitations of psiTurk?}
 doesn't force particular javascript gui stuff

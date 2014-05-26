@@ -81,25 +81,21 @@ Prevent same worker from performing your experiment multiple times
 
 \subsection{example subsection...}
 
-\section{View of the AMT worker (JVM)}
+\section{View of the AMT worker}
+AMT functions as an online listing service for online jobs.
+Workers search through a list of tasks, known as Human Intelligence Tasks (HITs). 
+When a worker examines a particular task, they are able to see metadata about the task, such as its title and how much it pays, and a website provided by the requester inside a web frame.
+This website serves as an advertisement for the task and must be hosted either by Amazon or on the requester's hosted servers.
+Once a worker has accepted a HIT, he or she agrees to complete it within a particular amount of time.
+The actual task is again served either from Amazon or the requester's own hosted service.
+The hosting both serves the job to the worker and collects data.
+Finally, the worker is returned the AMT worker page to be credited and continue to another HIT.
 
-% Ads
-% This covers a bit of the view from the experimenter as well and how the ad works 
-% Taken from the psiturk website which also has graphics that we could use: http://psiturk.org/ad_server/
-
-In the standard use of Amazon Mechanical Turk, the "crowd" views your task or experiment on the Amazon Mechanical Turk webpage.
-For more complex designs or applications, this usually means you need a dedicated server or servers running that can provide that information to the crowd.
-When using psiTurk, your local computer, laptop, or lab machine is turned into a web server.
-In order to advertise your task, you post the HTML containing your "Ad" to the psiturk.org cloud service.
-It is quite literally the digital equivalent of hanging a poster for your experiment on bulletin boards around your university.
-Crowdworkers first interact  with you restudy ad hosted on the psiTurk Secure Ad Server.
-This ensures that all participants can view the ad and there are no browser security errors.
-If a worker agrees to perform the task, the psiTurk Secure Ad Server will then forward the participant seamlessly to your local computer which is running the psiTurk command line tool.
-Participants will complete the task, sending their data to your computer or database.
-Directly forwarding workers to your personal computer or server ensures data is only accessible to you, eliminating privacy concerns.
-Another advantage of the psiTurk Secure Ad Server is that (similar to Google Analytics) it records information about who is accessing your ads, how many people decide not to do the task, the geographic location of crowd workers, prevents same worker from doing the task more than once, etc... 
-This data can be particularly useful and important for researchers. 
-
+PsiTurk helps an experimenter in both hosting the ad and delivering the experiment.
+First, PsiTurk provides a cloud service at \texttt{psiturk.org} for serving ads to workers.
+This service serves the ads with appropriate SSL certificates, something which can be difficult on many server configurations.\footnote{SSL certification has recently become a requirement for hosting content within an \texttt{iframe} on \texttt{mturk.com}.}
+Second, the PsiTurk web framework allows you to easily build and host your own experiment, running on your server or laptop and saving workers' data either to your own database  or to \texttt{psiturk.org}.
+This gives experimenters complete flexbility in terms of content while also offering a suite of tools to make experiment development easy.
 
 \section{View of the experimenter (TMG)}
 SSL hosted Ad Server removes need to deal with complex web security issues (https, data mining on workers) 

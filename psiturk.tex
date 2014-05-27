@@ -140,6 +140,33 @@ The experiment exchange allows researchers to share the code for psiTurk-compati
 
 \subsection{Frontend: psiTurk.js (DBM)}
 
+The javascript library psiTurk.js enables interaction with the server from within the experiment (javascript) code.
+Creating the psiTurk object.
+
+\subsubsection{Tracking a participant's progress in experiment}
+
+Finished instructions, completed HIT.
+
+\subsubsection{Saving experimental data}
+
+Data is stored in two formats: trial data and question data.
+
+\subsubsection{Automatic recording of browser interaction}
+
+One general limitation of web experiments is greater uncertainty about a participant's testing environment and engagement with the experiment.
+However, standard methods exist for recording many aspects of a user's interaction with a web browser, and this data can be useful for 1) tracking how an experiment was displayed, and 2) the level of a participant's engagement.
+
+Although it is possible to set the initial size of a browser window, a web participant is able to change the dimensions of the window, potentially obscuring or altering how the experiment is displayed.
+psiTurk.js automatically records changes in the size of the window.
+Similarly, a web participant can choose to switch focus away from the experiment window (e.g., to another browser window or a different application).
+psiTurk.js records every time that the experiment window loses and gains the participant's focus.
+This event data is automatically recorded and saved to the database.
+
+
+\subsubsection{Common experimental setup and presentation functions}
+
+Preloading html pages and images. Basic instructions element.
+
 
 \section{What are the limitations of psiTurk? (TMG)}
 doesn't force particular javascript gui stuff

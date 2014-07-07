@@ -137,6 +137,30 @@ The experiment exchange allows researchers to share the code for psiTurk-compati
 
 \subsection{Command line interface (AR)}
 
+PsiTurk runs as a command line interface (CLI) within a standard terminal window. Entering
+\texttt{psiturk} at the command line in any directory containing a psiTurk project launches the
+psiTurk CLI.
+
+The psiTurk CLI features a colorized prompt that provides important information at a glance, such as
+whether the server is running and the number of HITs currently running on MTurk. Commands are
+organized into groups based on their function, following a general ``\texttt{command subcommand
+arguments}'' format. For example, one can create a HIT by typing \texttt{hit create <\# assignments>
+<payment amount> <duration>} or list all active HITs with \texttt{hit list -{}-active}, and can
+restart the server with \texttt{server restart} or open the server log with \texttt{server log}. Tab
+completion makes it quick to type commands, and the \texttt{help} command can be used to show
+details on the usage of any command. The straighforward and consistent syntax of the CLI allows
+users to perform a wide variety of tasks--from creating HITs and paying workers, to launching Amazon
+Web Services database instances, to opening an experiment in a browser for debugging--that
+would otherwise be spread across a number of websites and programs. In most cases, a user of the
+psiTurk CLI will never have to log into the MTurk website except to add money to their MTurk
+requester account.
+
+There are several advantages to designing psiTurk as a simple CLI beyond its efficiency of use. This
+design makes the user-interface code clear and easy to read and write, allowing newcomers to quickly
+understand and contribute to the open-source project. Integrating a new feature into the interface
+is as simple as describing the syntax and functioning of a new command. The CLI also ensures that
+psiTurk is easy to interact with not just on a laptop or desktop but also on a remote server or in
+the cloud, where users may have terminal-only access.
 
 \subsection{Frontend: psiTurk.js (DBM)}
 

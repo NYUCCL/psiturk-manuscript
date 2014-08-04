@@ -56,13 +56,13 @@ While our approach doesn't solve every problem that exists in the community, it 
 This is definitely an interesting space for future development and there seems to be a market for tools which simplify online data collection and which provide services for those outside the US who can't leverage the Amazon Mechanical Turk platform.
 
 
-\subsection{Amazon Mechanical Turk (AMT)}
+\subsection{Amazon Mechanical Turk (AMT)} 
 
 Amazon Mechanical Turk (AMT) is an online platform that lets you post a wide variety of tasks to a large pool of participants.
 Instead of spending weeks to run experiments in the lab, it lets you collect data of a large number of people within a couple of hours.
 Workers get paid a fixed amount for each HIT which is determined by the requester.
 
-\subsubsection{From the worker's perspective}
+\subsubsection{From the worker's perspective (JVM)}
 AMT functions as an online listing service for online jobs.
 Workers search through a list of tasks, known as Human Intelligence Tasks (HITs). 
 When a worker examines a particular task, they are able to see metadata about the task, such as its title and how much it pays, and a website provided by the requester inside a web frame.
@@ -72,7 +72,7 @@ The actual task is again served either from Amazon or the requester's own hosted
 The hosting both serves the job to the worker and collects data.
 Finally, the worker is returned the AMT worker page to be credited and continue to another HIT.
 
-\subsubsection{From the requester's perspective}
+\subsubsection{From the requester's perspective (TMG)}
 Requesters can also make bonus payments to specific workers. Amazon collects a 10\% fee for each payment.
 AMT provides some very basic templates that you can use to design HITs (particularly questionnaires), but these will most likely not serve your purposes as an experimenter.
 The psiTurk toolbox is designed to help you run fully-customized and dynamic web-experiments on AMT.
@@ -136,14 +136,24 @@ The psiTurk Ad Server is a cloud-based solution for delivering ads to participan
 \section{Overview of the psiTurk system}
 
 
-\subsection{Command line interface: Managing HITs and serving the experiment}
+\subsection{Command line interface: Managing HITs and serving the experiment (AR)}
 
-PsiTurk runs as a command line interface (CLI) within a standard terminal window. Entering
+PsiTurk runs as a command line interface (CLI) within a standard terminal window.
+There are several advantages to designing psiTurk as a simple CLI beyond its efficiency of use. This
+design makes the user-interface code clear and easy to read and write, allowing newcomers to quickly
+understand and contribute to the open-source project. Integrating a new feature into the interface
+is as simple as describing the syntax and functioning of a new command. The CLI also ensures that
+psiTurk is easy to interact with not just on a laptop or desktop but also on a remote server or in
+the cloud, where users may have terminal-only access.
+ 
+Entering
 \texttt{psiturk} at the command line in any directory containing a psiTurk project launches the
 psiTurk CLI.
-
 The psiTurk CLI features a colorized prompt that provides important information at a glance, such as
-whether the server is running and the number of HITs currently running on MTurk. Commands are
+whether the server is running and the number of HITs currently running on MTurk. 
+
+\subsubsection{Managing HITs}
+Commands are
 organized into groups based on their function, following a general ``\texttt{command subcommand
 arguments}'' format. For example, one can create a HIT by typing \texttt{hit create <\# assignments>
 <payment amount> <duration>} or list all active HITs with \texttt{hit list -{}-active}, and can
@@ -157,13 +167,8 @@ psiTurk CLI will never have to log into the MTurk website except to add money to
 requester account.
 Easily switch between AMT's sandbox and live site.
 
-There are several advantages to designing psiTurk as a simple CLI beyond its efficiency of use. This
-design makes the user-interface code clear and easy to read and write, allowing newcomers to quickly
-understand and contribute to the open-source project. Integrating a new feature into the interface
-is as simple as describing the syntax and functioning of a new command. The CLI also ensures that
-psiTurk is easy to interact with not just on a laptop or desktop but also on a remote server or in
-the cloud, where users may have terminal-only access.
 
+\subsubsection{Serving an experiment}
 psiTurk experiments can be hosted on almost anything that has an internet connection and a public port, such as an office computer or laptop.
 You'll need a static IP to prevent your experiment's URL from changing. 
 Users without one (e.g., most home users) can use a dynamic DNS service to forward a URL to their dynamic IP.

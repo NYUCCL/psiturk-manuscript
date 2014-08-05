@@ -27,40 +27,34 @@ The principal goal of this framework is thus to handle common technical challeng
 
 \subsection{Survey of researchers' needs (AR)}
 
-In month, 2014 we conducted a survey to assess the methods and needs of behavioral researchers with respect to online experiments.
-We got some great feedback from the community, with 201 people responding.
-We heard from a wide range of academic fields.
-While most respondents (unsurprisingly) hailed from psychology, we also heard from researchers in linguistics, marketing, neuroscience, and economics.
+In early 2014 we conducted a survey to assess the methods and needs of behavioral researchers with
+respect to online experiments.  We collected responses from 201 researchers in psychology (58\%),
+linguistics (16\%), marketing (7\%), neuroscience (6\%), and economics (4\%), most of whom had some
+experience collecting behavioral data online in their labs (85\%).
 
-Most researchers (85\%) had some experience collecting behavioral data online in their labs.
- First, there is a clear interest in and acceptance of the use of online data in research.
-This is interesting because even a few years ago there was much more skepticism that random people doing your experiment over the Internet would give valid data.
-Nearly 40\% suggested they treat papers reporting data collected online identically to that collected in a lab.
-Nearly all respondents selected large sample sizes (93\%) and a more diverse population (98\%) as potential advantages of collecting data online, with most listing a more diverse population (60\%) and cost (75\%) as factors as well.
-However, some researchers felt that online data is unreliable (35\%), the population is unrepresentative (25\%), and the technology required to collect data online is too complex (26\%).
+These researchers showed a clear interest in online data collection. Nearly all listed fast data
+collection (98\%) and large sample sizes (93\%) as benefits of online data collection, with most
+interested in the potential for lower costs (75\%) and a more diverse population (60\%) as well. Nearly
+40\% stated that they treat papers reporting data collected online identically to that collected in
+a lab.
 
-Half of respondents also stated that the experiment designs they were interested in do not work well online, and researchers outside the US indicated having difficulties using services like Amazon Mechanical Turk.
-Second, it appears there remain significant software challenges in helping most researchers do behavioral data collection online.
-The majority of our respondents listed Qualtrics, a service for conducting online surveys, as the tool they were currently most likely to use.
-At the same time, 79\% of respondents were interested in running full experiments online including multiple trials, fixation crosses, etc.
+Respondents also felt that online data collected presented a set of unique challenges, as shown in
+Figure~\ref{fig:challenges}. Some felt that data collected online was unreliable (35\%) or the
+population unrepresentative (25\%). Many felt that experiment designs they were interested in did
+not work well online (50\%), or that web technology is too complex (25\%), and researchers based
+outside the US reported difficulty using services like Amazon Mechanical Turk (23\%).
 
 \begin{figure*}[tp]
 \centering
-\includegraphics[scale=.75]{challenges.pdf}
-\label{fig:challenges}
+\includegraphics[scale=.75]{figures/challenges.pdf}
 \caption{Challenges faced by 201 researchers who completed our survey on collecting behavioral data online.}
+\label{fig:challenges}
 \end{figure*}
 
-The vast majority (94\%) of those surveyed indicated they were interested in new tools which simplified online data collection.
-Of the features people hoped such software would include, 90\% listed the ability to block repeat participation, and 70\% listed the ability to automatically pay people (incidentally, these are all features of our lab's psiTurkpackage).
-In addition, 64\% said the availability of example code that one could use to jump-start their own experiment design was important (also a feature of psiTurk's Experiment Exchange).
-A majority of participants thought a cloud-based solution with a GUI interface would be the preferred form for this type of software to take and 64\% indicated a general lack of experience or knowledge about web-based programming (e.g., Javascript, HTML, etc).
-Interestingly, this is currently not how psiTurk works! (Stay tuned though, as we are currently developing greater cloud-compatibility.)
-
-Anyway, the take home seems to be that the acceptance of online data collection is increasing, but the tools for doing this are still lacking in ways most relevant to behavioral researchers.
-We conducted this study exactly because our lab is working on open-source tools to help with this.
-While our approach doesn't solve every problem that exists in the community, it does seem to tap many of the concerns these respondents have.
-This is definitely an interesting space for future development and there seems to be a market for tools which simplify online data collection and which provide services for those outside the US who can't leverage the Amazon Mechanical Turk platform.
+The majority of respondents (56\%) listed Qualtrics, a service for conducting online surveys, as the tool they
+were currently most likely to use, but most (79\%) expressed interest in being able to run full
+experiments including multiple, trials, fixation crosses, etc. The vast majority (94\%) reported
+interest in new tools that simplified online data collection.
 
 
 \subsection{Amazon Mechanical Turk (AMT)} 

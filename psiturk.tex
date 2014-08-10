@@ -1,18 +1,76 @@
-\documentclass[jou,apacite]{apa6}
+\RequirePackage{fix-cm}
+\documentclass[twocolumn]{svjour3}          % twocolumn
+\journalname{Behavior Research Methods}
 
-\title{psiTurk: A framework for running behavioral experiments online}
-\shorttitle{APA style}
 
-\twoauthors{Author One}{Author Two}
-\twoaffiliations{Institute of Psychology}{Freud's Institute}
+%\documentclass[jou,apacite]{apa6}
+%\shorttitle{Online behavioral research with psiTurk}
+%
+%\twoauthors{Author One}{Author Two}
+%\twoaffiliations{Institute of Psychology}{Freud's Institute}
+%
+%\abstract{psiTurk is really great and you should use it.}
+%
+%\rightheader{Online behavioral research with psiTurk}
+%\leftheader{Online behavioral research with psiTurk}
 
-\abstract{psiTurk is really great and you should use it.}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{graphicx}
 
-\rightheader{APA style}
-\leftheader{Author One}
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{frame=tb,
+  %language=Java,
+  aboveskip=5mm,
+  belowskip=5mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  frame=none,
+  breaklines=true,
+  breakatwhitespace=true
+  tabsize=3
+}
 
 \begin{document}
+
+\title{psiTurk: A framework for running behavioral experiments online}
+
+\author{First Author         \and
+        Second Author %etc.
+}
+
+
+%\authorrunning{Short form of author list} % if too long for running head
+
+\institute{F. Author \at
+              first address \\
+              Tel.: +123-45-678910\\
+              Fax: +123-45-678910\\
+              \email{fauthor@example.com}           %  \\
+%             \emph{Present address:} of F. Author  %  if needed
+           \and
+           S. Author \at
+              second address
+}
+
+\date{Received: date / Accepted: date}
+
 \maketitle
+
+\begin{abstract}
+Insert your abstract here.
+\keywords{Online experiments \and open science}
+\end{abstract}
+
 \section{Introduction (AC)}
 
 Online experiments are growing in popularity. 
@@ -38,18 +96,19 @@ interested in the potential for lower costs (75\%) and a more diverse population
 40\% stated that they treat papers reporting data collected online identically to that collected in
 a lab.
 
-Respondents also felt that online data collected presented a set of unique challenges, as shown in
-Figure~\ref{fig:challenges}. Some felt that data collected online was unreliable (35\%) or the
-population unrepresentative (25\%). Many felt that experiment designs they were interested in did
-not work well online (50\%), or that web technology is too complex (25\%), and researchers based
-outside the US reported difficulty using services like Amazon Mechanical Turk (23\%).
-
 \begin{figure*}[tp]
 \centering
 \includegraphics[scale=.75]{figures/challenges.pdf}
 \caption{Challenges faced by 201 researchers who completed our survey on collecting behavioral data online.}
 \label{fig:challenges}
 \end{figure*}
+
+Respondents also felt that online data collected presented a set of unique challenges, as shown in
+Figure~\ref{fig:challenges}. Some felt that data collected online was unreliable (35\%) or the
+population unrepresentative (25\%). Many felt that experiment designs they were interested in did
+not work well online (50\%), or that web technology is too complex (25\%), and researchers based
+outside the US reported difficulty using services like Amazon Mechanical Turk (23\%).
+
 
 The majority of respondents (56\%) listed Qualtrics, a service for conducting online surveys, as the tool they
 were currently most likely to use, but most (79\%) expressed interest in being able to run full
@@ -89,35 +148,53 @@ psiTurk also includes a powerful interactive command interface that lets you man
 
 Brief overview of how psiTurk addresses needs/challenges raised in the previous sections, before going on to a more detailed walkthrough in the next section.
 
-Flexible database options
 
-Server-side solutions
+\subsubsection{Better/More efficient interface to AMT}
 
 Automatic bonusing
 
-No need to install, configure and maintain complex webserver software (e.g., Apache, MySQL)
+Simplifies paying participants quickly, including bonuses
 
-Minimize security issues since server only runs while you want to collect data
+
+\subsubsection{Technical complexity and security}
 
 No need for dedicated server
 
-Ability to filter browsers, iPhones, tablets, etc. 
+No need to install, configure and maintain complex webserver software (e.g., Apache, MySQL)
+
+Flexible database options
+
+Includes industry standards (Bootstrap, jQuery, d3, etc)
 
 Custom routes
 
-Nicer interface to Mturk than Mturk 
+Minimize security issues since server only runs while you want to collect data
+
+Secure Ad server
+
+\subsubsection{Tailored to behavioral research}
+
+Ability to filter browsers, iPhones, tablets, etc. 
 
 Automatically fill in conditions randomly and evenly
 
 Templates (consent, instructions, errors, debrief)
 
-Includes industry standards (Bootstrap, jQuery, d3, etc) 
-
 Prevent same worker from performing your experiment multiple times
 
-Simplifies paying participants quickly, including bonuses
 
-The psiTurk Ad Server is a cloud-based solution for delivering ads to participants securely, while providing experiments useful information about who is taking their experiment, where they are connecting from, and possibly what other experiments they have completed.
+
+
+\subsection{Remaining challenges}
+
+Some of the concerns raised by survey respondents are inherent to online data collection.
+Reliability of data. 
+Note existing research about whether online experiments replicate lab versions.
+
+Do certain experiments not work well online?
+Requires careful consideration depending on the specific experimental design.
+
+Return to these challenges at the end of the paper.
 
 
 %\begin{table*}[t]
@@ -136,6 +213,24 @@ The psiTurk Ad Server is a cloud-based solution for delivering ads to participan
 
 \section{Overview of the psiTurk system}
 
+The structure of the psiTurk system is shown in Figure X.
+
+AMT
+
+psiTurk experiment server (local computer)
+
+Ad server
+
+Experiment exchange
+
+\subsection{Configuration and project structure}
+
+AMT keys.
+
+psiTurk keys.
+
+Anatomy of a psiturk experiment folder.
+
 
 \subsection{Command line interface: Managing HITs and serving the experiment (AR)}
 
@@ -150,26 +245,56 @@ the cloud, where users may have terminal-only access.
 Entering
 \texttt{psiturk} at the command line in any directory containing a psiTurk project launches the
 psiTurk CLI.
-The psiTurk CLI features a colorized prompt that provides important information at a glance, such as
-whether the server is running and the number of HITs currently running on MTurk. 
+The psiTurk CLI features a colorized prompt that provides important information at a glance, including
+whether the server is running, the current mode (``live" or ``sandbox", and the number of HITs currently running on AMT:
+
+\begin{lstlisting}
+[psiTurk server:off mode:sdbx #HITs:0]$
+\end{lstlisting}
+
+\noindent In some examples below, this prompt is truncated as \texttt{[psiTurk]\$} to indicate commands that occur within the psiTurk CLI, while commands that are entered on the command line are preceded simply by \texttt{\$}.
+
 
 \subsubsection{Managing HITs}
-Commands are
-organized into groups based on their function, following a general ``\texttt{command subcommand
-arguments}'' format. For example, one can create a HIT by typing \texttt{hit create <\# assignments>
-<payment amount> <duration>} or list all active HITs with \texttt{hit list -{}-active}, and can
-restart the server with \texttt{server restart} or open the server log with \texttt{server log}. Tab
-completion makes it quick to type commands, and the \texttt{help} command can be used to show
-details on the usage of any command. The straighforward and consistent syntax of the CLI allows
+Commands are organized into groups based on their function, following a general ``\texttt{command subcommand
+arguments}'' format. For example, one can create a HIT by typing 
+
+\begin{lstlisting}
+[psiTurk]$ hit create <# assignments> <$ amount> <duration>
+\end{lstlisting}
+
+What happens after you create a HIT?
+
+%\noindent or list all active HITs with 
+%
+%\begin{lstlisting}
+%[psiTurk]$ hit list --active
+%\end{lstlisting}
+
+Can restart the server with \texttt{server restart} or open the server log with \texttt{server log}. 
+Tab completion makes it quick to type commands, and the \texttt{help} command can be used to show
+details on the usage of any command. 
+The straightforward and consistent syntax of the CLI allows
 users to perform a wide variety of tasks--from creating HITs and paying workers, to launching Amazon
 Web Services database instances, to opening an experiment in a browser for debugging--that
-would otherwise be spread across a number of websites and programs. In most cases, a user of the
+would otherwise be spread across a number of websites and programs. 
+Easily switch between AMT's sandbox and live site.
+
+In most cases, a user of the
 psiTurk CLI will never have to log into the MTurk website except to add money to their MTurk
 requester account.
-Easily switch between AMT's sandbox and live site.
+
 
 
 \subsubsection{Serving an experiment}
+
+The experiment server is started using
+
+\begin{lstlisting}
+[psiTurk]$ server on
+\end{lstlisting}
+
+
 psiTurk experiments can be hosted on almost anything that has an internet connection and a public port, such as an office computer or laptop.
 You'll need a static IP to prevent your experiment's URL from changing. 
 Users without one (e.g., most home users) can use a dynamic DNS service to forward a URL to their dynamic IP.
@@ -217,16 +342,19 @@ Researchers can draw on a vast array of javascript libraries to design their exp
 Figure X shows javascript code from an experiment script (\emph{task.js}). 
 \emph{psiTurk.js} currently performs the following functions:
 
-\begin{enumerate}
 
-\item \textbf{Tracking a participant's progress in an experiment.} psiTurk records changes in a participant's status as they move through an experiment. 
+\subsubsection{Tracking a participant's progress in an experiment} 
+
+psiTurk records changes in a participant's status as they move through an experiment. 
 Some of these status changes are automatic, e.g., when a participant is assigned to a condition or if they quit an experiment early. 
 Two additional status changes are initiated by the client-side experiment code using psiTurk.js functions.
 First, since experiments typically begin with an instructional phase, calling the function \texttt{psiturk.finishInstructions()} upon completion of this phase will save the participant's status as having begun the main experiment.
 If the participant attempts to quit the experiment after that point, they will receive a warning that they will not be able to restart the experiment and may forgo payment.
 Second, successful completion of the experiment is signaled by calling \texttt{psiturk.completeHIT()}, which closes the experiment and redirects the participant to the AMT page to submit their HIT.
 
-\item \textbf{Saving experimental data.} Experiment code can save data in two formats.
+\subsubsection{Saving experimental data} 
+
+Experiment code can save data in two formats.
 \texttt{psiturk.recordTrialData} takes any array of values as input and appends it to a list of ``trial" data.
 This data structure is meant for sequential data that may be collected over the course of multiple trials or blocks, where each line corresponds to a new measurement.
 However, the format of this data is defined by the experimenter and is saved in the database as a single JSON object.
@@ -237,7 +365,8 @@ This format is useful for survey questions or other one-time measurements, e.g.,
 Importantly, both functions above simply record the data in the appropriate format on the client-side.
 When the experimenter wishes to save the data to the server they call \texttt{psiturk.saveData}.
 
-\item \textbf{Automatic recording of browser interaction.} 
+\subsubsection{Automatic recording of browser interaction}
+ 
 One general shortcoming of web experiments is greater uncertainty about a participant's testing environment and engagement with the experiment.
 Unlike lab computers where undesired behaviors can be prevented, a person is always able to close a web browser, switch to different applications, or change other aspects of their experience.
 However, standard methods exist for recording many aspects of a user's interaction with a web browser, and this data can be useful for 1) tracking how an experiment was actually displayed, and 2) the level of a participant's engagement.
@@ -246,52 +375,61 @@ For example, although it is possible to set the initial size of a browser window
 \emph{psiTurk.js} automatically records these changes in the size of the window.
 Similarly, the experiment can choose to switch focus away from the experiment window (e.g., to another browser window or a different application).
 \emph{psiTurk.js} automatically records every time that the experiment window loses and gains the participant's focus.
-This ``event data" is automatically recorded and saved to the database whenever \texttt{psiturk.saveData} is invoked.
+This ``event data" is automatically recorded and saved to the database whenever \texttt{psiturk.saveData} is invoked. \\
 
-\end{enumerate}
 
 \emph{psiTurk.js} can also preload html pages and images.
 Finally, it has a basic structure for presenting instructional pages.
 
 \subsection{Experiment exchange}
 
-psiTurk's experiment exchange is like an "app store" for experiment designs. 
+A significant advantage of web-based experiments is the potential for low-friction replication and extension. 
+The \emph{experiment exchange} (EE, found at http://psiturk.org/ee) facilitates the sharing of experiments that have been built to run using psiTurk, acting as an ``app store" for psiTurk-compatible designs.
+Once an experiment has been completed, a researcher can submit the following information to register their experiment on the exchange:
 
-Experiment exchange, "Get a head start", "friction-free replication", 
+\begin{enumerate}
+\item A Github repository containing the experiment code
+\item Metadata about the experiment, including a title, description, and keywords
+\item The DOI for any paper describing the results of the experiment (if any)
+\item The version of psiTurk that was used to run the experiment
+\end{enumerate}
 
-Standardization across labs/research groups aids replicability/code sharing
 
+Metadata associated with an experiment allows other researchers to discover it through the psiTurk website.
+A publicly available experiment can then be downloaded using the following command on the command line,
 
-Share your code, help others replicate, or check out someone else's experiment as a starting place for coding your own. The experiment exchange also allows researchers to quickly download psiTurk-compatible experiments and re-run them online. Same population, same task code, direct replication, better science.
-The experiment exchange allows researchers to share the code for psiTurk-compatible experiments. Other researchers can easily download the code from the exchange and re-run them online using the same population and task code. In addition, researchers can use the experiment exchange to learn about the code used in other people's experiments. 
+\begin{lstlisting}
+$ psiturk-install <experiment-specific-id>
+\end{lstlisting}
 
+\noindent with the experiment-specific identifier found on the exchange page.
+If psiTurk is already configured on the user's system, the downloaded experiment will run without further changes, and can then act as a starting point for direct replication or extensions.
+Modified versions can then be re-run using the same population via AMT, thereby minimizing the potential for experimenter-specific biases.
 
-\section{What are the limitations of psiTurk? (TMG)}
+Other initiatives (e.g., the Open Science Framework, https://osf.io) also aim to improve the transparency, reproducibility, and efficiency of research through centralized services, but are less focused on the specific technology involved in running online experiments.
+In contrast, the psiTurk experiment exchange links together experiments that can be run within a common framework.
+As a result, existing experiments can serve as examples to help new researchers learn to code for the web; they shorten the development time necessary (especially for popular experimental paradigms); and the exchange facilitates communication between researchers with similar interests.
 
-Restriction to AMT
+\section{Limitations and future directions (TMG)}
+
+Some challenges that were noted by the survey are inherent to online data collection 
+
+Restriction to AMT, can be an unrepresentative participant pool. 
 
 No Windows
 
-doesn't force particular javascript gui stuff
-
-multiperson real-time experiments (Doug?) 
-
-Showing videos is difficult (flash? html5? Slow connections? reload videos?)
-
-How to pay people when they don't finish hit completely?
-
-
-\section{Future directions}
-
-counterbalancing (integrate PlanOut (Facebook's counterbalancing tool)) (DH)
+Counterbalancing (integrate PlanOut (Facebook's counterbalancing tool)) (DH)
 
 Optimal Experimental Design/ Design of Experiments tools
 
 Better multi-person/multi-session exp (websockets; doug?)?
+
 Automate catch trials? How far did the worker get? Do we count them in the N? 
+
 Limiting/throttling number of people doing the experiment at once
+
 Video support
 
-\bibliography{sample}
+%\bibliography{sample}
 
 \end{document}

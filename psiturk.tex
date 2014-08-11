@@ -71,6 +71,8 @@ Insert your abstract here.
 \keywords{Online experiments \and open science}
 \end{abstract}
 
+\tolerance=5000
+
 \section{Introduction (AC)}
 
 Online experiments are growing in popularity. 
@@ -116,7 +118,7 @@ experiments including multiple, trials, fixation crosses, etc. The vast majority
 interest in new tools that simplified online data collection.
 
 
-\subsection{Amazon Mechanical Turk (AMT)} 
+\subsection{Amazon Mechanical Turk} 
 
 Amazon Mechanical Turk (AMT) is an online platform that lets you post a wide variety of tasks to a large pool of participants.
 Instead of spending weeks to run experiments in the lab, it lets you collect data of a large number of people within a couple of hours.
@@ -151,9 +153,11 @@ Brief overview of how psiTurk addresses needs/challenges raised in the previous 
 
 \subsubsection{Better/More efficient interface to AMT}
 
-Automatic bonusing
+Easy management of HITs
 
 Simplifies paying participants quickly, including bonuses
+
+Users only need to visit AMT website to manage their AWS account (e.g., add funds).
 
 
 \subsubsection{Technical complexity and security}
@@ -223,13 +227,39 @@ Ad server
 
 Experiment exchange
 
+In this section we highlight important functions of each component.
+Complete documentation and tutorials are available at http://psiturk.org/docs .
+
 \subsection{Configuration and project structure}
 
-AMT keys.
+After creating an Amazon Web Services account, a researcher must obtain credentials (a \emph{key ID} and a \emph{secret key}) that are saved in a global configuration file \texttt{.psiturkconfig}.
+When psiTurk is run for the first time this file is automatically created in the user's home directory, but the user's AWS credentials must be added in order for psiTurk to interact with AWS.
 
-psiTurk keys.
+In addition, need a pair of psiTurk keys to allow posting of ads on the ad server, and these are also placed in \texttt{.psiturkconfig}.
+This global configuration is used whenever psiTurk is run, allowing multiple experiments (each residing in its own directory somewhere on the user's system) to rely on the same AWS and psiTurk accounts, or to share other common configuration options as desired.
 
-Anatomy of a psiturk experiment folder.
+A new psiturk project can be initialized using:
+
+\begin{lstlisting}
+$ psiturk-setup-example
+\end{lstlisting}
+
+\noindent which creates a new directory containing an example experiment.
+The project directory contains the following:
+
+\begin{itemize}
+\item \texttt{config.txt}: Contains settings for this particular experiment
+\item \texttt{custom.py}: 
+\item \texttt{participants.db}: This sqlite database file is created by default in the experiment file
+\item \texttt{server.log}: A log file containing any messages from the experiment server (not from the actual experiment code!)
+\item \texttt{static} directory: Experiment files, including Javascript, CSS, and images
+\item \texttt{templates} directory: HTML files associated with experiment
+\end{itemize}
+
+Setting up a new experiment thus entails 1) editing the settings in \texttt{config.txt}, followed by 2) modifying the contents of the \texttt{static} and \texttt{templates} directories to program the experiment.
+The remaining files are only necessary in order to debug server errors, add new server-side functionality (\texttt{custom.py}), or to access saved data (\texttt{participants.db}).
+To run your experiment in a web browser you need to have at least some basic web programming skills (especially using HTML, CSS, and JavaScript).
+Once you mastered the basics, you can take advantage of the vast number of libraries and tools that can help you to build sharp and sophisticated experiments with the support of a large community of users.
 
 
 \subsection{Command line interface: Managing HITs and serving the experiment (AR)}
@@ -271,6 +301,14 @@ What happens after you create a HIT?
 %[psiTurk]$ hit list --active
 %\end{lstlisting}
 
+During the development of an experiment, the current code can be tested using:
+
+\begin{lstlisting}
+[psiTurk]$ debug
+\end{lstlisting}
+
+\noindent which will open a new browser window in which the current experiment can be tested.
+
 Can restart the server with \texttt{server restart} or open the server log with \texttt{server log}. 
 Tab completion makes it quick to type commands, and the \texttt{help} command can be used to show
 details on the usage of any command. 
@@ -294,15 +332,12 @@ The experiment server is started using
 [psiTurk]$ server on
 \end{lstlisting}
 
+\noindent This opens the port specified in the project configuration file.
+The experiment server will then respond to incoming requests, assuming that the port is publicly accessible.
+This requires a static IP to prevent the experiment's URL from changing.
+Users without a static IP address can use a dynamic DNS service to forward requests to their dynamic IP.
+If the system running psiTurk is behind a router, the router must be configured to forward requests on the same port.
 
-psiTurk experiments can be hosted on almost anything that has an internet connection and a public port, such as an office computer or laptop.
-You'll need a static IP to prevent your experiment's URL from changing. 
-Users without one (e.g., most home users) can use a dynamic DNS service to forward a URL to their dynamic IP.
-Here's a list of free DDNS providers.
-You also may need to forward a port from your home routers to you personal computer.
-To run your experiment in a web browser you need to have at least some basic web programming skills (especially using HTML, CSS, and JavaScript).
-Once you mastered the basics, you can take advantage of the vast number of libraries and tools that can help you to build sharp and sophisticated experiments with the support of a large community of users.
-To get you started, psiTurk provides a fully functioning example experiment (Getting up and running with the basic Stroop task) that you can use as a template for your own study.
 
 
 \subsection{The Ad server}
@@ -333,7 +368,7 @@ Participants recruited via Mechanical Turk first interact with your task via ads
 
 
 
-\subsection{Javascript library \emph{psiTurk.js} (DBM)}
+\subsection{Javascript library \emph{psiTurk.js}}
 
 The javascript library \emph{psiTurk.js} enables interaction with the server from the client-side (javascript) experiment code.
 The goal of the library is to handle the most common functionality of psiTurk-based web experiments, without imposing any additional requirements on the structure or design of the experiments themselves.

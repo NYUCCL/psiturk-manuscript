@@ -18,6 +18,7 @@
 \usepackage{color}
 \usepackage{graphicx}
 \usepackage{soul}
+\usepackage{natbib}
 
 
 \definecolor{dkgreen}{rgb}{0,0.6,0}
@@ -75,7 +76,7 @@ Insert your abstract here.
 
 \tolerance=5000
 
-\section{Introduction (AC)}
+\section{Introduction}
 
 Online experiments are growing in popularity in the behavioral sciences.
 While they offer some exciting opportunities to researchers, they also pose 
@@ -104,7 +105,7 @@ online, some of which might altogether bar some scientists from adopting online 
  To find out more the specific needs and challenges we conducted a survey in early 2014 of behavioral 
  researchers regarding online experimentation. 
 
-\subsection{Survey of researchers' needs (AR)}
+\subsection{Survey of researchers' needs}
  We collected responses from 201 researchers in psychology (58\%),
 linguistics (16\%), marketing (7\%), neuroscience (6\%), and economics (4\%), most of whom had some
 experience collecting behavioral data online in their labs (85\%).
@@ -177,7 +178,7 @@ and interfaces with AMT at the beginning and end of the task.
 % psiTurk also includes a powerful interactive command interface that lets you manage most of your AMT activity.
 
 
-\subsection{What problems does psiTurk solve? (AC)}
+\subsection{What problems does psiTurk solve?}
 To address the needs and concerned that survey participants mentioned, the psiTurk platform
  offers three key services.
 
@@ -229,7 +230,7 @@ at low payment levels data quality was high.
 On the other hand, there clearly exist experimental protocols that simply are not amenable to online
 experimentation. Experiments that require very fine grained temporal control over stimulus presentation, for example, 
 may be unsuited because even modern browsers will not be able to reliably display content fast enough if the presentation time
-becomes too short (also see crump et al).
+becomes too short~\citep{crump2013evaluating}.
 Similarly, any experiment that requires  control over a participant's screen size, resolution, or distance
 from the screen will be problematic due to the uncontrolled nature of participants' environment. One advantage of psiTurk is that
 it automatically collects data on worker's interaction with the experiment window, that is, if and when the window was resized and
@@ -257,15 +258,6 @@ We will continue to discuss these challenges at the end of the paper.
 \section{Overview of the psiTurk system}
 
 The structure of the psiTurk system is shown in Figure X.
-
-AMT
-
-psiTurk experiment server (local computer)
-
-Ad server
-
-Experiment exchange
-
 In this section we highlight important functions of each component.
 Complete documentation and tutorials are available at http://psiturk.org/docs .
 
@@ -488,9 +480,9 @@ As a result, existing experiments can serve as examples to help new researchers 
 
 Some challenges that were noted by the survey are inherent to online data collection 
 
-Restriction to AMT, can be an unrepresentative participant pool. 
+Restriction to AMT, can be an unrepresentative participant pool. Concerns about contamination, super-users. \cite{chandler2014nonnaivete}
 
-No Windows
+No Windows. One alternative is Openshift.
 
 Counterbalancing (integrate PlanOut (Facebook's counterbalancing tool)) (DH)
 
@@ -504,6 +496,10 @@ Limiting/throttling number of people doing the experiment at once
 
 Video support
 
-%\bibliography{sample}
+% BibTeX users please use one of
+\bibliographystyle{spbasic}      % basic style, author-year citations
+%\bibliographystyle{spmpsci}      % mathematics and physical sciences
+%\bibliographystyle{spphys}       % APS-like style for physics
+\bibliography{psiturk}
 
 \end{document}

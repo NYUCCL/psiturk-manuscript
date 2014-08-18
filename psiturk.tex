@@ -17,6 +17,8 @@
 \usepackage{listings}
 \usepackage{color}
 \usepackage{graphicx}
+\usepackage{soul}
+
 
 \definecolor{dkgreen}{rgb}{0,0.6,0}
 \definecolor{gray}{rgb}{0.5,0.5,0.5}
@@ -75,20 +77,35 @@ Insert your abstract here.
 
 \section{Introduction (AC)}
 
-Online experiments are growing in popularity. 
-They offer a number of advantages over lab-based experiments, as well as novel technical and experimental challenges.
+Online experiments are growing in popularity in the behavioral sciences.
+While they offer some exciting opportunities to researchers, they also pose 
+a new set of challenges, both technical and experimental.
 
-psiTurk is a framework of software and web services that facilitate the creation, running, and dissemination of web-based experiments.
-It presently relies on Amazon Mechanical Turk to recruit and pay participants on the web.
-It solves a number of technical requirements including serving an experiment on the web, saving experimental data, and restricting the participant pool according to the experimenter's needs.
+psiTurk is a framework of software and web services that addresses these challenges. 
+It facilitates the creation, deployment, and sharing of web-based experiments on Amazon Mechanical Turk (AMT),
+ which is currently the most common platform to run human experiments online.
+It solves a number of technical requirements including serving an experiment on the web, saving experimental data, and restricting the participant pool according to the experimenter's needs. It also provides an interface with AMT to create and test new projects as well as to manage and
+ pay participants.
+
 The principal goal of this framework is thus to handle common technical challenges so that researchers can focus on the development and dissemination of online experiments.
 
 \section{Web-based behavioral research}
+It is easy to see why online experiments are an attractive option for behavioral scientists.
+Compared to traditional methods of experimentation in the laboratory
+they allow researchers to collect large data sets in a fraction of the time and at much lower cost.
+At the same time, they also open up a completely new set of web-based tools that  can be used to
+design the look and flow of an experiment and that far exceed the capabilities
+of traditional experiment software.
+They also cater to a wide range of needs from simple surveys to more complicated interactive interfaces,
+ or even multi-player games.
+
+Still, there exists a range of hurdles that researchers need to tackle when running experiments
+online, some of which might altogether bar some scientists from adopting online experimentation.
+ To find out more the specific needs and challenges we conducted a survey in early 2014 of behavioral 
+ researchers regarding online experimentation. 
 
 \subsection{Survey of researchers' needs (AR)}
-
-In early 2014 we conducted a survey to assess the methods and needs of behavioral researchers with
-respect to online experiments.  We collected responses from 201 researchers in psychology (58\%),
+ We collected responses from 201 researchers in psychology (58\%),
 linguistics (16\%), marketing (7\%), neuroscience (6\%), and economics (4\%), most of whom had some
 experience collecting behavioral data online in their labs (85\%).
 
@@ -120,85 +137,107 @@ interest in new tools that simplified online data collection.
 
 \subsection{Amazon Mechanical Turk} 
 
-Amazon Mechanical Turk (AMT) is an online platform that lets you post a wide variety of tasks to a large pool of participants.
-Instead of spending weeks to run experiments in the lab, it lets you collect data of a large number of people within a couple of hours.
+Amazon Mechanical Turk (AMT) is an online platform that lets you post a wide variety of tasks to a large pool of participants. People
+who complete tasks, so called \emph{HITs} (Human Intelligence Tasks), are called \emph{workers}, people who post tasks are called
+\emph{requesters}.
+Instead of spending weeks to run experiments in the lab, AMT lets you collect data of a large number of workers within a couple of hours.
 Workers get paid a fixed amount for each HIT which is determined by the requester.
 
-\subsubsection{From the worker's perspective (JVM)}
-AMT functions as an online listing service for online jobs.
-Workers search through a list of tasks, known as Human Intelligence Tasks (HITs). 
-When a worker examines a particular task, they are able to see metadata about the task, such as its title and how much it pays, and a website provided by the requester inside a web frame.
-This website serves as an advertisement for the task and must be hosted either by Amazon or on the requester's hosted servers.
-Once a worker has accepted a HIT, he or she agrees to complete it within a particular amount of time.
-The actual task is again served either from Amazon or the requester's own hosted service.
-The hosting both serves the job to the worker and collects data.
-Finally, the worker is returned the AMT worker page to be credited and continue to another HIT.
+From a worker's perspective, the AMT website offers an overview of all available HITs
+ with a title and brief description, as  well as the basic payment for completion. 
+A worker can then click on a HIT to see its full \emph{advertisement}, which is an embedded website that is either hosted by
+Amazon or the requester, and decide to accept the HIT. The task itself can then either be completed on a requester's
+own hosted service, or on the AMT website itself, if the requester uses an Amazon template.
+At the end of the task, a worker needs to submit the HIT in order to receive compensation. Some HITs
+also offer bonus payments that are determined by the requester based on a worker's performance.
 
-\subsubsection{From the requester's perspective (TMG)}
-Requesters can also make bonus payments to specific workers. Amazon collects a 10\% fee for each payment.
-AMT provides some very basic templates that you can use to design HITs (particularly questionnaires), but these will most likely not serve your purposes as an experimenter.
-The psiTurk toolbox is designed to help you run fully-customized and dynamic web-experiments on AMT.
-Specifically, it allows you to:
-1. Run a web server for your experiment
-2. Test your experiment
-3. Interact with AMT to recruit, post HITs, filter, and pay participants (AMT workers)
-4. Manage databases and export data
-psiTurk also includes a powerful interactive command interface that lets you manage most of your AMT activity.
+From a requester's perspective, there are two main avenues for creating HITs. For very basic tasks like surveys
+and open text fields, AMT offers a range of built-in templates. For more complex tasks, like most behavioral
+experiments in psychology,  a requester has to provide their own hosted service which runs the experiment, saves the data, 
+and interfaces with AMT at the beginning and end of the task.
+% \subsubsection{From the worker's perspective (JVM)}
+% AMT functions as an online listing service for online jobs.
+% Workers search through a list of tasks, known as Human Intelligence Tasks (HITs). 
+% When a worker examines a particular task, they are able to see metadata about the task, such as its title and how much it pays, and a website provided by the requester inside a web frame.
+% This website serves as an advertisement for the task and must be hosted either by Amazon or on the requester's hosted servers.
+% Once a worker has accepted a HIT, he or she agrees to complete it within a particular amount of time.
+% The actual task is again served either from Amazon or the requester's own hosted service.
+% The hosting both serves the job to the worker and collects data.
+% Finally, the worker is returned the AMT worker page to be credited and continue to another HIT.
+
+% \subsubsection{From the requester's perspective (TMG)}
+% Requesters can also make bonus payments to specific workers. Amazon collects a 10\% fee for each payment.
+% AMT provides some very basic templates that you can use to design HITs (particularly questionnaires), but these will most likely not serve your purposes as an experimenter.
+% The psiTurk toolbox is designed to help you run fully-customized and dynamic web-experiments on AMT.
+% Specifically, it allows you to:
+% 1. Run a web server for your experiment
+% 2. Test your experiment
+% 3. Interact with AMT to recruit, post HITs, filter, and pay participants (AMT workers)
+% 4. Manage databases and export data
+% psiTurk also includes a powerful interactive command interface that lets you manage most of your AMT activity.
 
 
 \subsection{What problems does psiTurk solve? (AC)}
+To address the needs and concerned that survey participants mentioned, the psiTurk platform
+ offers three key services.
 
-Brief overview of how psiTurk addresses needs/challenges raised in the previous sections, before going on to a more detailed walkthrough in the next section.
 
-
-\subsubsection{Better/More efficient interface to AMT}
-
-Easy management of HITs
-
-Simplifies paying participants quickly, including bonuses
-
-Users only need to visit AMT website to manage their AWS account (e.g., add funds).
+\subsubsection{Interface to AMT}
+psiTurk provides an easy to use interactive command line tool that can be used to 
+interact with AMT without ever having to use the AMT website.  
+The command line tool can be used to create and manage HITs, both live and in the AMT sandbox 
+(AMT's testing environments for HITs before they go live), and to pay workers for
+participating. Besides the basic payment that every worker receives for completing a HIT
+it also has the capability to give automated bonus payments to participants based on a function
+designed by the experimenter. This feature is particularly helpful since the AMT website
+requires bonuses to be entered by hand for each participant individually.
 
 
 \subsubsection{Technical complexity and security}
+psiTurk reduces some of the main technical challenges that researchers face by providing a 
+web server and basic data base to host an experiment and store participants' data. 
+It also solves one very specific problem by providing a secure ad server that can
+be used to serve the advertisements that workers see on the AMT website. Without  a secure server
+ ads would not display on AMT and thus the ad server servers as a bridge between AMT and 
+ a researcher's local computer. \hl{Someone may have to check if this is true :)} 
+While providing a basic server and database, psiTurk also allows researchers to add custom
+server routes or alternative databases that can be tailored to their specific needs. 
 
-No need for dedicated server
+% Includes industry standards (Bootstrap, jQuery, d3, etc)
 
-No need to install, configure and maintain complex webserver software (e.g., Apache, MySQL)
+\subsubsection{Recruiting, filtering, and instructing participants}
+Finally, psiTurk also has a range of features of particular interest to behavioral researchers
+running controlled experiments. 
+For example, it offers basic capabilities for assigning workers to different experimental conditions 
+and counterbalancing features of the experiment. It also provides  a rage of templates
+for common experiment building blocks (e.g., consent form, debriefing, instructions).
+In addition, it allows experimenters to filter workers for example to exclude certain devices, platforms, or browsers, 
+or to prevent the same worker to take a current or previous HIT repeatedly.
 
-Flexible database options
-
-Includes industry standards (Bootstrap, jQuery, d3, etc)
-
-Custom routes
-
-Minimize security issues since server only runs while you want to collect data
-
-Secure Ad server
-
-\subsubsection{Tailored to behavioral research}
-
-Ability to filter browsers, iPhones, tablets, etc. 
-
-Automatically fill in conditions randomly and evenly
-
-Templates (consent, instructions, errors, debrief)
-
-Prevent same worker from performing your experiment multiple times
 
 
 
 
 \subsection{Remaining challenges}
+Some of the concerns raised by survey respondents are inherent to online data collection and therefore psiTurk does
+not address them.
+It is worth pointing out however that there exists some work on data reliability - one of the greatest worries that was found
+in the questionnaire - that successfully replicates a wide range of classic cognitive psychology findings using AMT data (cite crump
+et al). Interestingly, this study also found that increasing worker payment had no effect on reliability, suggesting that even 
+at low payment levels data quality was high. 
 
-Some of the concerns raised by survey respondents are inherent to online data collection.
-Reliability of data. 
-Note existing research about whether online experiments replicate lab versions.
+On the other hand, there clearly exist experimental protocols that simply are not amenable to online
+experimentation. Experiments that require very fine grained temporal control over stimulus presentation, for example, 
+may be unsuited because even modern browsers will not be able to reliably display content fast enough if the presentation time
+becomes too short (also see crump et al).
+Similarly, any experiment that requires  control over a participant's screen size, resolution, or distance
+from the screen will be problematic due to the uncontrolled nature of participants' environment. One advantage of psiTurk is that
+it automatically collects data on worker's interaction with the experiment window, that is, if and when the window was resized and
+if and when the user switched tabs or windows. This might help to at least get some grasp on a worker's level of distraction while completing
+the task. 
 
-Do certain experiments not work well online?
-Requires careful consideration depending on the specific experimental design.
-
-Return to these challenges at the end of the paper.
+% Requires careful consideration depending on the specific experimental design.
+We will continue to discuss these challenges at the end of the paper.
 
 
 %\begin{table*}[t]

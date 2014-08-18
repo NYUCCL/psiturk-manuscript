@@ -141,41 +141,33 @@ interest in new tools that simplified online data collection.
 Amazon Mechanical Turk (AMT) is an online platform that lets you post a wide variety of tasks to a large pool of participants. People
 who complete tasks, so called \emph{HITs} (Human Intelligence Tasks), are called \emph{workers}, people who post tasks are called
 \emph{requesters}.
-Instead of spending weeks to run experiments in the lab, AMT lets you collect data of a large number of workers within a couple of hours.
-Workers get paid a fixed amount for each HIT which is determined by the requester.
+Instead of spending weeks to run experiments in the lab, AMT lets you collect data from a large number of workers within a couple of hours.
+Beyond providing a platform to connect requesters and workers, AMT places few restrictions on the type of work that can be requested and the amount paid per HIT.
+Workers are paid a fixed amount for each HIT they complete which is determined by the requester.
 
-From a worker's perspective, the AMT website offers an overview of all available HITs
- with a title and brief description, as  well as the basic payment for completion. 
-A worker can then click on a HIT to see its full \emph{advertisement}, which is an embedded website that is either hosted by
-Amazon or the requester, and decide to accept the HIT. The task itself can then either be completed on a requester's
-own hosted service, or on the AMT website itself, if the requester uses an Amazon template.
-At the end of the task, a worker needs to submit the HIT in order to receive compensation. Some HITs
-also offer bonus payments that are determined by the requester based on a worker's performance.
+From a worker's perspective, the AMT website provides an up-to-date listing of HITs that are available, with a title, brief description, and payment amount.
+A worker can click on a HIT to see its full \emph{advertisement} (an embedded webpage that is either hosted by
+Amazon or the requester) and decide to accept the HIT. 
+Accepting a HIT implies that they are reserving the ability to complete it within a timeframe specified by the requester.
+The HIT itself can then be completed either on a requester's own hosted service, or on the AMT website itself through the use of customized templates.
+Upon completion, the worker ``submits" the HIT, after which point the completed work must be approved by the requester before they are compensated.
+In addition, some HITs offer bonus payments that are determined by the requester based on a worker's performance.
 
-From a requester's perspective, there are two main avenues for creating HITs. For very basic tasks like surveys
-and open text fields, AMT offers a range of built-in templates. For more complex tasks, like most behavioral
-experiments in psychology,  a requester has to provide their own hosted service which runs the experiment, saves the data, 
-and interfaces with AMT at the beginning and end of the task.
-% \subsubsection{From the worker's perspective (JVM)}
-% AMT functions as an online listing service for online jobs.
-% Workers search through a list of tasks, known as Human Intelligence Tasks (HITs). 
-% When a worker examines a particular task, they are able to see metadata about the task, such as its title and how much it pays, and a website provided by the requester inside a web frame.
-% This website serves as an advertisement for the task and must be hosted either by Amazon or on the requester's hosted servers.
-% Once a worker has accepted a HIT, he or she agrees to complete it within a particular amount of time.
-% The actual task is again served either from Amazon or the requester's own hosted service.
-% The hosting both serves the job to the worker and collects data.
-% Finally, the worker is returned the AMT worker page to be credited and continue to another HIT.
+From a requester's perspective, AMT provides a web-based interface for creating/managing HITs and approving work that has been submitted.
+In addition, they offer a ``sandbox" version of the platform in which HITs can be tested without paying live participants.
 
-% \subsubsection{From the requester's perspective (TMG)}
-% Requesters can also make bonus payments to specific workers. Amazon collects a 10\% fee for each payment.
-% AMT provides some very basic templates that you can use to design HITs (particularly questionnaires), but these will most likely not serve your purposes as an experimenter.
-% The psiTurk toolbox is designed to help you run fully-customized and dynamic web-experiments on AMT.
+For basic tasks like surveys and open text fields, AMT offers a range of built-in templates that can be customized using the AMT website.
+However, the degree of customization is limited for these templates. 
+In particular, they do not support advanced experimental logic that is common to many psychology experiments (e.g., adapting the presentation of stimuli based on performance, or counterbalancing across a number of experimental variables).
+For these kinds of tasks, a requester can provide a link to their own hosted service which runs the experiment, saves the data, and only interfaces with AMT at the beginning of the task (receiving basic information about the worker) and at the end of the task (sending confirmation that the task has been completed).
+
+Thus, these ``external HITs" enable a much wider range of experiments at the cost of additional technical requirements.
+psiTurk is designed to handle many of these requirements so that researchers can efficiently run experiments that are hosted externally.
 % Specifically, it allows you to:
 % 1. Run a web server for your experiment
 % 2. Test your experiment
 % 3. Interact with AMT to recruit, post HITs, filter, and pay participants (AMT workers)
 % 4. Manage databases and export data
-% psiTurk also includes a powerful interactive command interface that lets you manage most of your AMT activity.
 
 
 \subsection{What problems does psiTurk solve?}
@@ -241,35 +233,23 @@ the task.
 We will continue to discuss these challenges at the end of the paper.
 
 
-%\begin{table*}[t]
-%\caption{default}
-%\begin{center}
-%\begin{tabular}{|l|l|l|}
-%Category & Issue & psiTurk solution \\
-%\hline
-%Participant pool & Preventing repeated participation in same experiment & Database \\
-%\end{tabular}
-%\end{center}
-%\label{default}
-%\end{table*}%
-
-
-
 \section{Overview of the psiTurk system}
 
 The structure of the psiTurk system is shown in Figure X.
+
 In this section we highlight important functions of each component.
-Complete documentation and tutorials are available at http://psiturk.org/docs .
+Complete documentation and tutorials are available at http://psiturk.org/docs, including instructions for installing the software.
 
 \subsection{Configuration and project structure}
 
 After creating an Amazon Web Services account, a researcher must obtain credentials (a \emph{key ID} and a \emph{secret key}) that are saved in a global configuration file \texttt{.psiturkconfig}.
-When psiTurk is run for the first time this file is automatically created in the user's home directory, but the user's AWS credentials must be added in order for psiTurk to interact with AWS.
+When psiTurk runs for the first time this file is automatically created in the user's home directory, but the user's AWS credentials must be added in order for psiTurk to interact with AWS.
+Additionally, an account (and associated pair of keys) on the psiTurk.org website is required to allow posting of ads on the Ad server.
+These credentials (obtained from a user's psiTurk profile page) are also placed in \texttt{.psiturkconfig}.
 
-In addition, need a pair of psiTurk keys to allow posting of ads on the ad server, and these are also placed in \texttt{.psiturkconfig}.
 This global configuration is used whenever psiTurk is run, allowing multiple experiments (each residing in its own directory somewhere on the user's system) to rely on the same AWS and psiTurk accounts, or to share other common configuration options as desired.
 
-A new psiturk project can be initialized using:
+A new psiturk project can be initialized in the current directory using:
 
 \begin{lstlisting}
 $ psiturk-setup-example
@@ -478,23 +458,27 @@ As a result, existing experiments can serve as examples to help new researchers 
 
 \section{Limitations and future directions (TMG)}
 
-Some challenges that were noted by the survey are inherent to online data collection 
+Some challenges that were noted by the survey are inherent to online data collection.
 
-Restriction to AMT, can be an unrepresentative participant pool. Concerns about contamination, super-users. \cite{chandler2014nonnaivete}
+What are the limitations of psiTurk specifically?
 
-No Windows. One alternative is Openshift.
+Restriction to AMT, can be an unrepresentative participant pool. Geographical limitation. Concerns about contamination, super-users. \cite{chandler2014nonnaivete}.
 
-Counterbalancing (integrate PlanOut (Facebook's counterbalancing tool)) (DH)
+No Windows. Openshift.
 
-Optimal Experimental Design/ Design of Experiments tools
+Relatively simple form of counterbalancing.
+Counterbalancing (integrate PlanOut (Facebook's counterbalancing tool))
 
-Better multi-person/multi-session exp (websockets; doug?)?
+Currently no support for web-sockets or other protocols that facilitate multi-person experiments.
 
 Automate catch trials? How far did the worker get? Do we count them in the N? 
 
 Limiting/throttling number of people doing the experiment at once
 
 Video support
+
+
+
 
 % BibTeX users please use one of
 \bibliographystyle{spbasic}      % basic style, author-year citations

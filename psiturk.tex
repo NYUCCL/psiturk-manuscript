@@ -268,12 +268,13 @@ The project directory contains the following:
 \end{itemize}
 
 Setting up a new experiment thus entails 1) editing the settings in \texttt{config.txt}, followed by 2) modifying the contents of the \texttt{static} and \texttt{templates} directories to program the experiment.
-The remaining files are only necessary in order to debug server errors, add new server-side functionality (\texttt{custom.py}), or to access saved data (\texttt{participants.db}).
+The remaining files are only necessary in order to debug server errors (\texttt{server.log}), add new server-side functionality (\texttt{custom.py}), or to access saved data (\texttt{participants.db}).
+
 To run your experiment in a web browser you need to have at least some basic web programming skills (especially using HTML, CSS, and JavaScript).
 Once you mastered the basics, you can take advantage of the vast number of libraries and tools that can help you to build sharp and sophisticated experiments with the support of a large community of users.
 
 
-\subsection{Command line interface: Managing HITs and serving the experiment (AR)}
+\subsection{Command line interface: Managing HITs and serving the experiment}
 
 PsiTurk runs as a command line interface (CLI) within a standard terminal window.
 There are several advantages to designing psiTurk as a simple CLI beyond its efficiency of use. This
@@ -283,6 +284,13 @@ is as simple as describing the syntax and functioning of a new command. The CLI 
 psiTurk is easy to interact with not just on a laptop or desktop but also on a remote server or in
 the cloud, where users may have terminal-only access.
  
+Tab completion makes it quick to type commands, and the \texttt{help} command can be used to show
+details on the usage of any command. 
+The straightforward and consistent syntax of the CLI allows
+users to perform a wide variety of tasks--from creating HITs and paying workers, to launching Amazon
+Web Services database instances, to opening an experiment in a browser for debugging--that
+would otherwise be spread across a number of websites and programs. 
+
 Entering
 \texttt{psiturk} at the command line in any directory containing a psiTurk project launches the
 psiTurk CLI.
@@ -306,33 +314,11 @@ arguments}'' format. For example, one can create a HIT by typing
 
 What happens after you create a HIT?
 
-%\noindent or list all active HITs with 
-%
-%\begin{lstlisting}
-%[psiTurk]$ hit list --active
-%\end{lstlisting}
-
-During the development of an experiment, the current code can be tested using:
+List any existing HITs with:
 
 \begin{lstlisting}
-[psiTurk]$ debug
+[psiTurk]$ hit list --active
 \end{lstlisting}
-
-\noindent which will open a new browser window in which the current experiment can be tested.
-
-Can restart the server with \texttt{server restart} or open the server log with \texttt{server log}. 
-Tab completion makes it quick to type commands, and the \texttt{help} command can be used to show
-details on the usage of any command. 
-The straightforward and consistent syntax of the CLI allows
-users to perform a wide variety of tasks--from creating HITs and paying workers, to launching Amazon
-Web Services database instances, to opening an experiment in a browser for debugging--that
-would otherwise be spread across a number of websites and programs. 
-Easily switch between AMT's sandbox and live site.
-
-In most cases, a user of the
-psiTurk CLI will never have to log into the MTurk website except to add money to their MTurk
-requester account.
-
 
 
 \subsubsection{Serving an experiment}
@@ -349,6 +335,21 @@ This requires a static IP to prevent the experiment's URL from changing.
 Users without a static IP address can use a dynamic DNS service to forward requests to their dynamic IP.
 If the system running psiTurk is behind a router, the router must be configured to forward requests on the same port.
 
+During the development of an experiment, the current code can be tested using:
+
+\begin{lstlisting}
+[psiTurk]$ debug
+\end{lstlisting}
+
+\noindent which will open a new browser window in which the current experiment can be tested.
+
+Can restart the server with \texttt{server restart} or open the server log with \texttt{server log}. 
+
+Easily switch between AMT's sandbox and live site.
+
+In most cases, a user of the
+psiTurk CLI will never have to log into the MTurk website except to add money to their MTurk
+requester account.
 
 
 \subsection{The Ad server}

@@ -89,6 +89,11 @@ It solves a number of technical requirements including serving an experiment on 
  pay participants.
 
 The principal goal of this framework is thus to handle common technical challenges so that researchers can focus on the development and dissemination of online experiments.
+In this paper we present a high-level overview of the psiTurk framework and its advantages for running web-based experiments.
+We begin with an overview of web-based experiments, the AMT platform, and the specific challenges that psiTurk is designed to address.
+We then step through the core functionality of psiTurk and describe its role in an experimenter's workflow.
+Finally, we consider some future directions for psiTurk and online experimentation in general.
+
 
 \section{Web-based behavioral research}
 It is easy to see why online experiments are an attractive option for behavioral scientists.
@@ -215,8 +220,7 @@ or to prevent the same worker to take a current or previous HIT repeatedly.
 Some of the concerns raised by survey respondents are inherent to online data collection and therefore psiTurk does
 not address them.
 It is worth pointing out however that there exists some work on data reliability - one of the greatest worries that was found
-in the questionnaire - that successfully replicates a wide range of classic cognitive psychology findings using AMT data (cite crump
-et al). Interestingly, this study also found that increasing worker payment had no effect on reliability, suggesting that even 
+in the questionnaire - that successfully replicates a wide range of classic cognitive psychology findings using AMT data~\citep{crump2013evaluating}. Interestingly, this study also found that increasing worker payment had no effect on reliability, suggesting that even 
 at low payment levels data quality was high. 
 
 On the other hand, there clearly exist experimental protocols that simply are not amenable to online
@@ -256,16 +260,31 @@ $ psiturk-setup-example
 \end{lstlisting}
 
 \noindent which creates a new directory containing an example experiment.
-The project directory contains the following:
+The project directory contains the following: \\
+
+
+\noindent \texttt{config.txt}: This file contains settings for the current experiment, including:
 
 \begin{itemize}
-\item \texttt{config.txt}: Contains settings for this particular experiment
-\item \texttt{custom.py}: 
-\item \texttt{participants.db}: This sqlite database file is created by default in the experiment file
-\item \texttt{server.log}: A log file containing any messages from the experiment server (not from the actual experiment code!)
-\item \texttt{static} directory: Experiment files, including Javascript, CSS, and images
-\item \texttt{templates} directory: HTML files associated with experiment
+\item Metadata about the experiment that is displayed to workers on the AMT website (title, description)
+\item Restrictions on which workers can accept the HIT, including geographic location (e.g., limiting to US workers only), AMT-specific qualifications (e.g., a worker's proportion of past work that has been approved), and web browsers that are permitted.
+\item Database setup (Sqlite by default)
+\item Server parameters
+\item Task parameters
 \end{itemize}
+
+
+\noindent \texttt{custom.py}: Within Flask web framework, possible to add custom routes so that server-side functionality can be added to the psiTurk web server.
+Cite some examples. \\ 
+
+\noindent \texttt{participants.db}: If Sqlite is used (on by default), this file will be the database. \\
+
+\noindent \texttt{server.log}: A log file containing any messages from the experiment server (not from the actual experiment code!) \\ 
+
+\noindent \texttt{static/} directory: Experiment files, including Javascript, CSS, and images \\
+
+\noindent \texttt{templates/} directory: HTML files associated with experiment \\
+
 
 Setting up a new experiment thus entails 1) editing the settings in \texttt{config.txt}, followed by 2) modifying the contents of the \texttt{static} and \texttt{templates} directories to program the experiment.
 The remaining files are only necessary in order to debug server errors (\texttt{server.log}), add new server-side functionality (\texttt{custom.py}), or to access saved data (\texttt{participants.db}).

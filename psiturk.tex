@@ -177,7 +177,7 @@ psiTurk is designed to handle many of these requirements so that researchers can
 
 \subsection{What problems does psiTurk solve?}
 To address the needs and concerned that survey participants mentioned, the psiTurk platform
- offers three key services.
+ offers four key services.
 
 
 \subsubsection{Interface to AMT}
@@ -213,7 +213,14 @@ In addition, it allows experimenters to filter workers for example to exclude ce
 or to prevent the same worker to take a current or previous HIT repeatedly.
 
 
-
+\subsubsection{Coding the Experiment}
+In general, the psiTurk framework is \emph{not} designed as a programming interface for building the actual experiment.
+That is, it requires that the experimenter knows some basic JavasScipt, HTML, and CSS to code the logic and looks of a new study.
+Having said that, psiTurk does include its own JavaScript library, which provides helpful functions for recording data and sending
+it back to the server, preloading pages and images, as well as some basic functions for looping through instruction screens. These
+features should alleviate some of the most painful aspects of coding your own experiment and allow the researcher to focus
+on the task logic and design instead. psiTurk also ships with a complete working example task that can be used as a template for 
+new projects.
 
 
 \subsection{Remaining challenges}
@@ -224,7 +231,7 @@ in the questionnaire - that successfully replicates a wide range of classic cogn
 at low payment levels data quality was high. 
 
 On the other hand, there clearly exist experimental protocols that simply are not amenable to online
-experimentation. Experiments that require very fine grained temporal control over stimulus presentation, for example, 
+experimentation. Experiments that require very fine-grained temporal control over stimulus presentation, for example, 
 may be unsuited because even modern browsers will not be able to reliably display content fast enough if the presentation time
 becomes too short~\citep{crump2013evaluating}.
 Similarly, any experiment that requires  control over a participant's screen size, resolution, or distance
@@ -233,8 +240,12 @@ it automatically collects data on worker's interaction with the experiment windo
 if and when the user switched tabs or windows. This might help to at least get some grasp on a worker's level of distraction while completing
 the task. 
 
+
 % Requires careful consideration depending on the specific experimental design.
 We will continue to discuss these challenges at the end of the paper.
+
+
+
 
 
 \section{Overview of the psiTurk system}
@@ -478,24 +489,49 @@ As a result, existing experiments can serve as examples to help new researchers 
 
 \section{Limitations and future directions (TMG)}
 
-Some challenges that were noted by the survey are inherent to online data collection.
+As mentioned above, psiTurk faces some challenges inherent to all online data collection and may not be the right choice for
+researchers that require a very controlled experimental setup. But what are the limitations of psiTurk specifically?
 
-What are the limitations of psiTurk specifically?
+One restriction is that it's currently designed to only work with Amazon Mechanical Turk. A common worry with AMT is the unrepresentativeness of
+its subject pool (in terms of demographics and geography), as well as the fact that certain experimental protocols are now too well-known 
+to workers to guarantee naive
+participants~\citep{chandler2014nonnaivete}. These concerns are often not relevant for basic psychology research, but some experimenters may nevertheless
+look for alternatives to AMT. Many psiTurk features (i.e. the web server, data base, and psiturk.js) are general
+enough to facilitate running experiments on other platforms, too, but it would require some customization of certain AMT-specific functionality. 
+We hope that researchers who decide
+to use psiTurk on another platform could contribute such changes to the github repository (https://github.com/NYUCCL/psiTurk) to make them
+available to the community.
 
-Restriction to AMT, can be an unrepresentative participant pool. Geographical limitation. Concerns about contamination, super-users. \cite{chandler2014nonnaivete}.
 
-No Windows. Openshift.
+Another limitation is that psiTurk only runs on UNIX systems, like Linux and Mac OS, and can thus not be used on Windows computers. To meet this 
+challenge, one option for Windows users is to use a cloud-based computing service to run psiTurk and host experiments. There exist
+multiple free or low-cost options, such as Amazon Web Services (http://aws.amazon.com), or OpenShift (https://www.openshift.com). 
+The installation steps and setup may diverge slightly from the standard procedure but 
+ the psiTurk documentation already contains additional installation instructions for OpenShift. In the future, we hope to extend support  and 
+documentation to a wider range of cloud computing options.
 
-Relatively simple form of counterbalancing.
-Counterbalancing (integrate PlanOut (Facebook's counterbalancing tool))
+Another future direction is to extend the counterbalancing capabilities of psiTurk. Currently, the built-in counterbalancing algorithm
+simply aims to assign participants equally to different cells.  However, this equal assignment method can be problematic if, for instance, 
+one group has a higher drop-out rate than the others (a problem rarely encountered in the lab). 
+In that case the high drop-out group will need to receive
+more participants to equalize the difference and thus assignment probabilities will no longer be equal across groups. We are
+currently working on alternative counterbalancing algorithms that keep assignment probabilities equal (which may then lead to unequal
+number of participants) to avoid this problem. \hl{Not quite sure what the current status is here. May need updating and maybe mention PlanOut
+if that's still relevant.}
 
-Currently no support for web-sockets or other protocols that facilitate multi-person experiments.
+
+One exciting prospect of running online experiments is to let multiple participants interact to study coordination
+or group behavior. Currently psiTurk does not offer its own tool to facilitate such multi-person experiments, but we would like to
+add support for it in the future, using web-sockets or other protocols that enable communication between users.
+
+\hl{Some small features not mentioned yet:
 
 Automate catch trials? How far did the worker get? Do we count them in the N? 
 
 Limiting/throttling number of people doing the experiment at once
 
-Video support
+Video support}
+
 
 
 

@@ -87,40 +87,54 @@ Insert your abstract here.
 
 \section{Introduction}
 
-Online experiments are growing in popularity in the behavioral sciences.
-In comparison to traditional laboratory research, web-based experiments offer a number of benefits to investigators, including faster data collection and access to a more diverse pool of potential participants.
-At the same time, a new set of technical and experimental challenges must be met before a researcher can adopt the web-based approach.
 
-psiTurk is a framework of software and web services that aims to address many of these challenges.
-It facilitates the creation, deployment, and sharing of web-based experiments that rely on Amazon Mechanical Turk (AMT),
- which is currently the most common platform to run human experiments online.
-psiTurk solves a number of technical requirements including serving an experiment on the web, saving experimental data to a database, and restricting the participant pool according to the experimenter's needs. It also provides an interface with AMT to create and test new projects as well as to manage and
- pay participants.
-Finally, in the spirit of ``open science," it provides an \emph{experiment exchange} for sharing experiments that can be easily replicated and extended by other researchers.
+The ability to collect behavioral data from a large group of individuals
+anonymously over the Internet has transformed the behavioral and social
+sciences.  In addition to large scale experiments such as those
+conducted by websites such as Facebook or Google, many researchers
+use online data collection to deploy ``traditional" experimental psychology
+tasks.  The benefit of the online version of traditional behavioral experiments include 
+faster data collection and access to a potentially more diverse pool of participants. 
+At the same time, conducting experiments online introduces a number of new 
+technical and scientific challenges that must be addressed.
 
-The principal goal of this framework is thus to handle common technical challenges so that researchers can focus on the development and dissemination of online experiments.
-In this paper we present a high-level overview of the psiTurk framework and its advantages for running web-based experiments.
-We begin with an overview of online behavioral research, the AMT platform, and the specific challenges that psiTurk is designed to address.
-We then step through the core functionality of psiTurk and describe its role in an experimenter's workflow.
-Finally, we consider some future directions for psiTurk and online experimentation in general.
+The project described in this paper, \textsf{psiTurk}, is an open-source framework of 
+software and services that aims to address many of the technical challenges
+involved in deploying experimental psychology experiments online.
+It facilitates the creation, deployment, sharing, and replication of web-based experiments.
+Study participants can be recruited via a number of methods including Amazon 
+Mechanical Turk (AMT), which is currently the most popular platform for running 
+paid human experiments online.
+
+\textsf{psiTurk} provides features for serving an experiment on the web, saving 
+experimental data to a database, and restricting the participant pool according to 
+the experimenter's needs (e.g., to prevent non-naive participants from contaminating
+a study). It also provides an interface with AMT to create and test new projects as well as to 
+manage and pay participants. Finally, in the spirit of ``open science," it provides 
+an open-source \emph{experiment exchange} for sharing experiments that can be easily 
+replicated and extended by other researchers (see Figure~\ref{fig:logo}).
+
+The principal goal of this framework is to handle common technical 
+challenges so that researchers can focus on the development and replication
+of online experiments.  In this paper we present a high-level overview of the 
+\textsf{psiTurk} framework and its advantages for running web-based experiments.
+In supplement to this overview, \textsf{psiTurk} provides a large and continually
+evolving set of documentation hosted online (https://psiturk.org/docs).
+We begin with an overview of the issues involved in online behavioral research, 
+the AMT platform, and the specific challenges that \textsf{psiTurk} is designed to address.  
+We then  step through the core functionality of \textsf{psiTurk} and describe its role in both
+an experimenter's and particpant's workflow.  Finally, we consider some future directions for 
+\textsf{psiTurk} and online experimentation in general.
 
 
-\section{Web-based behavioral research}
-It is easy to see why online experiments are an attractive option for behavioral scientists.
-Compared to traditional methods of experimentation in the laboratory
-they allow researchers to collect large data sets in a fraction of the time and at much lower cost.
-At the same time, they also open up a completely new set of web-based tools that  can be used to
-design the look and flow of an experiment and that far exceed the capabilities
-of traditional experiment software.
-They also cater to a wide range of needs from simple surveys to more complicated interactive interfaces,
- or even multi-player games.
+\begin{figure*}[tp]
+\centering
+\includegraphics[scale=.35]{figures/psiturk_logo.jpg}
+\caption{The \textsf{psiTurk} project is hosted on Github (http://github.com/NYUCCL/ psiTurk) and at its main webpage (http://psiturk.org). The commissioned logo reflects the community-built orientation of the project.}
+\label{fig:logo}
+\end{figure*}
 
-Still, there exists a range of hurdles that researchers need to tackle when running experiments
-online, some of which might altogether bar some scientists from adopting online experimentation.
- To find out more the specific needs and challenges we conducted a survey in early 2014 of behavioral 
- researchers regarding online experimentation. 
-
-\subsection{Survey of researchers' needs}
+\section{The challenges of web-based experimental behavioral research}
 
 \begin{figure*}[tp]
 \centering
@@ -135,6 +149,29 @@ online, some of which might altogether bar some scientists from adopting online 
 \includegraphics[width=\textwidth]{figures/featuresTable.pdf}
 \label{tab:features}
 \end{table*}
+
+
+It is easy to see why online experiments are an attractive option for behavioral 
+scientists.  Compared to traditional methods of experimentation in the laboratory
+they allow researchers to collect large data sets in a fraction of the time and at 
+much lower cost (in terms of time, employment of research assistants, and typical 
+compensation costs for participants).  Designing experiments for the web allows 
+researchers to leverage the large set of software libraries developed to assist 
+in the design of commercial web applications.  Such libraries can be use to 
+design the look and flow of an experiment in ways that far exceed the capabilities 
+of traditional experiment running software developed in academia.  Such tools 
+enable a wider range of experiments including more complicated interactive
+interfaces, or even multi-player games.
+
+Still, there are a number of technical challenges to running experiments online.
+For example unlike in a laboratory setting, at a minimum researchers have to 
+deal with setting up a web server, recording data in a robust and secure way, 
+and compensating participants over the Internet.  
+Prior to the release of \textsf{psiTurk} version
+2.0.0 (early 2014), we conducted an informal survey of behavioral researchers 
+regarding their attitudes, concerns, and needs regarding online experimentation. 
+To help introduce some of the core features and goals of \textsf{psiTurk} we 
+quick summarize some of the findings from this survey
 
  We collected responses from 201 researchers in psychology (58\%),
 linguistics (16\%), marketing (7\%), neuroscience (6\%), and economics (4\%), most of whom had some

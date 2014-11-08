@@ -177,7 +177,7 @@ in academia.  Such tools enable a wider range of experiments including more
 complicated interactive interfaces, or even multi-player games.
 
 Still, there are a number of technical challenges to running experiments online.
-For example, unlike in a laboratory setting researchers have to 
+For example, unlike in a laboratory setting, researchers have to 
 deal with setting up a web server, recording data in a robust and secure way, 
 and compensating participants over the Internet.  
 Prior to the release of \textsf{psiTurk} version
@@ -403,18 +403,92 @@ preventing anyone who has already completed a similar experiment~\citep[see][for
 With these general features in mind, we now turn to a more detailed overview of the 
 \textsf{psiTurk} platform.
 
-\section{Components of the \textsf{psiTurk} platform}
+\begin{figure*}[tp]
+\centering
+\includegraphics[scale=.40]{figures/psiturk-components.pdf}
+\caption{Three key components of the \textsf{psiTurk} system.  }
+\label{fig:components}
+\end{figure*}
 
-The overall structure of the psiTurk platform is shown in Figure X.  The platform
-consists of a collection of software tools, some which run locally on a user's
-computer and others which are hosted on the Internet (the cloud).
 
-Command line tool
-Web application server (webserver + database)
-psiturk.org
+\section{Key components of the \textsf{psiTurk} platform}
 
-In the following sections we highlight important functions of each component.
-Complete documentation and tutorials are available at http://psiturk.org/docs, including instructions for installing the software.
+The overall structure of the \textsf{psiTurk} platform is shown in Figure~\ref{fig:components}
+and can be conceptualized as involving three components.
+First, there are a collection of software tools which run locally on a user's
+local computer or server.  These local components include a command line tool and 
+a web application server (which provides both a customizable webserver and 
+database solution).  Next, \textsf{psiTurk} relies currently on Amazon
+Mechanical Turk to handle the recruitment and compensation of participants.
+Finally, the psiturk.org cloud based component includes a hosted ``ad server" 
+and the experiment exchange.  In the following sections we highlight the important 
+functions of each component.
+
+
+\subsection{Command line tool}
+
+When using \textsf{psiTurk}, the researchers 
+local computer (laptop, lab server) runs the \textsf{psiturk} command line tool.  
+This tool is used to issue commands and interact
+with the Amazon Mechanical Turk system and with the \textsf{psiTurk} cloud.  
+Although somewhat dated, the design choice of a command line interface was 
+selected to make it easier to add new functionality to the system quickly (without 
+needing to design time consuming GUI elements).
+Example uses of the command line tool include checking the user's Amazon
+Mechanical Turk account balance, paying participants, and creating new HITs.
+
+\subsection{Web application server (webserver + database)}
+
+The command line tool is also used to interact with the web application server.
+The web application server handles the logic determining which pages to show
+to a participant at different stages of the experiment.  \textsf{psiTurk} comes with
+a default web application which implements many important features commonly
+needed by experiments (e.g., checking that a user hasn't already done the experiment,
+recording and saving data to a centralized database).  In addition the web application
+server can be heavily customized to include more complex types of experiments.
+For example, in one instance we made an experiment where a cognitive model
+is fit to participants data in real time and used to determine the sequence of future
+trials in the experiment.  The logic for the model fitting was done within the 
+web application system itself rather than coding all of this mathematics in
+Javascript.
+
+\subsection{Amazon Mechanical Turk and Amazon Web Services}
+
+ Amazon Mechanical Turk's servers handle the recruitment of participants via
+its crowdsourced labor force.  It also handles the transfers of money between Requesters and
+Workers.  Finally, it provides a listing of available HITs which workers can browse through looking
+for interesting work.  Amazon Mechanical Turk is one part of a larger collection
+of cloud-based services provided by Amazon via the Amazon Web Services.
+For example, using the \textsf{psiTurk} command line tool users can create a
+database server running on Amazon's cloud with a few short commands.  This database
+can then be used instead of a local database solution.
+
+\subsection{psiturk.org Cloud-based Services}
+In addition the command-line tool and the web application server, \textsf{psiTurk}
+provides a few services that run on a constantly available web server.
+Most important of these is that psiTurk "Secure Ad Server."  When a user
+creates a new HIT and wishes to post it to AMT, typically one advertises the
+study to potential participants (explaining how long the task will take and how
+much it will pay).  As mentioned earlier, these "ads" will not correctly display
+in worker's browsers unless they are encrypted using SSL.  The psiturk.org
+ad server allows users of the psiturk system to host ads on the psiturk.org
+website which are encrypted.  These ads are what appear in the browseable listing
+on the Amazon Mechanical Turk website.
+As mentioned earlier, the psiturk, Experiment Exchange provides
+a open-source repository of \textsf{psiTurk}-compatible experiments which can be 
+easily downloaded.  The coordination of these downloads is handled by the psiturk.org cloud.
+
+%Complete documentation and tutorials are available at http://psiturk.org/docs, including instructions for installing the software.
+
+\section{Requirements}
+
+\hl{What are the requirements for using psiTurk}
+
+\section{Getting started with \textsf{psiTurk}}
+
+The following section provides a basic overview of how to use psiTurk,
+explaining the various steps required of new users of the system along with
+some details about how the various components described above interact.
 
 \subsection{Configuration and project structure}
 
@@ -547,7 +621,7 @@ requester account.
 \begin{figure*}[tp]
 \centering
 \includegraphics[scale=.40]{figures/psiturk_cloud_sequence.jpg}
-\caption{How the ad server worlds.}
+\caption{How the ad server works.}
 \label{fig:adserver}
 \end{figure*}
 

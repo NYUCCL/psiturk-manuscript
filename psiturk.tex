@@ -522,32 +522,32 @@ A new \textsf{psiTurk} project can be initialized in the current directory using
 $ psiturk-setup-example
 \end{lstlisting}
 
-\noindent which creates a new directory containing an example experiment.
-This example can be a template for building more custom designs.
-The project directory typically includes the following files: \\
-
-
-\noindent \texttt{config.txt}: This file contains settings for the current experiment, including:
+\noindent This creates a new directory containing an example experiment,
+which can be used as a template for more sophisticated designs.
+The project directory typically includes the following files: 
 
 \begin{itemize}
-\item Metadata about the experiment that is displayed to workers on the AMT website (title, description)
+\item \texttt{config.txt}: contains settings for the current experiment, including:
+
+\begin{itemize}
+\item Metadata about the experiment that is displayed to workers on the AMT website (title, description, etc.)
 \item Restrictions on which workers can accept the HIT, including geographic location (e.g., limiting to US workers only), AMT-specific qualifications (e.g., a worker's proportion of past work that has been approved), and web browsers that are permitted.
-\item Database setup (Sqlite by default)
+\item Database information (Sqlite by default)
 \item Server parameters (URL, port number)
 \item Task parameters (e.g., number of conditions)
 \end{itemize}
 
 
-\noindent \texttt{custom.py}: Within Flask web framework, possible to add custom routes so that server-side functionality can be added to the psiTurk web server. \\ 
+\item \texttt{custom.py}: contains user-created routes, so that new server-side functionality can be added to the psiTurk web server. 
 
-\noindent \texttt{participants.db}: If Sqlite is used (on by default), this file will be the database. \\
+\item \texttt{participants.db}: if Sqlite is used, contains database.
 
-\noindent \texttt{server.log}: A log file containing any messages from the experiment server (not from the actual experiment code!) \\ 
+\item \texttt{server.log}: contains a log of any messages from the experiment server (not from the actual experiment code!).
 
-\noindent \texttt{static/} directory: Experiment files, including Javascript, CSS, and images. \\
+\item \texttt{static/} directory: contains experiment files, including Javascript, CSS, and images.
 
-\noindent \texttt{templates/} directory: HTML files associated with experiment \\
-
+\item \texttt{templates/} directory: contains HTML files associated with experiment 
+\end{itemize}
 
 Setting up a new experiment thus entails 1) editing the settings in \texttt{config.txt}, and 2) modifying the contents of the \texttt{static} and \texttt{templates} directories to program the experiment.
 The remaining files are only necessary in order to debug server errors (\texttt{server.log}), add new server-side functionality (\texttt{custom.py}), or to access saved data (\texttt{participants.db}).
@@ -569,9 +569,12 @@ the cloud, where users may have terminal-only access.
 Tab completion makes it quick to type commands, and the \texttt{help} command can be used to show
 details on the usage of any command. 
 The straightforward and consistent syntax of the CLI allows
-users to perform a wide variety of tasks--from creating HITs and paying workers, to launching Amazon
-Web Services database instances, to opening an experiment in a browser for debugging--that
-would otherwise be spread across a number of websites and programs. 
+users to perform a wide variety of tasks---from creating HITs and paying workers, to launching Amazon
+Web Services database instances, to opening an experiment in a browser for debugging---that
+would otherwise be spread across a number of websites and programs. In most cases, a user of the
+psiTurk CLI will never have to log into the MTurk website except to add money to their MTurk
+requester account.
+
 
 Entering
 \texttt{psiturk} at the command line in any directory containing a psiTurk project launches the
@@ -586,24 +589,21 @@ whether the server is running, the current mode (``live" or ``sandbox", and the 
 \noindent In some examples below, this prompt is truncated as \texttt{[psiTurk]\$} to indicate commands that occur within the psiTurk CLI, while commands that are entered on the command line are preceded simply by \texttt{\$}.
 
 
-\subsubsection{Managing HITs}
+\subsubsection{Example CLI usage}
 Commands are organized into groups based on their function, following a general ``\texttt{command subcommand
 arguments}'' format. For example, one can create a HIT by typing 
 
+% \noindent\lstinline+[psiTurk]$ hit create+
+% $<\# assignments> <\$ amount> <duration>$
 \begin{lstlisting}
-[psiTurk]$ hit create <# assignments> <$ amount> <duration>
+[psiTurk]$ hit create
 \end{lstlisting}
 
-What happens after you create a HIT?
-
-List any existing HITs with:
+\noindent which launches an interactive prompt for number of assignments, payment per HIT, and HIT duration. After creating one or more HITs, one can list any active HITs with:
 
 \begin{lstlisting}
 [psiTurk]$ hit list --active
 \end{lstlisting}
-
-
-\subsubsection{Serving an experiment}
 
 The experiment server is started using
 
@@ -630,10 +630,6 @@ Can restart the server with \texttt{server restart} or open the server log with 
 The sandbox mode is active by default, which means that calling \texttt{hit create} will submit a HIT to the AMT sandbox website.
 The experimenter can then test the experiment from the perspective of a worker before making it publicly available.
 Once the experiment is ready for real workers, the \texttt{mode} command can be used to switch to ``live" mode, after which newly created HITs will be submitted to the main AMT site.
-
-In most cases, a user of the
-psiTurk CLI will never have to log into the MTurk website except to add money to their MTurk
-requester account.
 
 
 \begin{figure*}[tp]

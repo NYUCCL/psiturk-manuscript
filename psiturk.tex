@@ -407,7 +407,7 @@ With these general features in mind, we now turn to a more detailed overview of 
 \begin{figure*}[tp]
 \centering
 \includegraphics[scale=.40]{figures/psiturk-components.pdf}
-\caption{Three key components of the \textsf{psiTurk} system.  }
+\caption{The three core components of the \textsf{psiTurk} system.  }
 \label{fig:components}
 \end{figure*}
 
@@ -635,18 +635,64 @@ Once the experiment is ready for real workers, the \texttt{mode} command can be 
 \begin{figure*}[tp]
 \centering
 \includegraphics[scale=.40]{figures/psiturk_cloud_sequence.jpg}
-\caption{How the ad server works.}
+\caption{How the Secure Ad Server works.}
 \label{fig:adserver}
 \end{figure*}
 
 
-\subsection{The secure ad server - (TG)}
+\subsection{The Secure Ad Server}
 
-\textsf{psiTurk} provides a cloud service at \texttt{psiturk.org} for serving ads to workers.
-This service serves the ads with appropriate SSL certificates, something which can be difficult on many server configurations.\footnote{SSL certification has recently become a requirement for hosting content within an \texttt{iframe} on \texttt{mturk.com}.}
-The Ad Server removes need to deal with complex web security issues (https, data mining on workers) 
-Participants recruited via Mechanical Turk first interact with your task via ads. Ads are simply the digital version of hanging a poster or flyer around your university building in order to recruit participants. Technically, ads are snippets of HTML code that describe what your task is about and what you're offering for compensation. As a result, they are the front line for any subject recruitment online. It's easy to overlook the importance of a good ad, and making that ad visible to as many participants as possible.
+As described briefly above, the psiturk.org cloud service
+provides a ``Secure Ad Server."  The term ``ad" in this context
+refers to a small HTML page the describes the details and
+requirements of a given experiment.  The ad is the
+first interaction that a \textsf{psiTurk} user has with a
+potential subject and is thus the gateway to subject recruitment.
+Ads are in many ways analogous to hanging a poster or flyer 
+around a university building in order to recruit participants.
+It's easy to overlook the importance of a good ad, and making that ad
+visible to as many participants as possible.
 
+An overview of the flow of running an experiment using
+\textsf{psiTurk} and the Secure Ad Server is illustrated in
+Figure~\ref{fig:adserver}.  When a researcher using \textsf{psiTurk}
+runs the \texttt{hit create} command, the current contents of the local
+\texttt{templates/ad.html} file are uploaded to the psiturk.org cloud (see
+the right panel of Figure~\ref{fig:adserver}).
+This will create a unique custom URL for the experiment (an example might be
+\texttt{https://ad.psiturk.org/view/90812390123091823}) which
+allows anyone on the Internet to view the contents of the \texttt{ad.html}
+file which was uploaded.  A different URL is create each time \texttt{hit create}
+is run and there is no limit to the number of ads a user can create.  A list
+of all of a users ads is available in the psiturk.org dashboard (\texttt{http://psiturk.org/dashboard}).
+Critically the ad URL is encrypted and
+securely signed with an appropriate SSL certificate ensuring that all
+web browsers will successfully display the webpage\footnote{SSL certification has recently become a requirement for hosting content within an \texttt{iframe} on \texttt{mturk.com}.}.  This new custom URL is then passed
+on to AMT by the \texttt{hit create} command as the ``location" of
+the selected HIT.  As is visible in the right panel of Figure~\ref{fig:adserver}
+when a user in the AMT "crowd" labor workforce views a HIT on the AMT
+website, it loads the ad from the psiturk.org cloud server.  If the user accepts
+the hit, a link is provided to the worker which pops open a new browser
+window.  This URL points directly at the location of the user's local computer
+or server.  After this hand off occurs all data transmitted between the worker
+and requester is direct meaning that the psiturk.org cloud server does not
+process or see the user's experimental data.  This is important for many IRBs
+particular if an experiment involves sensitive materials.
+
+Besides the convenience of the Secure Ad Server in terms of providing
+SSL signed URLs, the Secure Ad Server does track statistics about the
+number of workers who viewed and ad but decided to not accept it, the
+number who accepted it, the number who completed the task, etc...
+These statistics are made available on the psiturk.org dashboard
+and can be an additional source of information for experimenters.
+
+
+%
+%\textsf{psiTurk} provides a cloud service at \texttt{psiturk.org} for serving ads to workers.
+%This service serves the ads with appropriate SSL certificates, something which can be difficult on many server configurations.
+%The Ad Server removes need to deal with complex web security issues (https, data mining on workers) 
+%Participants recruited via Mechanical Turk first interact with your task via ads.  Technically, ads are snippets of HTML code that describe what your task is about and what you're offering for compensation. As a result, they are the front line for any subject recruitment online. 
+%
 
 %Second, the PsiTurk web framework allows you to easily build and host your own experiment, running on your server or laptop and saving workers' data either to your own database  or to \texttt{psiturk.org}.
 %This gives experimenters complete flexbility in terms of content while also offering a suite of tools to make experiment development easy.

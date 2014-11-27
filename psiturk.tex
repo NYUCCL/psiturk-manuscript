@@ -687,81 +687,75 @@ These statistics are made available on the psiturk.org dashboard
 and can be an additional source of information for experimenters.
 
 
-%
-%\textsf{psiTurk} provides a cloud service at \texttt{psiturk.org} for serving ads to workers.
-%This service serves the ads with appropriate SSL certificates, something which can be difficult on many server configurations.
-%The Ad Server removes need to deal with complex web security issues (https, data mining on workers) 
-%Participants recruited via Mechanical Turk first interact with your task via ads.  Technically, ads are snippets of HTML code that describe what your task is about and what you're offering for compensation. As a result, they are the front line for any subject recruitment online. 
-%
+\subsection{Javascript library \emph{psiturk.js}}
 
-%Second, the PsiTurk web framework allows you to easily build and host your own experiment, running on your server or laptop and saving workers' data either to your own database  or to \texttt{psiturk.org}.
-%This gives experimenters complete flexbility in terms of content while also offering a suite of tools to make experiment development easy.
-
-
-
-%Extendable Python based API: easily add new functionality
-%
-%Library of experiments you can adapt or replicate
-%
-%Fully open-source development helps catch bugs
-%
-%Since everything runs locally easy to debug/test (even w/o Internet!)
-%
-%Run experiments on local computer (via tunnel) (can run offline and online)
-%
-%Perfect for laboratory-based courses with undergrads (replicating studies)
-
-
-
-\subsection{Javascript library \emph{psiTurk.js} - (DM)}
-
-The javascript library \emph{psiTurk.js} enables interaction with the server from the client-side (javascript) experiment code.
+The javascript library \emph{psiturk.js} enables interaction with the server from the client-side (javascript) experiment code.
 The goal of the library is to handle the most common functionality of psiTurk-based web experiments, without imposing any additional requirements on the structure or design of the experiments themselves.
-Researchers can draw on a vast array of javascript libraries to design their experiment, while using psiTurk.js to save data and notify the server of changes in a participant's status.
+Researchers can use any third-party javascript libraries to design their experiment, while relying on \emph{psiturk.js} for common functions, including saving data and notifying the server of changes in a participant's status.
+
+Listing~\ref{code.lst} shows a condensed version of the javascript code from the Stroop example experiment.
+This is used in the following sections to illustrate how experiment code uses functions from \emph{psiturk.js} in order to interact with the psiTurk server.
+For the full, functional version, see the file \texttt{static/js/task.js} in the example experiment directory.
 
 \subsubsection{Initialization}
 
-Figure X shows javascript code from an experiment script (\texttt{static/js/task.js}). 
-Initialization. 
-Preloading of HTML and images.
-Basic structure for presenting instructional pages.
+When the experiment files are requested from the psiTurk server, the following global variables are also set (see \texttt{templates/exp.html}):
+
+\begin{itemize}
+\item \texttt{uniqueId}: a unique identifier for the participant
+\item \texttt{adServerLoc}: an experiment-specific URL on the Ad Server
+\item \texttt{mode}: the current mode (debug, sandbox, or live)
+\item \texttt{condition}: experimental condition
+\item \texttt{counterbalance}: counterbalancing code, used to vary design elements that are not related to main manipulation 
+\end{itemize}
+
+A \texttt{psiTurk} object must be initialized based on these global variables (line 2).
+These variables can also be used to change the experimental logic.
+For example, a common requirement is to change the stimulus set or design based on the condition or counterbalance codes that have been assigned by the psiTurk server (lines 4-5).
+
+Following instantiation, the \texttt{psiTurk} object can be used to preload a list of HTML pages that reside in the \texttt{templates} directory of the experiment (lines 8-9).
+This allows a new page to be displayed using a single command (line 34), which replaces the body of the window with the content in the specified HTML file.
+The \texttt{psiTurk} object also has functions for preloading images (in order to avoid server requests in the middle of the experiment when an image is displayed) and a basic structure for presenting a series of HTML pages (e.g., for an instructional phase).
 
 \subsubsection{Tracking a participant's progress in an experiment} 
 
 psiTurk records changes in a participant's status as they move through an experiment. 
 Some of these status changes are automatic, e.g., when a participant is assigned to a condition or if they quit an experiment early. 
-Two additional status changes are initiated by the client-side experiment code using psiTurk.js functions.
-First, since experiments typically begin with an instructional phase, calling the function \texttt{psiturk.finishInstructions()} upon completion of this phase will save the participant's status as having begun the main experiment.
+Two additional status changes are initiated by the client-side experiment code using \emph{psiturk.js} functions.
+First, since experiments typically begin with an instructional phase, calling the function \texttt{psiTurk.finishInstructions()} upon completion of this phase will save the participant's status as having begun the main experiment.
 If the participant attempts to quit the experiment after that point, they will receive a warning that they will not be able to restart the experiment and may forgo payment.
-Second, successful completion of the experiment is signaled by calling \texttt{psiturk.completeHIT()}, which closes the experiment and redirects the participant to the AMT page to submit their HIT.
+Second, successful completion of the experiment is signaled by calling \texttt{psiTurk.completeHIT()}, which closes the experiment and redirects the participant to the AMT page to submit their HIT.
 
 \subsubsection{Saving experimental data} 
 
-Experiment code can save data in two formats.
-\texttt{psiturk.recordTrialData} takes any list of values as input and appends it to a list of ``trial" data.
+The experimenter can save data in two formats.
+\texttt{psiTurk.recordTrialData} takes any JSON object as input and appends it to a list of ``trial" data.
 This data structure is meant for sequential data that may be collected over the course of multiple trials or blocks, where each line corresponds to a new measurement.
-However, the format of this data is defined by the experimenter and is saved in the database as a single JSON object.
+However, the format of each entry is defined by the experimenter and is saved in the database as a single JSON object (see line 20).
+Each new entry is automatically time-stamped at the time that \texttt{psiTurk.recordTrialData} is called.
 
-In contrast, \texttt{psiturk.recordUnstructuredData} is used to record $(key, value)$ pairs, where the key is uniquely defined within the experiment.
+In contrast, \texttt{psiTurk.recordUnstructuredData} is used to record $(key, value)$ pairs, where the key is uniquely defined within the experiment (see line 43).
 This format is useful for survey questions, randomly generated experiment parameters, or other one-time measurements, e.g., (\emph{Age}: 24).
 
-Importantly, both functions above simply record the data in the appropriate format on the client-side.
-When the experimenter wishes to save the data to the server they call \texttt{psiturk.saveData()}, at which point both sets of data are sent to the server to be recorded in the database.
+Importantly, both functions above simply record the data in the appropriate format on the client-side (i.e., within the \texttt{psiTurk} javascript object).
+When the experimenter wishes to save the data to the server they call \texttt{psiTurk.saveData()}, at which point both sets of data are sent to the server to be recorded in the database.
+\texttt{psiTurk.saveData()} can also be called with functions that will be executed upon either success or failure of the server request.
+For example, if the final save request is successful, the experiment can be terminated with \texttt{psiTurk.completeHIT()} passed as a callback (see lines 56-63).  
 
 \subsubsection{Automatic recording of browser interactions}
  
-One general shortcoming of web experiments is greater uncertainty about a participant's testing environment and engagement with the experiment.
+One general limitation of web experiments is greater uncertainty about a participant's testing environment and engagement with the experiment.
 Unlike lab computers where most undesired behaviors can be prevented, a web participant is always able to close a web browser, switch to different applications, or change other aspects of their experience.
-However, standard methods exist for recording many aspects of a user's interaction with a web browser, and this data can be useful for 1) tracking how an experiment was actually displayed, and 2) the level of a participant's engagement.
+However, standard methods exist for recording a user's interaction with a web browser, and this data can be useful for 1) tracking how an experiment was actually displayed, and 2) the level of a participant's engagement.
 
-For example, although it is possible to set the initial size of a browser window, a web participant can change the dimensions of the window, potentially obscuring or altering how the experiment is displayed.
-\emph{psiTurk.js} automatically records these changes in the size of the window.
+For example, although it is possible to control the initial size of a browser window, a web participant can change the dimensions of the window, potentially obscuring or altering the displayed elements.
+\emph{psiturk.js} automatically records these changes in the size of the window.
 Similarly, the participant can choose to switch focus away from the experiment window (e.g., to another browser window or a different application).
-\emph{psiTurk.js} automatically records every time that the experiment window loses and gains the participant's focus.
-This ``event data" is automatically recorded and saved to the database whenever \texttt{psiturk.saveData} is invoked. \\
+\emph{psiturk.js} automatically records every time that the experiment window loses and gains the participant's focus.
+This ``event data" is saved to the database whenever \texttt{psiTurk.saveData} is invoked, without any additional action on the part of the experimenter. \\
 
 
-\begin{lstlisting}[float=*,numbers=left,numberstyle=\small\color{gray},caption=Example experiment code (javascript)]
+\begin{lstlisting}[float=*,numbers=left,numberstyle=\small\color{gray},caption=Condensed version of javascript code for Stroop experiment,label=code.lst]
 // Initalize psiturk object with parameters passed from server (see templates/exp.html)
 var psiTurk = new PsiTurk(uniqueId, adServerLoc, mode);
 
@@ -828,11 +822,10 @@ var Questionnaire = function() {
 };
 \end{lstlisting}
 
-
 \subsection{Experiment exchange}
 
 A significant advantage of web-based experiments is the potential for low-friction replication and extension. 
-The \emph{experiment exchange} (http://psiturk.org/ee) facilitates the sharing of experiments that have been built to run using psiTurk, acting as an ``app store" for psiTurk-compatible designs.
+The \emph{Experiment Exchange} (http://psiturk.org/ee) facilitates the sharing of experiments that have been built to run using psiTurk, acting as an ``app store" for psiTurk-compatible designs.
 Once an experiment has been completed, a researcher can submit the following information to register their experiment on the exchange:
 
 \begin{enumerate}
@@ -844,7 +837,7 @@ Once an experiment has been completed, a researcher can submit the following inf
 
 
 Metadata associated with an experiment allows other researchers to discover it through the psiTurk website.
-A publicly available experiment can then be downloaded using the following command on the command line,
+A publicly available experiment can then be downloaded using the following command in the terminal:
 
 \begin{lstlisting}
 $ psiturk-install <experiment-specific-id>
@@ -854,7 +847,7 @@ $ psiturk-install <experiment-specific-id>
 If psiTurk is already configured on the user's system, the downloaded experiment will run without further changes, and can then act as a starting point for direct replication or extensions.
 Modified versions can then be re-run using the same population via AMT, thereby minimizing the potential for experimenter-specific biases.
 
-Other initiatives (e.g., the Open Science Framework, https://osf.io) also aim to improve the transparency, reproducibility, and efficiency of research through centralized services, but are less focused on the specific technology involved in running online experiments.
+Other initiatives (e.g., the Open Science Framework, https://osf.io) also aim to improve the transparency, reproducibility, and efficiency of research through centralized services, but are less focused on the specific technology stack used to run online experiments.
 In contrast, the psiTurk experiment exchange links together experiments that can be run within a common framework.
 As a result, existing experiments can serve as examples to help new researchers learn to code for the web; they shorten the development time necessary (especially for popular experimental paradigms); and the exchange facilitates communication between researchers with similar interests.
 

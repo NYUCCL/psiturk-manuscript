@@ -490,19 +490,37 @@ easily downloaded.  The coordination of these downloads is handled by the \texts
 %Complete documentation and tutorials are available at http://psiturk.org/docs, including instructions for installing the software.
 
 \section{Requirements and initial setup - (AC)}
+Before successfully installing and running a HIT with psiTurk, three sets of requirements must be fulfilled.
 
-\hl{can someone work on requirements?}
-% this needs to cover
-% 1. creating AMT account (maybe just mention necessary and provide link to instructions
-% online someplace because will be outdated by time anyone reads this
-% 2. create psiturk.org account
+\subsection{System}
+psiTurk is designed to run on unix systems (including Mac OS X, BSD, and Linux) that satisfy the following requirements:
 
-After creating an Amazon Web Services account, a researcher must obtain credentials (a \emph{key ID} and a \emph{secret key}) that are then added to a global configuration file \texttt{.psiturkconfig}.
-When psiTurk runs for the first time this file is automatically created in the user's home directory, but the user's AWS credentials must be added in order for psiTurk to interact with AWS.
-Additionally, an account (and associated pair of keys) on the psiTurk.org website is required to allow posting of ads on the Ad server.
-These credentials (obtained from a user's psiTurk profile page) are also placed in \texttt{.psiturkconfig}.
+\begin{enumerate}
+\item A working python installation of version 2.7 or newer (python 3 is not supported)
+\item The pip package manager 
+\item A command line tool (like Termainal in Mac OS X)
+\item A web browsers (ideally one that provides web developer tools, like Firefox, Safari, or Chrome)
+\end{enumerate}
 
-This global configuration is used whenever psiTurk is run, allowing multiple experiments (each residing in its own directory somewhere on the user's system) to rely on the same AWS and psiTurk accounts, or to share other common configuration options as desired.
+To satisfy the python requirements we recommend using an existing distribution like \emph{Enthought} or \emph{Anaconda}. These are free
+python distributions that ship with a range of useful packages and a package manager. 
+
+\subsection{AMT}
+An Amazon Web Services (AWS) account is required to use AMT as a requester. A new account can be created at \textsf{http://aws.amazon.com/mturk/}. 
+To set up an account, note that requesters
+must provide a U.S. billing address, so this may bar researchers out of the USA to create an account. 
+
+After setting up an account, psiTurk users must retrieve their AWS credentials, which include an \emph{access key id} and a
+\emph{secret access key}. These can be retrieved and (re-)generated at \textsf{https://console.aws.amazon.com}.
+Eventually, these credentials will be entered in the \texttt{.psiturkconfig}. file, as explained below.
+
+
+\subsection{psiTurk}
+Additionally, an account must be created at \textsf{https://psiturk.org/register}, which allows users to 
+post ads on psiTurk's ad server. A new user must then obtain a set of psiTurk credentials which can be found in 
+the ``API Keys'' menu item in the drop-down at the top right hand of the page.
+These credentials will also placed in \texttt{.psiturkconfig} (see below).
+
 
 
 % 3. install psiturk via pip (maybe describe system requirements, minimum python version)

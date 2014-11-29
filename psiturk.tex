@@ -376,8 +376,8 @@ experiments (e.g., it does not provide code for widgets such as sliders or butto
 researchers will use some basic Javascript, HTML, and CSS to design their experiment.  Instead, \textsf{psiTurk}'s
 philosophy is that general purpose javascript libraries available online for creating dynamic content (e.g., jquery or
 Twitter's Bootstrap library) provide the most powerful and well-documented set of features.  Instead, \textsf{psiTurk}
-aims to help share code and propagate ``best practices" among the research community.
-This later goal is supported by the online ``experiment exchange.'
+aims to help share code and propagate ``best practices'' among the research community.
+This later goal is supported by the online ``experiment exchange''.
 The source code for projects in the exchange can be downloaded and modified for a new use,
 replicated directly, or can simply provide example of code implementing a particular 
 feature.  In addition to the exchange, \textsf{psiTurk} also includes with a complete working example 
@@ -475,10 +475,10 @@ can then be used instead of a local database solution.
 \subsection{\textsf{psiturk.org} cloud services}
 In addition the command-line tool and the web application server, \textsf{psiTurk}
 provides a few services that run on a constantly available web server.
-Most important of these is that psiTurk "Secure Ad Server."  When a user
+Most important of these is that psiTurk Secure Ad Server.  When a user
 creates a new HIT and wishes to post it to AMT, typically one advertises the
 study to potential participants (explaining how long the task will take and how
-much it will pay).  As mentioned earlier, these "ads" will not correctly display
+much it will pay).  As mentioned earlier, these ``ads'' will not correctly display
 in worker's browsers unless they are encrypted using SSL.  The \textsf{psiturk.org}
 ad server allows users of the psiturk system to host ads on the \textsf{https://psiturk.org}
 website which are encrypted.  These ads are what appear in the browsable listing
@@ -490,41 +490,66 @@ easily downloaded.  The coordination of these downloads is handled by the \texts
 %Complete documentation and tutorials are available at http://psiturk.org/docs, including instructions for installing the software.
 
 \section{Requirements and initial setup - (AC)}
-Before successfully installing and running a HIT with psiTurk, three sets of requirements must be fulfilled.
+This section describes the requirements and installation steps that are required to successfully setup psiTurk and run
+HITs on Mechanical Turk. Note that details of these steps may change over time and will be updated at \textsf{http://psiturk.readthedocs.org}.
 
-\subsection{System}
+\subsection{System requirements}
 psiTurk is designed to run on unix systems (including Mac OS X, BSD, and Linux) that satisfy the following requirements:
 
 \begin{enumerate}
 \item A working python installation of version 2.7 or newer (python 3 is not supported)
 \item The pip package manager 
-\item A command line tool (like Termainal in Mac OS X)
+\item A command line tool (like Terminal in Mac OS X)
 \item A web browsers (ideally one that provides web developer tools, like Firefox, Safari, or Chrome)
 \end{enumerate}
 
 To satisfy the python requirements we recommend using an existing distribution like \emph{Enthought} or \emph{Anaconda}. These are free
-python distributions that ship with a range of useful packages and a package manager. 
+python distributions that ship with a range of useful packages and the pip package manager. 
 
-\subsection{AMT}
+\subsection{AWS credentials}
 An Amazon Web Services (AWS) account is required to use AMT as a requester. A new account can be created at \textsf{http://aws.amazon.com/mturk/}. 
 To set up an account, note that requesters
-must provide a U.S. billing address, so this may bar researchers out of the USA to create an account. 
+must provide a U.S. billing address, so this may bar researchers out of the U.S. to create an account. 
 
 After setting up an account, psiTurk users must retrieve their AWS credentials, which include an \emph{access key id} and a
 \emph{secret access key}. These can be retrieved and (re-)generated at \textsf{https://console.aws.amazon.com}.
 Eventually, these credentials will be entered in the \texttt{.psiturkconfig}. file, as explained below.
 
 
-\subsection{psiTurk}
+\subsection{psiTurk credentials}
 Additionally, an account must be created at \textsf{https://psiturk.org/register}, which allows users to 
 post ads on psiTurk's ad server. A new user must then obtain a set of psiTurk credentials which can be found in 
 the ``API Keys'' menu item in the drop-down at the top right hand of the page.
-These credentials will also placed in \texttt{.psiturkconfig} (see below).
+These credentials will also be placed in \texttt{.psiturkconfig} (see below).
 
 
+\subsection{Installation}
+psiTurk is installed using the python package manager \texttt{pip}. In a terminal window, type:
 
-% 3. install psiturk via pip (maybe describe system requirements, minimum python version)
-% 4. discussion optional database option
+\begin{lstlisting}
+pip install psiturk
+\end{lstlisting}
+
+Depending on the user's permissions, this command may have to be prefaced with \texttt{sudo}.
+Alternatively, psiTurk can be installed directly from github, which holds the latest stable
+release in the \texttt{master} branch, and the latest development version in the \texttt{dev} branch. 
+To install from \texttt{master}, for example, type:
+
+\begin{lstlisting}
+pip install git+git://github.com/NYUCCL/psiTurk.git@master
+\end{lstlisting}
+
+The psiTurk installation automatically creates a global config file, \texttt{.psiturkconfig}, in a user's home directory. 
+This file must then be edited to include the AWS and psiTurk credentials of the specific user. 
+
+\subsection{Optional: Adding SQL database}
+By default, psiTurk includes a basic database solution \emph{SQLite}. This solution
+will work well for HITs that only require light traffic, but it does not handle
+multiple concurrent queries well and there is a danger of data loss when accessed at the same time by different users. 
+It is therefore recommended to set up a more robust database solution, like a
+MySQL database, especially if a researcher wants to run many participants simultaneously.  
+
+
 
 \section{Getting started with \textsf{psiTurk}}
 

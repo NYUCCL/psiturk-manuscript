@@ -101,7 +101,7 @@ anonymously over the Internet has transformed the behavioral and social
 sciences.  In addition to large scale experiments such as those
 conducted by websites such as Facebook or 
 Twitter~\citep[e.g.,][]{Chen:2013pb,Kramer:2014dq,Wu:2011sp}, many researchers
-use online data collection to deploy ``traditional" experimental psychology
+use online data collection to deploy ``traditional'' experimental psychology
 tasks.  The benefit of the online versions of traditional behavioral experiments include 
 faster data collection and access to a potentially more diverse pool of participants. 
 At the same time, conducting experiments online introduces a number of new 
@@ -131,7 +131,7 @@ experiment on the web, saving experimental data to a database, and restricting t
 participant pool according to the experimenter's needs (e.g., to prevent non-naive 
 participants from contaminating a study). It also provides an interface with AMT to 
 create and test new projects as well as to manage and pay participants. Finally, in 
-the spirit of the recent ``open science" movement \citep{Collaboration:2012vf},
+the spirit of the recent ``open science'' movement \citep{Collaboration:2012vf},
 it provides  an open-source \emph{experiment exchange} for sharing experiments 
 that can be easily replicated and extended by other researchers.  The code for 
 \textsf{psiTurk} is open source, hosted publicly at
@@ -211,7 +211,7 @@ collected online, 59\% treated the data identically to data collected in the lab
 %\centering
 %\includegraphics[scale=.75]{figures/challenges.pdf}
 %\caption{Survey responses in answer to the question ``What are the major challenges 
-% in using behavioral data collected online in research?" \hl{I suggest making this a full page 
+% in using behavioral data collected online in research?'' \hl{I suggest making this a full page 
 % info graphic type thing that shows more of the interesting things in the survey that we 
 % can use to open discussion of psiturk's features}}
 %\label{fig:challenges}
@@ -270,7 +270,7 @@ In addition, some HITs offer bonus payments that are determined by the requester
 on a worker's performance.
 
 From a requester's perspective, AMT provides a web-based interface for creating/managing 
-HITs and approving work that has been submitted.  In addition, they offer a ``sandbox" version 
+HITs and approving work that has been submitted.  In addition, they offer a ``sandbox'' version 
 of the platform in which HITs can be tested without paying live participants.
 For basic tasks like surveys and open text fields, AMT offers a range of built-in templates that 
 can be used to create experiments within the AMT website.  However, the degree of customization 
@@ -300,7 +300,9 @@ these types of tasks.
 The \textsf{psiTurk} platform is design to mitigate several of the technical complexities
 involved in online experimentation, particularly using AMT.
 
-\subsubsection{Web server and database management} 
+\subsubsection{Web server and database management}
+\label{sec:web-and-database}
+
 To collect experimental data on the web, or specifically to run an external HIT on AMT, 
 researchers minimally need a web server and database.  
 The role of a web server is to respond to requests from participant's Internet browser 
@@ -359,19 +361,19 @@ to save researchers considerable time.
 
 \subsubsection{Programming an experiment}
 \textsf{psiTurk} provides a number of features which help researchers implement 
-experiments.  These include a Javascript library (psiturk.js), basic HTML templates 
+experiments.  These include a JavaScript library (psiturk.js), basic HTML templates 
 for commonly used components (e.g., consent forms and instruction screens), 
 and an user-contributed ``experiment exchange'' where researchers can share the code for their \textsf{psiTurk}-compatible
 projects (\textsf{http://psiturk.org/ee}). 
 
-The psiturk.js javascript library provides basic functions for recording data and sending it back to the \textsf{psiTurk} server,
+The psiturk.js JavaScript library provides basic functions for recording data and sending it back to the \textsf{psiTurk} server,
 preloading pages and images, as well as some basic functions for looping through instructions
 screens and providing (and recording) informed consent.
 However, the \textsf{psiTurk} framework is \emph{not} designed as a generic
 programming interface for building 
 experiments (e.g., it does not provide code for widgets such as sliders or buttons) and assume
-researchers will use some basic Javascript, HTML, and CSS to design their experiment.  Instead, \textsf{psiTurk}'s
-philosophy is that general purpose javascript libraries available online for creating dynamic content (e.g., jquery or
+researchers will use some basic JavaScript, HTML, and CSS to design their experiment.  Instead, \textsf{psiTurk}'s
+philosophy is that general purpose JavaScript libraries available online for creating dynamic content (e.g., jquery or
 Twitter's Bootstrap library) provide the most powerful and well-documented set of features.  Instead, \textsf{psiTurk}
 aims to help share code and propagate ``best practices'' among the research community.
 This later goal is supported by the online ``experiment exchange''.
@@ -418,7 +420,7 @@ local computer or server.  These local components include a command line tool an
 a web application server (which provides both a customizable webserver and 
 database solution).  Next, \textsf{psiTurk} relies currently on Amazon
 Mechanical Turk to handle the recruitment and compensation of participants.
-Finally, the \textsf{psiturk.org} cloud based component includes a hosted ``ad server" 
+Finally, the \textsf{psiturk.org} cloud based component includes a hosted ``ad server'' 
 and the experiment exchange.  In the following sections we highlight the important 
 functions of each component.
 
@@ -427,22 +429,26 @@ functions of each component.
 \subsubsection{Command line tool}
 \label{sec:cli}
 
-When using \textsf{psiTurk}, the researcher runs the \textsf{psiturk} 
-interactive UNIX-based command line tool on a local computer, such as a laptop or lab computer.
-This tool is used to issue commands, and to interact
-with the Amazon Mechanical Turk system and with the \textsf{psiTurk} cloud.  
-The design choice of a command line interface was 
-selected to make it easier to add new functionality to the system quickly without 
-needing to design time consuming GUI elements; thus, the set of
-available commands continues to grow. Furthermore, the command line can be run in
-a ``script'' mode, which allows multiple commands to be run automatically at once
-and allowing for even further automation of an experiment.
-Example uses of the command line tool include checking the user's Amazon
-Mechanical Turk account balance, paying participants, and creating new HITs.
-The command line has the capability to give automated bonus payments to 
-participants based on a function designed by the experimenter. This feature is 
-particularly helpful since the AMT website requires bonuses to be entered by hand 
-for each participant individually.
+When using \textsf{psiTurk}, the researcher runs the \textsf{psiturk}
+interactive UNIX-based command line tool on a local computer, such as a laptop
+or lab computer. This tool is used to issue commands, and to interact with the
+Amazon Mechanical Turk system and with the \textsf{psiTurk} cloud.  Example
+uses of the command line tool include checking the user's Amazon Mechanical
+Turk account balance, paying participants, and creating new HITs. In addition,
+the command line has the capability to give automated bonus payments to
+participants based on a function designed by the experimenter. This feature is
+particularly helpful since the AMT website requires bonuses to be entered by
+hand for each participant individually.
+
+There are several advantages to designing psiTurk as a simple CLI beyond its
+efficiency of use. This design makes the user interface code clear and easy to
+read and write, allowing newcomers to quickly understand and contribute to the
+open-source project. Integrating a new feature into the interface is as simple
+as describing the syntax and functioning of a new command; in contrast to a
+graphical user interfac (GUI), extending the CLI does not require designing
+time-consuming GUI elements.  The CLI also ensures that psiTurk is easy to
+interact with not just on a laptop or desktop, but also on a remote server or
+in the cloud, where users may only have terminal access.
 
 
 \subsubsection{Web application server (webserver + database)}
@@ -597,30 +603,19 @@ The remaining files are only necessary in order to debug server errors (\texttt{
 
 \subsection{Command line interface: Managing HITs and serving the experiment - (AR)}
 
-PsiTurk runs as a command line interface (CLI) within a standard terminal window, as described in Section\ref{sec:cli}.
-
-There are several advantages to designing psiTurk as a simple CLI beyond its efficiency of use. This
-design makes the user interface code clear and easy to read and write, allowing newcomers to quickly
-understand and contribute to the open-source project. Integrating a new feature into the interface
-is as simple as describing the syntax and functioning of a new command. The CLI also ensures that
-psiTurk is easy to interact with not just on a laptop or desktop but also on a remote server or in
-the cloud, where users may have terminal-only access.
- 
-Tab completion makes it quick to type commands, and the \texttt{help} command can be used to show
-details on the usage of any command. 
-The straightforward and consistent syntax of the CLI allows
-users to perform a wide variety of tasks---from creating HITs and paying workers, to launching Amazon
-Web Services database instances, to opening an experiment in a browser for debugging---that
-would otherwise be spread across a number of websites and programs. In most cases, a user of the
-psiTurk CLI will never have to log into the MTurk website except to add money to their MTurk
-requester account.
-
+As described in Section~\ref{sec:cli}, PsiTurk runs as a command line interface
+(CLI) within a standard terminal window and can be used to perform a wide
+variety of tasks---from creating HITs and paying workers, to launching Amazon
+Web Services database instances, to opening an experiment in a browser for
+debugging---that would otherwise be spread across a number of websites and
+programs. In most cases, a user of the psiTurk CLI will never have to log into
+the MTurk website except to add money to their MTurk requester account.
 
 Entering
 \texttt{psiturk} at the command line in any directory containing a psiTurk project launches the
 psiTurk CLI.
 The psiTurk CLI features a colorized prompt that provides important information at a glance, including
-whether the server is running, the current mode (``live" or ``sandbox", and the number of HITs currently running on AMT:
+whether the server is running, the current mode (``live'' or ``sandbox''), and the number of HITs currently running on AMT in the same mode:
 
 \begin{lstlisting}
 [psiTurk server:off mode:sdbx #HITs:0]$
@@ -628,10 +623,9 @@ whether the server is running, the current mode (``live" or ``sandbox", and the 
 
 \noindent In some examples below, this prompt is truncated as \texttt{[psiTurk]\$} to indicate commands that occur within the psiTurk CLI, while commands that are entered at the user's standard command line are preceded simply by \texttt{\$}.
 
-
 \subsubsection{Example CLI usage}
 Commands are organized into groups based on their function, following a general ``\texttt{command subcommand
-arguments}'' format. For example, one can create a HIT by typing 
+arguments}'' format. For example, one can create a HIT by typing: 
 
 % \noindent\lstinline+[psiTurk]$ hit create+
 % $<\# assignments> <\$ amount> <duration>$
@@ -639,13 +633,15 @@ arguments}'' format. For example, one can create a HIT by typing
 [psiTurk]$ hit create
 \end{lstlisting}
 
-\noindent which launches an interactive prompt for number of assignments, payment per HIT, and HIT duration. After creating one or more HITs, one can list any active HITs with:
+\noindent which launches an interactive prompt for number of assignments, payment per HIT, and HIT duration. The sandbox mode is active by default, which means that calling \texttt{hit create} will submit a HIT to the AMT sandbox website.
+
+After creating one or more HITs, one can list any active HITs with:
 
 \begin{lstlisting}
 [psiTurk]$ hit list --active
 \end{lstlisting}
 
-The experiment server is launched using
+The experiment server is launched using:
 
 \begin{lstlisting}
 [psiTurk]$ server on
@@ -663,14 +659,10 @@ During the development of an experiment, the current code can be tested using:
 [psiTurk]$ debug
 \end{lstlisting}
 
-\noindent which will open a new browser window in which the current experiment can be tested.
+\noindent which will open a new browser window in which the current experiment can be tested. The experimenter can then test the experiment from the perspective of a worker before making it publicly available.
+Once the experiment is ready for real workers, the \texttt{mode} command can be used to switch to ``live'' mode, after which newly created HITs will be submitted to the main AMT site.
 
-%Can restart the server with \texttt{server restart} or open the server log with \texttt{server log}. 
-
-The sandbox mode is active by default, which means that calling \texttt{hit create} will submit a HIT to the AMT sandbox website.
-The experimenter can then test the experiment from the perspective of a worker before making it publicly available.
-Once the experiment is ready for real workers, the \texttt{mode} command can be used to switch to ``live" mode, after which newly created HITs will be submitted to the main AMT site.
-
+Help on any of the commands is easily accessible through the \texttt{help} command. Using \texttt{help} on its own will print all available commands, and using \texttt{help command} will print out detailed help on the given command.
 
 \begin{figure*}[tp]
 \centering
@@ -683,16 +675,14 @@ Once the experiment is ready for real workers, the \texttt{mode} command can be 
 \subsection{The Secure Ad Server}
 \label{sec:adserver}
 
-As described briefly above, the psiturk.org cloud service
-provides a ``Secure Ad Server."  The term ``ad" in this context
-refers to a small HTML page the describes the details and
-requirements of a given experiment.  The ad is the
-first interaction that a \textsf{psiTurk} user has with a
-potential subject and is thus the gateway to subject recruitment.
-Ads are in many ways analogous to hanging a poster or flyer 
-around a university building in order to recruit participants.
-It's easy to overlook the importance of a good ad, and making that ad
-visible to as many participants as possible.
+As described briefly in Section~\ref{sec:web-and-database}, the psiturk.org
+cloud service provides a ``Secure Ad Server.''  The term ``ad'' in this context
+refers to a small HTML page which describes the details and requirements of a
+given experiment.  The ad is the first interaction that an experimenter has
+with a potential subject and is thus the gateway to subject recruitment. Ads
+are in many ways analogous to hanging a poster or flyer around a university
+building in order to recruit participants. It's easy to overlook the importance
+of a good ad, and making that ad visible to as many participants as possible.
 
 An overview of the flow of running an experiment using
 \textsf{psiTurk} and the Secure Ad Server is illustrated in
@@ -702,39 +692,39 @@ runs the \texttt{hit create} command, the current contents of the local
 the right panel of Figure~\ref{fig:adserver}).
 This will create a unique custom URL for the experiment (an example might be
 \texttt{https://ad.psiturk.org/view/90812390123091823}) which
-allows anyone on the Internet to view the contents of the \texttt{ad.html}
-file which was uploaded.  A different URL is create each time \texttt{hit create}
-is run and there is no limit to the number of ads a user can create.  A list
-of all of a users ads is available in the psiturk.org dashboard (\texttt{http://psiturk.org/dashboard}).
-Critically the ad URL is encrypted and
+allows anyone on the internet to view the contents of the uploaded \texttt{ad.html}
+file.  Critically, the ad URL is encrypted and
 securely signed with an appropriate SSL certificate ensuring that all
-web browsers will successfully display the webpage\footnote{SSL certification has recently become a requirement for hosting content within an \texttt{iframe} on \texttt{mturk.com}.}.  This new custom URL is then passed
-on to AMT by the \texttt{hit create} command as the ``location" of
-the selected HIT.  As is visible in the right panel of Figure~\ref{fig:adserver}
-when a user in the AMT "crowd" labor workforce views a HIT on the AMT
-website, it loads the ad from the psiturk.org cloud server.  If the user accepts
+web browsers will successfully display the webpage\footnote{SSL certification has recently become a requirement for hosting content within an \texttt{iframe} on \texttt{mturk.com}.}. A different URL is created each time \texttt{hit create}
+is run and there is no limit to the number of ads that can be created.  A private listing of all ads created by a particular user is available on the psiturk.org dashboard (\texttt{http://psiturk.org/dashboard}).
+
+The custom ad URL is automatically passed
+on to AMT by the \texttt{hit create} command as the ``location'' of
+the selected HIT.  As is visible in Figure~\ref{fig:adserver},
+when an AMT worker views a HIT on the AMT
+website, it loads the ad from the psiturk.org cloud server (left panel of Figure~\ref{fig:adserver}).  If the worker accepts
 the hit, a link is provided to the worker which pops open a new browser
-window.  This URL points directly at the location of the user's local computer
-or server.  After this hand off occurs all data transmitted between the worker
-and requester is direct meaning that the psiturk.org cloud server does not
-process or see the user's experimental data.  This is important for many IRBs
+window.  This URL points directly at the location of the \emph{requester's} local computer
+or server (right panel).  After this hand off occurs, all data is transmitted directly between the worker
+and the requester: the psiturk.org cloud server does not ever
+process or see the user's experimental data.  This is important for many IRBs,
 particular if an experiment involves sensitive materials.
 
 Besides the convenience of the Secure Ad Server in terms of providing
-SSL signed URLs, the Secure Ad Server does track statistics about the
-number of workers who viewed and ad but decided to not accept it, the
-number who accepted it, the number who completed the task, etc...
+SSL signed URLs, the Secure Ad Server tracks statistics about the
+number of workers who viewed the ad but decided to not accept it, the
+number who accepted it, and the number who actually completed the task.
 These statistics are made available on the psiturk.org dashboard
 and can be an additional source of information for experimenters.
 
 
-\subsection{Javascript library \emph{psiturk.js}}
+\subsection{JavaScript library \emph{psiturk.js}}
 
-The javascript library \emph{psiturk.js} enables interaction with the server from the client-side (javascript) experiment code.
+The JavaScript library \emph{psiturk.js} enables interaction with the server from the client-side (JavaScript) experiment code.
 The goal of the library is to handle the most common functionality of psiTurk-based web experiments, without imposing any additional requirements on the structure or design of the experiments themselves.
-Researchers can use any third-party javascript libraries to design their experiment, while relying on \emph{psiturk.js} for common functions, including saving data and notifying the server of changes in a participant's status.
+Researchers can use any third-party JavaScript libraries to design their experiment, while relying on \emph{psiturk.js} for common functions, including saving data and notifying the server of changes in a participant's status.
 
-Listing~\ref{code.lst} shows a condensed version of the javascript code from the Stroop example experiment.
+Listing~\ref{code.lst} shows a condensed version of the JavaScript code from the Stroop example experiment.
 This is used in the following sections to illustrate how experiment code uses functions from \emph{psiturk.js} in order to interact with the psiTurk server.
 For the full, functional version, see the file \texttt{static/js/task.js} in the example experiment directory.
 
@@ -744,7 +734,7 @@ When the experiment files are requested from the psiTurk server, the following g
 
 \begin{itemize}
 \item \texttt{uniqueId}: a unique identifier for the participant
-\item \texttt{adServerLoc}: an experiment-specific URL on the Ad Server
+\item \texttt{adServerLoc}: the experiment-specific URL on the Ad Server
 \item \texttt{mode}: the current mode (debug, sandbox, or live)
 \item \texttt{condition}: experimental condition
 \item \texttt{counterbalance}: counterbalancing code, used to vary design elements that are not related to main manipulation 
@@ -770,7 +760,7 @@ Second, successful completion of the experiment is signaled by calling \texttt{p
 \subsubsection{Saving experimental data} 
 
 The experimenter can save data in two formats.
-\texttt{psiTurk.recordTrialData} takes any JSON object as input and appends it to a list of ``trial" data.
+\texttt{psiTurk.recordTrialData} takes any JSON object as input and appends it to a list of ``trial'' data.
 This data structure is meant for sequential data that may be collected over the course of multiple trials or blocks, where each line corresponds to a new measurement.
 However, the format of each entry is defined by the experimenter and is saved in the database as a single JSON object (see line 20).
 Each new entry is automatically time-stamped at the time that \texttt{psiTurk.recordTrialData} is called.
@@ -778,7 +768,7 @@ Each new entry is automatically time-stamped at the time that \texttt{psiTurk.re
 In contrast, \texttt{psiTurk.recordUnstructuredData} is used to record $(key, value)$ pairs, where the key is uniquely defined within the experiment (see line 43).
 This format is useful for survey questions, randomly generated experiment parameters, or other one-time measurements, e.g., (\emph{Age}: 24).
 
-Importantly, both functions above simply record the data in the appropriate format on the client-side (i.e., within the \texttt{psiTurk} javascript object).
+Importantly, both functions above simply record the data in the appropriate format on the client-side (i.e., within the \texttt{psiTurk} JavaScript object).
 When the experimenter wishes to save the data to the server they call \texttt{psiTurk.saveData()}, at which point both sets of data are sent to the server to be recorded in the database.
 \texttt{psiTurk.saveData()} can also be called with functions that will be executed upon either success or failure of the server request.
 For example, if the final save request is successful, the experiment can be terminated with \texttt{psiTurk.completeHIT()} passed as a callback (see lines 56-63).  
@@ -793,10 +783,10 @@ For example, although it is possible to control the initial size of a browser wi
 \emph{psiturk.js} automatically records these changes in the size of the window.
 Similarly, the participant can choose to switch focus away from the experiment window (e.g., to another browser window or a different application).
 \emph{psiturk.js} automatically records every time that the experiment window loses and gains the participant's focus.
-This ``event data" is saved to the database whenever \texttt{psiTurk.saveData} is invoked, without any additional action on the part of the experimenter. \\
+This ``event data'' is saved to the database whenever \texttt{psiTurk.saveData} is invoked, without any additional action on the part of the experimenter. \\
 
 
-\begin{lstlisting}[float=*,numbers=left,numberstyle=\small\color{gray},caption=Condensed version of javascript code for Stroop experiment,label=code.lst]
+\begin{lstlisting}[float=*,numbers=left,numberstyle=\small\color{gray},caption=Condensed version of JavaScript code for Stroop experiment,label=code.lst]
 // Initalize psiturk object with parameters passed from server (see templates/exp.html)
 var psiTurk = new PsiTurk(uniqueId, adServerLoc, mode);
 
@@ -851,14 +841,14 @@ var Questionnaire = function() {
 	psiTurk.recordTrialData({'phase':'postquestionnaire', 'status':'begin'});
 	
 	$("#next").click(function () {
-	    record_responses();
-	    psiTurk.saveData({
-            	success: function(){
-                	psiTurk.computeBonus('compute_bonus', function() { 
-                	  psiTurk.completeHIT(); // when finished computing bonus, quit
-                }); 
-            }, 
-            error: prompt_resubmit});
+		record_responses();	
+		psiTurk.saveData({
+			success: function(){
+			    psiTurk.computeBonus('compute_bonus', function() { 
+			    	psiTurk.completeHIT(); // when finished computing bonus, quit
+			    }); 
+			}, 
+			error: prompt_resubmit});
 	});
 };
 \end{lstlisting}
@@ -866,7 +856,7 @@ var Questionnaire = function() {
 \subsection{Experiment exchange}
 
 A significant advantage of web-based experiments is the potential for low-friction replication and extension. 
-The \emph{Experiment Exchange} (http://psiturk.org/ee) facilitates the sharing of experiments that have been built to run using psiTurk, acting as an ``app store" for psiTurk-compatible designs.
+The \emph{Experiment Exchange} (http://psiturk.org/ee) facilitates the sharing of experiments that have been built to run using psiTurk, acting as an ``app store'' for psiTurk-compatible designs.
 Once an experiment has been completed, a researcher can submit the following information to register their experiment on the exchange:
 
 \begin{enumerate}

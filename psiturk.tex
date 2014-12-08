@@ -51,7 +51,7 @@
 \author{Todd M. Gureckis$^1$ \and
 	Jay Martin$^{1,2}$ \and
 	John McDonnell$^3$ \and
-	Alex Rich$^1$ \and
+	Alexander S. Rich$^1$ \and
 	Doug Markant$^4$  \and
 	Anna Coenen$^1$ \and
 	Jessica Hamrick$^5$ \and
@@ -219,7 +219,7 @@ collected online, 59\% treated the data identically to data collected in the lab
 
 Respondents also felt that online data collected presented a set of unique challenges 
 (Figure~\ref{fig:survey}).  Some felt that data collected online was unreliable or the
-population unrepresentative. Many felt that experiment designs they were interested in did
+population unrepresentative. Many expressed that experiment designs they were interested in did
 not work well online, or that web technology is too complex, and researchers based
 outside the US reported difficulty using services like Amazon Mechanical Turk.
 
@@ -527,7 +527,7 @@ These credentials will also be placed in \texttt{.psiturkconfig} (see below).
 psiTurk is installed using the python package manager \texttt{pip}. In a terminal window, type:
 
 \begin{lstlisting}
-pip install psiturk
+$ pip install psiturk
 \end{lstlisting}
 
 Depending on the user's permissions, this command may have to be prefaced with \texttt{sudo}.
@@ -536,7 +536,7 @@ release in the \texttt{master} branch, and the latest development version in the
 To install from \texttt{master}, for example, type:
 
 \begin{lstlisting}
-pip install git+git://github.com/NYUCCL/psiTurk.git@master
+$ pip install git+git://github.com/NYUCCL/psiTurk.git@master
 \end{lstlisting}
 
 The psiTurk installation automatically creates a global config file, \texttt{.psiturkconfig}, in a user's home directory. 
@@ -575,7 +575,7 @@ The project directory typically includes the following files:
 \begin{itemize}
 \item Metadata about the experiment that is displayed to workers on the AMT website (title, description, etc.)
 \item Restrictions on which workers can accept the HIT, including geographic location (e.g., limiting to US workers only), AMT-specific qualifications (e.g., a worker's proportion of past work that has been approved), and web browsers that are permitted.
-\item Database information (Sqlite by default)
+\item Database information (SQLite by default)
 \item Server parameters (URL, port number)
 \item Task parameters (e.g., number of conditions)
 \end{itemize}
@@ -583,7 +583,7 @@ The project directory typically includes the following files:
 
 \item \texttt{custom.py}: contains user-created routes, so that new server-side functionality can be added to the psiTurk web server. 
 
-\item \texttt{participants.db}: if Sqlite is used, contains database.
+\item \texttt{participants.db}: if SQLite is used, contains database.
 
 \item \texttt{server.log}: contains a log of any messages from the experiment server (not from the actual experiment code!).
 
@@ -629,7 +629,7 @@ whether the server is running, the current mode (``live" or ``sandbox", and the 
 [psiTurk server:off mode:sdbx #HITs:0]$
 \end{lstlisting}
 
-\noindent In some examples below, this prompt is truncated as \texttt{[psiTurk]\$} to indicate commands that occur within the psiTurk CLI, while commands that are entered on the command line are preceded simply by \texttt{\$}.
+\noindent In some examples below, this prompt is truncated as \texttt{[psiTurk]\$} to indicate commands that occur within the psiTurk CLI, while commands that are entered at the user's standard command line are preceded simply by \texttt{\$}.
 
 
 \subsubsection{Example CLI usage}
@@ -648,13 +648,13 @@ arguments}'' format. For example, one can create a HIT by typing
 [psiTurk]$ hit list --active
 \end{lstlisting}
 
-The experiment server is started using
+The experiment server is launched using
 
 \begin{lstlisting}
 [psiTurk]$ server on
 \end{lstlisting}
 
-\noindent This opens the port specified in the project configuration file.
+\noindent which opens the port specified in the project configuration file.
 The experiment server will then respond to incoming requests, assuming that the port is publicly accessible.
 This requires a static IP to prevent the experiment's URL from changing.
 Users without a static IP address can use a dynamic DNS service to forward requests to their dynamic IP.
@@ -668,7 +668,7 @@ During the development of an experiment, the current code can be tested using:
 
 \noindent which will open a new browser window in which the current experiment can be tested.
 
-Can restart the server with \texttt{server restart} or open the server log with \texttt{server log}. 
+%Can restart the server with \texttt{server restart} or open the server log with \texttt{server log}. 
 
 The sandbox mode is active by default, which means that calling \texttt{hit create} will submit a HIT to the AMT sandbox website.
 The experimenter can then test the experiment from the perspective of a worker before making it publicly available.

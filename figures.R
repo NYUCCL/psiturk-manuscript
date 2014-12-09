@@ -37,7 +37,7 @@ features$psiTurk = c(1,1,0,1,1,1,0,1,1,1,0,1,2,2,2,0,0,1,0)
 
 
 pdf(file="figures/combinedquestions2.pdf", width = 12, height = 5, useDingbats = FALSE)
-ggplot(combinedquestions, aes(answer, percent, fill=label)) + geom_bar(stat="identity") + coord_flip() + theme_classic() + xlab("") + ylab("Percent reporting challenge") + scale_y_continuous(limits=c(0,100)) + scale_fill_manual(values=c("#4daf4a", "#e41a1c", "#377eb8"), name="Response type", breaks = c("uses", "challenges", "benefits"))
+ggplot(combinedquestions, aes(answer, percent, fill=label)) + geom_bar(stat="identity") + coord_flip() + theme_classic() + xlab("") + ylab("Percent reporting challenge") + scale_y_continuous(limits=c(0,100)) + scale_fill_manual(values=c("#222222", "#777777", "#bbbbbb"), name="Response type", breaks = c("uses", "challenges", "benefits"))
 dev.off()
 
 

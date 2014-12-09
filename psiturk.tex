@@ -111,11 +111,10 @@ faster data collection and access to a potentially more diverse pool of particip
 At the same time, conducting experiments online introduces a number of new 
 technical and scientific challenges that must be addressed.
 
-The project described in this paper, \psiturk{}, is an open-source framework of 
-software and services that aims to address many of the technical challenges
-involved in deploying experimental psychology experiments online.
+The project described in this paper, \psiturk{}, is an open-source project that aims to address many of the technical challenges
+involved in deploying psychology experiments online.
 It facilitates the creation, deployment, sharing, and replication of web-based experiments.
-Study participants can be recruited via a number of methods including Amazon 
+Study participants can be recruited via Amazon 
 Mechanical Turk (AMT), which is currently the most popular platform for running 
 paid human experiments online.
 
@@ -123,7 +122,7 @@ paid human experiments online.
 \centering
 \includegraphics[scale=.30]{figures/psiturk_logo.jpg}
 \caption{The \psiturk{} project is hosted on Github 
-(http://github.com/NYUCCL/psiTurk) and at its main webpage (\textsf{http://psiturk.org}). 
+(\textsf{http://github.com/NYUCCL/psiTurk}) and at its main webpage (\textsf{http://psiturk.org}). 
 The commissioned logo reflects the community-built orientation of the project.  A 
 core philosophy is that better scientific software developed can be developed 
 with more diverse input from many programmers~\citep{Raymond:1999zt}}.
@@ -132,26 +131,25 @@ with more diverse input from many programmers~\citep{Raymond:1999zt}}.
 
 To briefly summarize, \psiturk{} provides features for serving an 
 experiment on the web, saving experimental data to a database, and restricting the 
-participant pool according to the experimenter's needs (e.g., to prevent non-naive 
-participants from contaminating a study). It also provides an interface with AMT to 
+participant pool according to the experimenter's needs (e.g., to prevent from repeating a study). It also provides an interface with AMT to 
 create and test new projects as well as to manage and pay participants. Finally, in 
 the spirit of the recent ``open science'' movement \citep{Collaboration:2012vf},
-it provides  an open-source \emph{experiment exchange} for sharing experiments 
+it provides  an open-source Experiment Exchange for sharing experiments 
 that can be easily replicated and extended by other researchers.  The code for 
 \psiturk{} is open source, hosted publicly at
-\textsf{http://github.com/NYUCCL/psiTurk} and interested researchers can easily 
+\textsf{http://github.com/NYUCCL/psiTurk}, and interested researchers can easily 
 contribute to improvements and bug fixes (see Figure~\ref{fig:logo}).
 
-The principal goal of this framework is to handle common technical 
+The principal goal of \psiturk{} is to handle common technical 
 challenges so that researchers can focus on the development and replication
-of online experiments.  In this paper we present a high-level overview of the 
+of online experiments.  In this paper, we present a high-level overview of the 
 \psiturk{} framework and its advantages for running web-based experiments.
 In supplement to this overview, \psiturk{} provides a large and continually
 evolving set of documentation hosted online (\textsf{https://psiturk.org/docs}).
 We begin with an overview of the issues involved in online 
 behavioral research,  the AMT platform, and the specific challenges that \psiturk{} is designed to 
 address.  We then  step through the core functionality of \psiturk{} and 
-describe its role in both an experimenter's and participant's workflow.  Finally, we
+describe its role from the point of view of both the experimenter and the participant.  Finally, we
 consider some future directions for \psiturk{} and online experimentation in 
 general.
 
@@ -168,13 +166,13 @@ by 201 behavioral researchers.}
 \end{figure*}
 
 It is easy to see why online experiments are an attractive option for behavioral 
-scientists.  Compared to traditional methods of experimentation in the laboratory
+scientists.  Compared to traditional methods of experimentation in the laboratory,
 they allow researchers to collect large data sets in a fraction of the time and at 
 much lower cost (in terms of time, employment of research assistants, and typical 
 compensation costs for participants).  Designing experiments for the web allows 
-researchers to leverage the large set of software libraries developed to assist 
-in the design of commercial web applications such as Node.js, JQuery, d3.js, 
-and Bootstrap.  Such libraries can be used to design the look and flow of an 
+researchers to leverage a large set of software libraries, such as Node.js, JQuery, d3.js, 
+and Bootstrap. These libraries were developed to assist 
+in the development of commercial web applications, can be used to design the look and flow of an 
 experiment in ways 
 that far exceed the capabilities of traditional experiment software developed 
 in academia.  Additionally, such tools enable a much wider range of experiments, 
@@ -183,12 +181,12 @@ including more complicated interactive interfaces, or even multi-player games.
 Still, there are a number of technical challenges to running experiments online.
 For example, unlike in a laboratory setting, researchers have to 
 deal with setting up a web server, recording data in a robust and secure way, 
-and compensating participants over the Internet.  
+and compensating participants over the internet.  
 Prior to the release of \psiturk{} version
 2.0.0 (early 2014), we conducted an informal survey of behavioral researchers 
 regarding their attitudes, concerns, and needs regarding online experimentation. 
 To help introduce some of the core features and goals of \psiturk{} we 
-quick summarize some of the findings from this survey.
+quickly summarize some of the findings from this survey.
 
 
 
@@ -201,8 +199,8 @@ as well as blogs and social media.
 
 The survey questions asked respondents about their attitudes and opinions towards
 online data collection as well as the features they would look for in a software package
-that helps with online data collection.  In the interest of brevity we highlight some of the
-most important questions and answer.
+that helps with online data collection.  In the interest of brevity, we highlight some of the
+most important questions and answers.
 
 Survey respondents showed a clear interest in online data collection. Nearly all listed fast data
 collection and large sample sizes as benefits of online data collection, with most
@@ -234,12 +232,10 @@ outside the US reported difficulty using services like Amazon Mechanical Turk.
 \label{tab:features}
 \end{table*}
 
-
-While about half of respondents (56\%) listed Qualtrics, a service for conducting online surveys, 
-as the tool they were \emph{currently} most likely to use, most respondents (79\%) expressed interest in 
+Many respondents (56\%) listed the tool that they were currently most likely to use as Qualtrics, which is a service for conducting online surveys. However, a majority of participants (79\%) expressed interest in 
 being able to run full experiments that included multiple trials, fixation crosses, etc.
 (Figure~\ref{fig:survey}). The vast majority (94\%) reported interest in new tools that 
-simplified online data collection. A full list of the features researchers are looking for in a 
+simplified online data collection. A full list of the features researchers were looking for in a 
 online data-collection system are shown in Table~\ref{tab:features}, along with a checklist 
 showing which are currently handled by \psiturk{}.  Importantly, \psiturk{} successfully
 meets many of the major challenges that researchers identified.
@@ -248,15 +244,15 @@ meets many of the major challenges that researchers identified.
 \section{\psiturk{} and Amazon Mechanical Turk} 
 
 \psiturk{} was primarily designed to facilitate online data collection using
-the Amazon Mechanical Turk (AMT) crowdsourcing platform (though, it can also be
-used to run expereiments in a traditional lab setting).
+the Amazon Mechanical Turk (AMT) crowdsourcing platform, though it can also be
+used to run experiments in a traditional lab setting.
 \cite{Mason:2012xy} provide a general overview of AMT features of
-interest to academic researchers.  A key feature of AMT is that it provides a way for researchers
+interest to academic researchers, one of which is that it provides a way for researchers
 to easily recruit and compensate individuals for online experiments.  
-People who complete tasks (called Human Intelligence Tasks or \emph{HITs}), are 
+People who complete tasks (called \emph{Human Intelligence Tasks} or \emph{HITs}) are 
 called \emph{workers}, and people who post tasks are called \emph{requesters}.
 Beyond providing a platform to connect requesters and workers, AMT places few restrictions 
-on the type of work that can be requested and the amount paid per HIT.  Workers are 
+on the type of work that can be requested.  Workers are 
 paid a fixed amount for each HIT they complete; this amount is determined by the requester and
 can be supplemented with bonus payments for good performance.
 
@@ -264,17 +260,17 @@ From a worker's perspective, the AMT website provides an up-to-date listing of H
 are available, with a title, brief description, and payment amount.  A worker can click on a HIT to 
 see its full \emph{advertisement} (an embedded webpage that is either hosted by
 Amazon or the requester) and decide to accept the HIT. Once the HIT has been accepted,
-the worker must complete it within a timeframe specified by the requester, or ``return'' the HIT
+the worker must complete it within a timeframe specified by the requester, or \emph{return} the HIT
 so that it may be completed by a different worker. The HIT may be completed either 
 on a requester's own hosted service (i.e., a webpage 
 external to the AMT site), or on the AMT website itself through the use of customized templates.
-Upon completion, the worker ``submits'' the HIT, after which point the completed work must 
+Upon completion, the worker \emph{submits} the HIT, after which point the completed work must 
 be approved by the requester before they are compensated.
 In addition, some HITs offer bonus payments that are determined by the requester based 
 on a worker's performance.
 
 From a requester's perspective, AMT provides a web-based interface for creating/managing 
-HITs and approving work that has been submitted.  In addition, they offer a ``sandbox'' version 
+HITs and approving work that has been submitted.  In addition, they offer a \emph{sandbox} version 
 of the platform in which HITs can be tested without paying live participants.
 For basic tasks like surveys and open text fields, AMT offers a range of built-in templates that 
 can be used to create experiments within the AMT website.  However, the degree of customization 
@@ -283,14 +279,12 @@ common to many psychology experiments (e.g., adapting the presentation of stimul
 performance, or counterbalancing across a number of experimental variables).
 In addition, they are limited to relatively simple forms of interaction and stimulus presentation.
 
-For more complex tasks, a requester can provide a link to their own hosted web page or
-web application which runs the 
-experiment, saves the data, and only interfaces with AMT at the beginning of the task (receiving 
+For more complex tasks, a requester can provide a link to an their own hosted web page or
+web application. This \emph{external HIT} only interfaces with AMT at the beginning of the task (receiving 
 basic information about the worker) and at the end of the task (sending confirmation that the task 
-has been completed).  Thus, these ``external HITs'' enable a much wider range of experiments at 
-the cost of additional technical requirements.  \psiturk{} is designed to handle many of the 
-complex requirements associated with ``external HITs'' so that researchers can more efficiently run 
-these types of tasks.
+has been completed); the requester's web application is responsible for otherwise running the 
+experiment and saving the data.  Thus, external HITs enable a much wider range of experiments at 
+the cost of additional technical requirements.
 % Specifically, it allows you to:
 % 1. Run a web server for your experiment
 % 2. Test your experiment
@@ -301,8 +295,7 @@ these types of tasks.
 
 \section{What technical challenges is \psiturk{} designed to solve?}
 
-The \psiturk{} platform is design to mitigate several of the technical complexities
-involved in online experimentation, particularly using AMT.
+The \psiturk{} platform is designed to handle many of the requirements associated with online experimentation---in particular, external HITs on Amazon Mechanical Turk---so that researchers can more efficiently run complex and sophisticated experiments.
 
 \subsubsection{Web server and database management}
 \label{sec:web-and-database}
@@ -319,55 +312,47 @@ experiment concurrently which can result in file corruption if two people try to
 write to the same file at the same time. Databases are specifically designed to 
 mitigate this issue by managing concurrent reading and writing.
  
-Setting up a webserver and database can be complex.  Some university Information
+Setting up a web server and database can be complex.  Some university Information
 Technology departments
 provide these types of services, but the technical infrastructure at other 
 institutions is lacking.  \psiturk{} includes a custom webserver and database
 as a basic feature of the software tool which can be run from any computer
 including a standard office computer or laptop.  This allows data collection from
 anywhere without the need for a dedicated server computer.  In addition, \psiturk{}
-can be easily installed on free hosting services such as Amazon Web Services
+can be installed on free hosting services such as Amazon Web Services
 or RedHat's OpenShift.  Data collected with \psiturk{} is stored at a location
 chosen by the experimenter and never visible to the \textsf{psiturk.org} cloud
 services or Amazon, protecting the privacy of participants and helping with IRB compliance.
 
 An additional complication is that contemporary web browsers are increasingly security
 focused.  In particular, certain browsers will not load content that is not properly 
-signed with a SSL certificate and accessed with a \textsf{https://} request.  This
-is often difficult to obtain from universities and can be costly from online
+signed with a SSL certificate and accessed with a \textsf{https://} request.  Such certificates
+are often difficult to obtain from universities and can be costly from online
 hosting companies.  \psiturk{} solves this problem on behalf of researchers by
-using a cloud-based ``ad server'' which presents securely signed
-content for users.  One way to think of the ad server is as a digital
-version of a ``bulletin board'' which is used to advertise particular
-studies within a university.  \psiturk{}
-posts the text of an ad using a unique URL, and securely routes requests to this URL
-back to the worker's browser.  If the worker decides to accept the HIT after seeing the ad,
-they are forwarded to the researcher's local computer to complete the task; it is up to the
-experimenter if this later content is encrypted or not. Thus, 
-the \psiturk{} ad server acts as a bridge between AMT and 
-a researcher's local computer (see Section~\ref{sec:adserver} for further information 
-about the ad server). 
+using a cloud-based \emph{Secure Ad Server} which presents securely signed
+content for users.  One way to think of the Secure Ad Server is as a digital
+version of a bulletin board which is used to advertise particular
+studies within a university.
 
 
 \subsubsection{Communicating with AMT}
 
 When using AMT to recruit and compensate participants,
 experimenters typically use the AMT website.  This often
-involves a lot of manual, error-prone clicking.   \psiturk{}
+involves a lot of manual, error-prone clicking.  To mitigate this, \psiturk{}
 has scripted many of the common
 tasks that researchers have to do on AMT's website, including:
 paying all participants, assigning bonus, checking the current
 account balance, and monitoring the progress of an experiment.
-This is accomplished via an interactive UNIX-based command
-line tool (see below).
-The goal of this tool is to help prevent errors in payments and
-to save researchers considerable time.
+These tasks are performed via an interactive UNIX-based command
+line tool, which helps by preventing errors in payments and
+by saving researchers considerable time.
 
 \subsubsection{Programming an experiment}
 \psiturk{} provides a number of features which help researchers implement 
 experiments.  These include a JavaScript library (\psiturkjs{}), basic HTML templates 
 for commonly used components (e.g., consent forms and instruction screens), 
-and an user-contributed ``experiment exchange'' where researchers can share the code for their \psiturk{}-compatible
+and an user-contributed \emph{Experiment Exchange} where researchers can share the code for their \psiturk{}-compatible
 projects (\textsf{http://psiturk.org/ee}). 
 
 The \psiturkjs{} JavaScript library provides basic functions for recording data and sending it back to the \psiturk{} server,
@@ -376,12 +361,12 @@ screens and providing (and recording) informed consent.
 However, the \psiturk{} framework is \emph{not} designed as a generic
 programming interface for building 
 experiments (e.g., it does not provide code for widgets such as sliders or buttons) and assume
-researchers will use some basic JavaScript, HTML, and CSS to design their experiment.  Instead, \psiturk{}'s
-philosophy is that general purpose JavaScript libraries available online for creating dynamic content (e.g., jquery or
-Twitter's Bootstrap library) provide the most powerful and well-documented set of features.  Instead, \psiturk{}
-aims to help share code and propagate ``best practices'' among the research community.
-This later goal is supported by the online ``experiment exchange''.
-The source code for projects in the exchange can be downloaded and modified for a new use,
+researchers will use some basic JavaScript, HTML, and CSS to design their experiment.  \psiturk{}'s
+philosophy is that general purpose JavaScript libraries available online for creating dynamic content (e.g., jQuery or
+Twitter's Bootstrap library) provide the most powerful and well-documented set of features.  
+
+Rather than reimplenting the functionality of existing libraries, \psiturk{} aims to help share code and propagate ``best practices'' among the research community.
+These goals are supported by the online Experiment Exchange, which catalogues existing \psiturk{} experiments. The source code for projects in the exchange can be downloaded and modified for a new use,
 replicated directly, or can simply provide example of code implementing a particular 
 feature.  In addition to the exchange, \psiturk{} also includes a complete working example 
 experiment that can be used as a template for new projects.
@@ -397,15 +382,11 @@ and counterbalancing different aspects of the experiment.
 In addition, it allows experimenters to filter workers in particular ways.  For example, through \psiturk{},
 is it possible to exclude participation by workers using certain devices (such as phones or tablets) or browsers
 which are known to have compatibility issues with the experimenter's design (for example,
-Firefox or Internet Explorer).  \psiturk{} also allows researchers to prevent a AMT worker from 
+Firefox or Internet Explorer).  \psiturk{} also allows researchers to prevent a worker from 
 participating in the same experiment more than once (which might otherwise be tempting when
 large financial rewards are offered).  Future versions of \psiturk{} may also allow researchers to 
 block AMT workers who have completed certain \psiturk{} experiments in the past, such as
 any similar experiment with a similar task~\citep[see][for a discussion about non-naivety amongst AMT workers]{chandler2014nonnaivete}.
-
-
-With these general features in mind, we now turn to a more detailed overview of the 
-\psiturk{} platform.
 
 \begin{figure*}[tp]
 \centering
@@ -417,15 +398,17 @@ With these general features in mind, we now turn to a more detailed overview of 
 
 \section{Key components of the \psiturk{} platform}
 
-The overall structure of the \psiturk{} platform is shown in Figure~\ref{fig:components}
+In the last section, we described the technical challenges that \psiturk{} was designed to address. Now, we describe how these challenges are actually met by giving a more detailed overview \psiturk{}'s different components.
+
+The overall structure of \psiturk{} is shown in Figure~\ref{fig:components}
 and can be conceptualized as involving three components.
 First, there are a collection of software tools which run locally on a user's
 local computer or server.  These local components include a command line tool and 
 a web application server (which provides both a customizable webserver and 
-database solution).  Next, \psiturk{} relies currently on Amazon
+database solution).  Second, \psiturk{} relies currently on Amazon
 Mechanical Turk to handle the recruitment and compensation of participants.
-Finally, the \textsf{psiturk.org} cloud based component includes a hosted ``ad server'' 
-and the experiment exchange.  In the following sections we highlight the important 
+Third, the \textsf{psiturk.org} cloud based component includes a hosted \emph{Secure Ad Server}
+and the \emph{Experiment Exchange}.  In the following sections we highlight the important 
 functions of each component.
 
 \subsection{Local computer or server}
@@ -433,7 +416,7 @@ functions of each component.
 \subsubsection{Command line tool}
 \label{sec:cli}
 
-When using \psiturk{}, the researcher runs the \psiturk{}
+When using \psiturk{}, the researcher runs an
 interactive UNIX-based command line tool on a local computer, such as a laptop
 or lab computer. This tool is used to issue commands, and to interact with the
 Amazon Mechanical Turk system and with the \psiturk{} cloud.  Example
@@ -484,17 +467,23 @@ can then be used instead of a local database solution.
 \subsection{\textsf{psiturk.org} cloud services}
 In addition to the command-line tool and the web application server, \psiturk{}
 provides a few web services that are continuously running on a separate web server.
-Most important of these is the \psiturk{} Secure Ad Server.  When a user
-creates a new HIT and wishes to post it to AMT, typically one advertises the
-study to potential participants (explaining how long the task will take and how
-much it will pay).  As mentioned earlier, these ``ads'' will not correctly display
-in worker's browsers unless they are encrypted using SSL.  The \textsf{psiturk.org}
-ad server allows users of the \psiturk{} system to host ads on the \textsf{https://psiturk.org}
-website which are encrypted.  These ads are what appear in the browsable listing
-on the Amazon Mechanical Turk website.
-As mentioned earlier, the \psiturk{} Experiment Exchange provides
+Most important of these is the \psiturk{} Secure Ad Server.  As mentioned earlier, when an experimenter
+creates a new HIT and posts it to AMT, they need to display an \emph{ad} explaining how long the task will take and how
+much it will pay.  However, ads will not correctly display
+in worker's browsers unless they are encrypted using SSL.  To resolve this issue, the
+Secure Ad Servier allows users of the \psiturk{} system to host ads on the \textsf{psiturk.org}
+website which are encrypted.
+
+Besides the convenience of the Secure Ad Server in terms of providing
+SSL signed URLs, the Secure Ad Server tracks statistics about the
+number of workers who viewed the ad but decided to not accept it, the
+number who accepted it, and the number who actually completed the task.
+These statistics are made available on the \textsf{psiturk.org} dashboard
+and can be an additional source of information for experimenters.
+
+Finally, in addition to the Secure Ad Server, the \psiturk{} Experiment Exchange provides
 a open-source repository of \psiturk{}-compatible experiments which can be 
-easily downloaded.  The coordination of these downloads is handled by the \textsf{psiturk.org} cloud.
+easily downloaded.  The coordination of these downloads is handled by the \textsf{psiturk.org} cloud. 
 
 %Complete documentation and tutorials are available at http://psiturk.org/docs, including instructions for installing the software.
 
@@ -527,13 +516,12 @@ Eventually, these credentials will be entered in the \texttt{.psiturkconfig} fil
 
 \subsection{\psiturk{} credentials}
 Additionally, a \psiturk{} account must be created at \textsf{https://psiturk.org/register}, which allows users to 
-post ads on \psiturk{}'s ad server. A new user must then obtain a set of \psiturk{} credentials which can be found in 
+post ads on \psiturk{}'s Secure Ad Server. A new user must then obtain a set of \psiturk{} credentials which can be found in 
 the ``API Keys'' menu item in the drop-down at the top right hand of the page.
 These credentials will also be placed in \texttt{.psiturkconfig} (see below).
 
 \subsection{Installation}
-\psiturk{} is installed using the python package manager \texttt{pip}. In a terminal window, type (excluding the dollar sign):
-\footnote{Depending on the user's permissions, this command may have to be prefaced with \texttt{sudo}.}
+\psiturk{} is installed using the python package manager \texttt{pip}. In a terminal window, type\footnote{Depending on the user's permissions, this command may have to be prefaced with \texttt{sudo}.} (excluding the dollar sign):
 
 \begin{lstlisting}
 $ pip install psiturk
@@ -550,7 +538,7 @@ $ pip install git+git://github.com/NYUCCL/psiTurk.git@master
 The \psiturk{} installation automatically creates a global config file, \texttt{.psiturkconfig}, in a user's home directory. 
 This file must then be edited to include the AWS and \psiturk{} credentials of the specific user. 
 
-\subsection{Optional: Adding SQL database}
+\subsection{Optional: Adding a SQL database}
 By default, \psiturk{} includes a basic database solution called \emph{SQLite}. This solution
 will work well for HITs that only require light traffic, but it does not handle
 multiple concurrent queries well: there is a real danger of data loss when a SQLite database is accessed at the same time by different users. 
@@ -590,7 +578,7 @@ created after the experiment is run for the first time):
 \end{itemize}
 
 
-\item \texttt{custom.py}: a Python file containing user-created ``routes'', so that new server-side functionality can be added to the \psiturk{} web server. \hl{JBH: I think there needs to be an explanation of what routes are}
+\item \texttt{custom.py}: a Python file containing user-provided custom functionality for the \psiturk{} web server
 
 \item \texttt{participants.db}: the SQLite database (if SQLite is being used)
 
@@ -618,7 +606,7 @@ the MTurk website except to add money to their MTurk requester account.
 Entering
 \texttt{psiturk} at the command line in any directory containing a \psiturk{} project launches the
 \psiturk{} CLI, whieh features a colorized prompt that provides important information at a glance, including
-whether the server is running, the current mode (``live'' or ``sandbox''), and the number of HITs currently running on AMT in the same mode:
+whether the server is running, the current mode (\emph{live} or \emph{sandbox}), and the number of HITs currently running on AMT in the same mode:
 
 \begin{lstlisting}
 [psiTurk server:off mode:sdbx #HITs:0]$
@@ -627,8 +615,8 @@ whether the server is running, the current mode (``live'' or ``sandbox''), and t
 \noindent In some examples below, this prompt is truncated as \texttt{[psiTurk]\$} to indicate commands that occur within the \psiturk{} CLI, while commands that are entered at the user's standard command line are preceded simply by \texttt{\$}.
 
 \subsubsection{Example CLI usage}
-Commands are organized into groups based on their function, following a general ``\texttt{command subcommand
-arguments}'' format. For example, one can create a HIT by typing: 
+Commands are organized into groups based on their function, following a general \texttt{command subcommand
+arguments} format. For example, one can create a HIT by typing: 
 
 % \noindent\lstinline+[psiTurk]$ hit create+
 % $<\# assignments> <\$ amount> <duration>$
@@ -663,7 +651,7 @@ During the development of an experiment, the current code can be tested using:
 \end{lstlisting}
 
 \noindent which will open a new browser window in which the current experiment can be tested. The experimenter can then test the experiment from the perspective of a worker before making it publicly available.
-Once the experiment is ready for real workers, the \texttt{mode} command can be used to switch to ``live'' mode, after which newly created HITs will be submitted to the main AMT site.
+Once the experiment is ready for real workers, the \texttt{mode} command can be used to switch to \emph{live} mode, after which newly created HITs will be submitted to the main AMT site.
 
 Help on any of the commands is easily accessible through the \texttt{help} command. Using \texttt{help} on its own will print all available commands, and using \texttt{help command} will print out detailed help on the given command.
 
@@ -678,8 +666,8 @@ Help on any of the commands is easily accessible through the \texttt{help} comma
 \subsection{The Secure Ad Server}
 \label{sec:adserver}
 
-As described briefly in Section~\ref{sec:web-and-database}, the psiturk.org
-cloud service provides a ``Secure Ad Server.''  The term ``ad'' in this context
+As described briefly in Section~\ref{sec:web-and-database}, the \textsf{psiturk.org}
+cloud service provides a \emph{Secure Ad Server}.  The term \emph{ad} in this context
 refers to a small HTML page which describes the details and requirements of a
 given experiment.  The ad is the first interaction that an experimenter has
 with a potential subject and is thus the gateway to subject recruitment. Ads
@@ -691,34 +679,27 @@ An overview of the flow of running an experiment using
 \psiturk{} and the Secure Ad Server is illustrated in
 Figure~\ref{fig:adserver}.  When a researcher using \psiturk{}
 runs the \texttt{hit create} command, the current contents of the local
-\texttt{templates/ad.html} file are uploaded to the psiturk.org cloud (see
+\texttt{templates/ad.html} file are uploaded to the \textsf{psiturk.org} cloud (see
 the right panel of Figure~\ref{fig:adserver}).
 This will create a unique custom URL for the experiment (an example might be
-\texttt{https://ad.psiturk.org/view/90812390123091823}) which
+\textsf{https://ad.psiturk.org/view/90812390123091823}) which
 allows anyone on the internet to view the contents of the uploaded \texttt{ad.html}
 file.  Critically, the ad URL is encrypted and
 securely signed with an appropriate SSL certificate ensuring that all
 web browsers will successfully display the webpage\footnote{SSL certification has recently become a requirement for hosting content within an \texttt{iframe} on \texttt{mturk.com}.}. A different URL is created each time \texttt{hit create}
-is run and there is no limit to the number of ads that can be created.  A private listing of all ads created by a particular user is available on the psiturk.org dashboard (\texttt{http://psiturk.org/dashboard}).
+is run and there is no limit to the number of ads that can be created.  A private listing of all ads created by a particular user is available on the \textsf{psiturk.org} dashboard (\textsf{http://psiturk.org/dashboard}).
 
 The custom ad URL is automatically passed
-on to AMT by the \texttt{hit create} command as the ``location'' of
+on to AMT by the \texttt{hit create} command as the location of
 the selected HIT.  As is visible in Figure~\ref{fig:adserver},
 when an AMT worker views a HIT on the AMT
-website, it loads the ad from the psiturk.org cloud server (left panel of Figure~\ref{fig:adserver}).  If the worker accepts
+website, it loads the ad from the \textsf{psiturk.org} cloud server (left panel of Figure~\ref{fig:adserver}).  If the worker accepts
 the hit, a link is provided to the worker which pops open a new browser
 window.  This URL points directly at the location of the \emph{requester's} local computer
 or server (right panel).  After this hand off occurs, all data is transmitted directly between the worker
-and the requester: the psiturk.org cloud server does not ever
+and the requester: the \textsf{psiturk.org} cloud server does not ever
 process or see the user's experimental data.  This is important for many IRBs,
-particular if an experiment involves sensitive materials.
-
-Besides the convenience of the Secure Ad Server in terms of providing
-SSL signed URLs, the Secure Ad Server tracks statistics about the
-number of workers who viewed the ad but decided to not accept it, the
-number who accepted it, and the number who actually completed the task.
-These statistics are made available on the psiturk.org dashboard
-and can be an additional source of information for experimenters.
+particularly if an experiment involves sensitive materials.
 
 
 \subsection{JavaScript library \psiturkjs{}}
@@ -737,7 +718,7 @@ When the experiment files are requested from the \psiturk{} server, the followin
 
 \begin{itemize}
 \item \texttt{uniqueId}: a unique identifier for the participant
-\item \texttt{adServerLoc}: the experiment-specific URL on the Ad Server
+\item \texttt{adServerLoc}: the experiment-specific URL on the Secure Ad Server
 \item \texttt{mode}: the current mode (debug, sandbox, or live)
 \item \texttt{condition}: experimental condition
 \item \texttt{counterbalance}: counterbalancing code, used to vary design elements that are not related to main manipulation 
@@ -763,7 +744,7 @@ Second, successful completion of the experiment is signaled by calling \texttt{p
 \subsubsection{Saving experimental data} 
 
 The experimenter can save data in two formats.
-\texttt{psiTurk.recordTrialData} takes any JSON object as input and appends it to a list of ``trial'' data.
+\texttt{psiTurk.recordTrialData} takes any JSON object as input and appends it to a list of \emph{trial data}.
 This data structure is meant for sequential data that may be collected over the course of multiple trials or blocks, where each line corresponds to a new measurement.
 However, the format of each entry is defined by the experimenter and is saved in the database as a single JSON object (see line 20).
 Each new entry is automatically time-stamped at the time that \texttt{psiTurk.recordTrialData} is called.
@@ -786,7 +767,7 @@ For example, although it is possible to control the initial size of a browser wi
 \psiturkjs{} automatically records these changes in the size of the window.
 Similarly, the participant can choose to switch focus away from the experiment window (e.g., to another browser window or a different application).
 \psiturkjs{} automatically records every time that the experiment window loses and gains the participant's focus.
-This ``event data'' is saved to the database whenever \texttt{psiTurk.saveData} is invoked, without any additional action on the part of the experimenter. \\
+This \emph{event data} is saved to the database whenever \texttt{psiTurk.saveData} is invoked, without any additional action on the part of the experimenter. \\
 
 
 \begin{lstlisting}[float=*,numbers=left,numberstyle=\small\color{gray},caption=Condensed version of JavaScript code for Stroop experiment,label=code.lst]
@@ -856,10 +837,10 @@ var Questionnaire = function() {
 };
 \end{lstlisting}
 
-\subsection{Experiment exchange}
+\subsection{Experiment Exchange}
 
 A significant advantage of web-based experiments is the potential for low-friction replication and extension. 
-The \emph{Experiment Exchange} (http://psiturk.org/ee) facilitates the sharing of experiments that have been built to run using \psiturk{}, acting as an ``app store'' for \psiturk{}-compatible designs.
+The \emph{Experiment Exchange} (\textsf{http://psiturk.org/ee}) facilitates the sharing of experiments that have been built to run using \psiturk{}, acting as an ``app store'' for \psiturk{}-compatible designs.
 Once an experiment has been completed, a researcher can submit the following information to register their experiment on the exchange:
 
 \begin{enumerate}
@@ -881,8 +862,8 @@ $ psiturk-install <experiment-specific-id>
 If \psiturk{} is already configured on the user's system, the downloaded experiment will run without further changes, and can then act as a starting point for direct replication or extensions.
 Modified versions can then be re-run using the same population via AMT, thereby minimizing the potential for experimenter-specific biases.
 
-Other initiatives (e.g., the Open Science Framework, https://osf.io) also aim to improve the transparency, reproducibility, and efficiency of research through centralized services, but are less focused on the specific technology stack used to run online experiments.
-In contrast, the \psiturk{} experiment exchange links together experiments that can be run within a common framework.
+Other initiatives (e.g., the Open Science Framework, \textsf{https://osf.io}) also aim to improve the transparency, reproducibility, and efficiency of research through centralized services, but are less focused on the specific technology stack used to run online experiments.
+In contrast, the \psiturk{} Experiment Exchange links together experiments that can be run within a common framework.
 As a result, existing experiments can serve as examples to help new researchers learn to code for the web; they shorten the development time necessary (especially for popular experimental paradigms); and the exchange facilitates communication between researchers with similar interests.
 
 \section{Limitations and future directions (TMG)}
@@ -897,13 +878,13 @@ participants~\citep{chandler2014nonnaivete}. These concerns are often not releva
 look for alternatives to AMT. Many \psiturk{} features (i.e. the web server, data base, and \psiturkjs{}) are general
 enough to facilitate running experiments on other platforms, too, but it would require some customization of certain AMT-specific functionality. 
 Researchers who decide
-to use \psiturk{} on another platform could contribute such changes to the github repository (https://github.com/NYUCCL/psiTurk) to make them
+to use \psiturk{} on another platform could contribute such changes to the github repository (\textsf{https://github.com/NYUCCL/psiTurk}) to make them
 available to the community.
 
 
 Another limitation is that \psiturk{} only runs on UNIX systems, like Linux and Mac OS, and can thus not be used on Windows computers. To meet this 
 challenge, one option for Windows users is to use a cloud-based computing service to run \psiturk{} and host experiments. There exist
-multiple free or low-cost options, such as Amazon Web Services (http://aws.amazon.com), or OpenShift (https://www.openshift.com). 
+multiple free or low-cost options, such as Amazon Web Services (\textsf{http://aws.amazon.com}), or OpenShift (\textsf{https://www.openshift.com}). 
 The installation steps and setup may diverge slightly from the standard procedure but 
  the \psiturk{} documentation already contains additional installation instructions for OpenShift. In the future, we hope to extend support  and 
 documentation to a wider range of cloud computing options.

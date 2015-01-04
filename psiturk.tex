@@ -87,7 +87,7 @@ Please address correspondence concerning this paper to:\\
         \email{authors@psiturk.org}
 }
 
-\date{Received: date / Accepted: date}
+\date{Received: 1/4/2014 date}
 
 \maketitle
 
@@ -204,7 +204,7 @@ quickly summarize some of the findings from this survey.
 linguistics (16\%), marketing (7\%), neuroscience (6\%), and economics (4\%), most of 
 whom had some experience collecting behavioral data online in their labs (85\%).  
 Respondents were recruited via mailing lists devoted to behavioral science and psychology 
-as well as blogs and social media. 
+as well as blogs and social media.
 
 The survey questions asked respondents about their attitudes and opinions towards
 online data collection as well as the features they would look for in a software package
@@ -551,11 +551,11 @@ This file must then be edited to include the AWS and \psiturk{} credentials of t
 \subsection{Optional: Adding a SQL database}
 By default, \psiturk{} includes a basic database solution called \emph{SQLite}. This solution
 will work for HITs that only require light traffic, but it does not handle
-multiple concurrent queries well: there is a real danger of data loss when a SQLite database is accessed at the same time by different users. 
+multiple concurrent queries well: there is a danger of data loss when a SQLite database is 
+accessed at the same time by different users. 
 It is therefore recommended to set up a more robust database solution, like a
 MySQL database, especially if a researcher wants to run many participants simultaneously.
-%\hl{JBH: earlier it was mentioned this could be done from the psiturk command line --
-%maybe we should briefly mention specifics of how to do that here?}
+
 
 \section{Getting started with \psiturk{}}
 
@@ -875,6 +875,16 @@ Modified versions can then be re-run using the same population via AMT, thereby 
 Other initiatives (e.g., the Open Science Framework, \textsf{https://osf.io}) also aim to improve the transparency, reproducibility, and efficiency of research through centralized services, but are less focused on the specific technology stack used to run online experiments.
 In contrast, the \psiturk{} Experiment Exchange links together experiments that can be run within a common framework.
 As a result, existing experiments can serve as examples to help new researchers learn to code for the web; they shorten the development time necessary (especially for popular experimental paradigms); and the exchange facilitates communication between researchers with similar interests.
+
+\section{Adoption by the community}
+
+At the time of publication of this paper, there are 267 registered users accounts
+on \textsf{http://psiturk.org}.  So far 8,432 distinct Amazon workers have completely
+\textsf{psiTurk} tasks and 1,788 attempts to complete the same experiment more
+than once have been blocked.   The \textsf{psiTurk} command line tool itself has been
+launching 20,823 times.  In addition, six full \textsf{psiTurk}-compatible experiments
+have been published in the Experiment Exchange including some by researchers
+who are not authors of this article.
 
 \section{Limitations and future directions}
 

@@ -25,6 +25,9 @@
 \definecolor{gray}{rgb}{0.5,0.5,0.5}
 \definecolor{mauve}{rgb}{0.58,0,0.82}
 
+\renewcommand{\labelitemi}{$\bullet$}
+\renewcommand{\labelitemii}{$\cdot$}
+
 \lstset{frame=tb,
   %language=Java,
   aboveskip=5mm,
@@ -131,7 +134,7 @@ paid human experiments online.
 \centering
 \includegraphics[scale=.30]{figures/psiturk_logo.jpg}
 \caption{The \psiturk{} project is hosted on GitHub 
-(\textsf{http://github.com/NYUCCL/psiTurk}) and at its main webpage (\textsf{http://psiturk.org}). 
+(\textsf{https://github.com/NYUCCL/psiTurk}) and at its main webpage (\textsf{https://psiturk.org}). 
 The commissioned logo reflects the community-built orientation of the project.  A 
 core philosophy is that better scientific software developed can be developed 
 with more diverse input from many programmers~\citep{Raymond:1999zt}.}
@@ -146,7 +149,7 @@ the spirit of the recent ``open science'' movement \citep{Collaboration:2012vf},
 it provides  an open-source Experiment Exchange for sharing experiments 
 that can be easily replicated and extended by other researchers.  The code for 
 \psiturk{} is open source, hosted publicly at
-\textsf{http://github.com/NYUCCL/psiTurk}, and interested researchers can easily 
+\textsf{https://github.com/NYUCCL/psiTurk}, and interested researchers can easily 
 contribute to improvements and bug fixes (see Figure~\ref{fig:logo}).
 
 The principal goal of \psiturk{} is to handle common technical 
@@ -555,7 +558,10 @@ multiple concurrent queries well: there is a danger of data loss when a SQLite d
 accessed at the same time by different users. 
 It is therefore recommended to set up a more robust database solution, like a
 MySQL database, especially if a researcher wants to run many participants simultaneously.
-
+Fortunately, Amazon's Web Services (of which Mechanical Turk is just one component)
+provides a relatively simple and inexpensive way to set up a SQL server.  Please refer to
+the documentation at \textsf{http://psiturk.readthedocs.org/} (``Configuring Databases'' section)
+for complete instructions.
 
 \section{Getting started with \psiturk{}}
 
@@ -611,11 +617,12 @@ variety of tasks---from creating HITs and paying workers, to launching Amazon
 Web Services database instances, to opening an experiment in a browser for
 debugging---that would otherwise be spread across a number of websites and
 programs. In most cases, a user of the \psiturk{} CLI will never have to log into
-the MTurk website except to add money to their MTurk requester account.
+the MTurk website except to add money to their MTurk requester account and
+to first create the account (and to accept the terms of service).
 
 Entering
 \texttt{psiturk} at the command line in any directory containing a \psiturk{} project launches the
-\psiturk{} CLI, whieh features a colorized prompt that provides important information at a glance, including
+\psiturk{} CLI, which features a colorized prompt that provides important information at a glance, including
 whether the server is running, the current mode (\emph{live} or \emph{sandbox}), and the number of HITs currently running on AMT in the same mode:
 
 \begin{lstlisting}
@@ -697,7 +704,7 @@ allows anyone on the internet to view the contents of the uploaded \texttt{ad.ht
 file.  Critically, the ad URL is encrypted and
 securely signed with an appropriate SSL certificate ensuring that all
 web browsers will successfully display the webpage\footnote{SSL certification has recently become a requirement for hosting content within an \texttt{iframe} on \texttt{mturk.com}.}. A different URL is created each time \texttt{hit create}
-is run and there is no limit to the number of ads that can be created.  A private listing of all ads created by a particular user is available on the \textsf{psiturk.org} dashboard (\textsf{http://psiturk.org/dashboard}).
+is run and there is no limit to the number of ads that can be created.  A private listing of all ads created by a particular user is available on the \textsf{psiturk.org} dashboard (\textsf{https://psiturk.org/dashboard}).
 
 The custom ad URL is automatically passed
 on to AMT by the \texttt{hit create} command as the location of
@@ -850,7 +857,7 @@ var Questionnaire = function() {
 \subsection{Experiment Exchange}
 
 A significant advantage of web-based experiments is the potential for low-friction replication and extension. 
-The \emph{Experiment Exchange} (\textsf{http://psiturk.org/ee}) facilitates the sharing of experiments that have been built to run using \psiturk{}, acting as an ``app store'' for \psiturk{}-compatible designs.
+The \emph{Experiment Exchange} (\textsf{https://psiturk.org/ee}) facilitates the sharing of experiments that have been built to run using \psiturk{}, acting as an ``app store'' for \psiturk{}-compatible designs.
 Once an experiment has been completed, a researcher can submit the following information to register their experiment on the exchange:
 
 \begin{enumerate}
@@ -879,10 +886,10 @@ As a result, existing experiments can serve as examples to help new researchers 
 \section{Adoption by the community}
 
 At the time of publication of this paper, there are 267 registered users accounts
-on \textsf{http://psiturk.org}.  So far 8,432 distinct Amazon workers have completely
+on \textsf{https://psiturk.org}.  So far 8,432 distinct Amazon workers have completely
 \textsf{psiTurk} tasks and 1,788 attempts to complete the same experiment more
 than once have been blocked.   The \textsf{psiTurk} command line tool itself has been
-launching 20,823 times.  In addition, six full \textsf{psiTurk}-compatible experiments
+launched 20,823 times.  In addition, the source code for six \textsf{psiTurk}-compatible experiments
 have been published in the Experiment Exchange including some by researchers
 who are not authors of this article.
 
@@ -890,12 +897,12 @@ who are not authors of this article.
 
 \psiturk{} solves a number of the challenges facing researchers interested in online data collection.
 However, at the time of the publication of this article, there remain a number of limitations 
-that remain to be solves.
+that remain to be solved.
 
 One possible limitation is that \psiturk{} is currently designed to work primarily with Amazon Mechanical Turk. 
 A common worry with AMT is the unrepresentativeness of its subject pool (in terms of demographics and 
 geography), as well as the fact that certain experimental protocols are now too well-known to workers to guarantee naive
-participants~\citep{chandler2014nonnaivete}.  Indeed, some of the concerns raised by survey respondents are inherent 
+participants~\citep{chandler2014nonnaivete}.  Indeed, some of the concerns raised by survey respondents in Section 2 are inherent 
 to online data collection or the AMT platform and therefore \psiturk{} does not address them.
 It is worth pointing out, however, that the common concern about data reliability may be somewhat exaggerated 
 based on recent studies that have successfully replicated a wide range of classic cognitive psychology findings using 
@@ -920,7 +927,7 @@ Researchers who decide to use \psiturk{} on another platform could contribute su
 
 Another limitation is that \psiturk{} only runs on UNIX systems, like Linux and Mac OS, and can thus not be used on Windows computers. To meet this 
 challenge, one option for Windows users is to use a cloud-based computing service to run \psiturk{} and host experiments. There exist
-multiple free or low-cost options, such as Amazon Web Services (\textsf{http://aws.amazon.com}). 
+multiple free or low-cost options, such as Amazon Web Services (\textsf{https://aws.amazon.com}). 
 The installation steps and setup may diverge slightly from the standard procedure but  the \psiturk{} documentation already contains 
 additional installation instructions for OpenShift. In the future, we hope to extend support  and documentation to a wider range of cloud 
 computing options.
@@ -937,7 +944,17 @@ One exciting prospect of running online experiments is to let multiple participa
 or group behavior. Currently \psiturk{} does not offer its own tool to facilitate such multi-person experiments, but we would like to
 add support for it in the future, using web-sockets or other protocols that enable communication between users.
 
+\section{Conclusions}
 
+As online data collection becomes more widespread, new software tools will need to be
+created.  While in some cases these tools may come from for-profit enterprises, the project
+described in this paper advances an open-source, community-driven approach to software
+design.  A core philosophy is that better scientific software developed can be developed 
+with more diverse input from many programmers~\citep{Raymond:1999zt}.
+The advantages are that the quality of the code can be improved by having many people
+read and help catch bugs.  In addition, ``best practices" can be more readily propagated
+through the research community through code share such as in the \textsf{psiTurk}
+Experiment Exchange. 
 
 
 % BibTeX users please use one of

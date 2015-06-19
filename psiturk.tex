@@ -163,8 +163,12 @@ We begin with an overview of the issues involved in online
 behavioral research,  the AMT platform, and the specific challenges that \psiturk{} is designed to 
 address.  We then  step through the core functionality of \psiturk{} and 
 describe its role from the point of view of both the experimenter and the participant.  Finally, we
-consider some future directions for \psiturk{} and online experimentation in 
-general.
+consider some future directions for \psiturk{}. 
+
+Note that an exhaustive discussion of all the caveats, challenges, and opportunities presented by 
+web-based experimentation lies beyond the scope of this paper~\cite[see e.g.,][for a more detailed discussion]{reips2000web,birnbaum2004human,reips2002standards}. Rather, we will
+focus on the specific methodological contributions of \psiturk{} and its possibilities in the future. 
+
 
 
 
@@ -179,7 +183,7 @@ by 201 behavioral researchers.}
 \end{figure*}
 
 It is easy to see why online experiments are an attractive option for behavioral 
-scientists.  Compared to traditional methods of experimentation in the laboratory,
+scientists~\cite[see also,][]{birnbaum2004human}.  Compared to traditional methods of experimentation in the laboratory,
 they allow researchers to collect large data sets in a fraction of the time and at 
 much lower cost (in terms of time, employment of research assistants, and typical 
 compensation costs for participants).  Designing experiments for the web allows 
@@ -191,7 +195,8 @@ that far exceed the capabilities of traditional experiment software developed
 in academia.  Additionally, such tools enable a much wider range of experiments, 
 including more complicated interactive interfaces, or even multi-player games.
 
-Still, there are a number of technical challenges to running experiments online.
+Still, there are a number of technical challenges to running experiments online~\cite[for 
+a more in-depth discussion of these challenges, see ][]{reips2002standards}.
 For example, unlike in a laboratory setting, researchers have to 
 deal with setting up a web server, recording data in a robust and secure way, 
 and compensating participants over the Internet.  
@@ -319,7 +324,7 @@ To collect experimental data on the web, or specifically to run an external HIT 
 researchers minimally need a web server and database.  
 The role of a web server is to respond to requests from participant's Internet browser 
 for the experiment content.  The role of the database is to save the data provided by 
-the participant.  Although less common in laboratory experiments, databases are 
+the participant. Although less common in laboratory experiments, databases are 
 necessary for online studies because it is impossible to save data to a participant's 
 computer using a web page or web application -- data must be stored on the server,
 rather than the client.  In addition, multiple participants often complete an 
@@ -395,8 +400,8 @@ For example, \psiturk{} offers basic capabilities for assigning workers to diffe
 and counterbalancing different aspects of the experiment.
 In addition, it allows experimenters to filter workers in particular ways.  For example, through \psiturk{},
 is it possible to exclude participation by workers using certain devices (such as phones or tablets) or browsers
-which are known to have compatibility issues with the experimenter's design (for example,
-Firefox or Internet Explorer).  \psiturk{} also allows researchers to prevent a worker from 
+which are known to have compatibility issues with the experimenter's design (for example Internet Explorer).  
+\psiturk{} also allows researchers to prevent a worker from 
 participating in the same experiment more than once (which might otherwise be tempting when
 large financial rewards are offered).  Future versions of \psiturk{} may also allow researchers to 
 block AMT workers who have completed certain \psiturk{} experiments in the past, such as
@@ -904,13 +909,20 @@ One possible limitation is that \psiturk{} is currently designed to work primari
 A common worry with AMT is the unrepresentativeness of its subject pool (in terms of demographics and 
 geography), as well as the fact that certain experimental protocols are now too well-known to workers to guarantee naive
 participants~\citep{chandler2014nonnaivete}.  Indeed, some of the concerns raised by survey respondents in Section 2 are inherent 
-to online data collection or the AMT platform and therefore \psiturk{} does not address them.
+to online data collection or the AMT platform and therefore \psiturk{} does not address them. 
 It is worth pointing out, however, that the common concern about data reliability may be somewhat exaggerated 
 based on recent studies that have successfully replicated a wide range of classic cognitive psychology findings using 
 AMT data~\citep{crump2013evaluating}. Interestingly, this study also found that increasing worker payment had no effect on 
 reliability, suggesting that even  at low payment levels data quality was high. 
 
-On the other hand, there clearly exist experimental protocols that simply are not amenable to online
+
+To address some of these concerns,  some experimenters may look for alternatives to AMT. 
+Many \psiturk{} features (i.e. the web server, data base, and \psiturkjs{}) are general enough to facilitate running experiments 
+on other platforms, too, but it would require some customization of certain AMT-specific functionality. 
+Researchers who decide to use \psiturk{} on another platform could contribute such changes to the GitHub repository 
+(\textsf{https://github.com/NYUCCL/psiTurk}) to make them available to the community.
+
+There also clearly exist experimental protocols that simply are not amenable to online
 experimentation. Experiments that require very fine-grained temporal control over stimulus presentation, for example, 
 may be unsuited because browsers will not be able to reliably display content fast enough if the presentation time
 becomes too short~\citep{crump2013evaluating}.
@@ -919,12 +931,13 @@ be problematic due to the nature of the web browsing environment.
 One advantage of \psiturk{} is that it automatically collects data on worker's interaction with the experiment window, that is, 
 if and when the window was resized and if and when the user switched tabs or windows. 
 This kind of data can be used to evaluate a worker's level of engagement while completing the task.
+Nevertheless, the general lack of control over, for example, who drops out
+of an experiment, the environment of the participant, and the degree of motivation that participants
+bring to a task may present serious challenges and render online experiments unsuitable for some.  
+To help researchers decide whether online experimentation is an appropriate method for them, 
+we refer the reader to previous work that focuses in more detail on the various and in some cases unavoidable differences 
+between lab and online experimentation~\cite[see e.g.,][]{reips2002standards,birnbaum2004human}.   
 
-As a result of these concerns, some experimenters may look for alternatives to AMT. 
-Many \psiturk{} features (i.e. the web server, data base, and \psiturkjs{}) are general enough to facilitate running experiments 
-on other platforms, too, but it would require some customization of certain AMT-specific functionality. 
-Researchers who decide to use \psiturk{} on another platform could contribute such changes to the GitHub repository 
-(\textsf{https://github.com/NYUCCL/psiTurk}) to make them available to the community.
 
 Another limitation is that \psiturk{} only runs on UNIX systems, like Linux and Mac OS, and can thus not be used on Windows computers. To meet this 
 challenge, one option for Windows users is to use a cloud-based computing service to run \psiturk{} and host experiments. There exist

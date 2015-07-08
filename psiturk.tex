@@ -57,7 +57,7 @@
 % i set the authorship order based on github contributions
 \author{Todd M. Gureckis$^1$ \and
 	Jay Martin$^{1,2}$ \and
-	John McDonnell$^3$ \and
+	John McDonnell$^{1,3}$ \and
 	Alexander S. Rich$^1$ \and
 	Doug Markant$^4$  \and
 	Anna Coenen$^1$ \and
@@ -101,7 +101,7 @@ of technical and scientific challenges.  The project described in this paper, \t
 an open-source platform which helps researchers develop experiment designs which can be
 conducted over the Internet.  The tool primarily interfaces with Amazon's Mechanical Turk, 
 a popular crowd-sourcing labor market.  This paper describes the basic architecture of the system 
-and introduces new users to the overall goals of the system.  \textsf{psiTurk} aims to reduce
+and introduces new users to the overall goals.  \textsf{psiTurk} aims to reduce
 the technical hurdles for researchers developing online experiments 
 while improving the transparency and collaborative nature of the behavioral sciences.
 \keywords{Online experiments \and Open science \and Amazon Mechanical Turk \and Internet Experiments \and psiTurk}
@@ -121,7 +121,7 @@ use online data collection to deploy ``traditional'' experimental psychology
 tasks.  The benefit of the online versions of traditional behavioral experiments include 
 faster data collection and access to a potentially more diverse pool of participants. 
 At the same time, conducting experiments online introduces a number of new 
-technical and scientific challenges that must be addressed.
+technical and scientific challenges that must be addressed~\cite{reips2000web,birnbaum2004human,reips2002standards}.
 
 The project described in this paper, \psiturk{}, is an open-source project that aims to address many of the technical challenges
 involved in deploying psychology experiments online.
@@ -384,11 +384,17 @@ researchers will use some basic JavaScript, HTML, and CSS to design their experi
 philosophy is that general purpose JavaScript libraries available online for creating dynamic content (e.g., jQuery or
 Twitter's Bootstrap library) provide the most powerful and well-documented set of features.  
 
-Rather than reimplenting the functionality of existing libraries, \psiturk{} aims to help share code and propagate ``best practices'' among the research community.
+Rather than reimplementing the functionality of existing libraries, \psiturk{} aims to help share code and propagate ``best practices'' among the research community.
 These goals are supported by the online Experiment Exchange, which catalogues existing \psiturk{} experiments. The source code for projects in the exchange can be downloaded and modified for a new use,
 replicated directly, or can simply provide example of code implementing a particular 
 feature.  In addition to the exchange, \psiturk{} also includes a complete working example 
 experiment that can be used as a template for new projects.
+
+Examples of experiments already shared in the Experiment Exchange include mental rotation
+experiments, feature rating tasks, interactive drawing tasks, auditory lexical decision and identification
+tasks, decision making experiments, and other common designs in cognitive psychology.
+Any interface that can be programmed in a browser can in theory be adapted for use with psiTurk
+which means anything from surveys to rich video-game type interfaces are possible.
 
 %That is, it requires that the experimenter knows some basic JavasScipt, HTML, and CSS to code the logic and looks of a new study.
 
@@ -520,6 +526,14 @@ HITs on Mechanical Turk. Note that details of these steps may change over time a
 \item A web browser (ideally one that provides web developer tools, like Firefox, Safari, or Chrome)
 \end{enumerate}
 
+\psiturk{} relies on a variety of open-source packages developed for Python.  Most centrally this includes
+Flask (\textsf{http://flask.pocoo.org/}) which is a micro framework for developing web applications in Python,
+gunicorn (\textsf{http://gunicorn.org/}) a Python-based HTTP server, and boto (\textsf{https://boto.readthedocs.org/en/latest/})
+a Python interface to Amazon Web Services.  There are a variety of other packages which provide supporting
+functions which are automatically installed using the \texttt{pip} package manager when \psiturk{} is installed.
+However in many ways \psiturk{} is a package which glues together the functionality of Flask, gunicorn, and boto.
+These packages were selected due to their relatively mature development status, their open-source licensing,
+and their ease of use.
 To satisfy the Python requirements, we recommend using an existing distribution like \emph{Enthought} or \emph{Anaconda}. These are free
 Python distributions that ship with a range of useful packages, including the \texttt{pip} package manager. 
 
@@ -724,6 +738,12 @@ and the requester: the \textsf{psiturk.org} cloud server does not ever
 process or see the user's experimental data.  This is important for many IRBs,
 particularly if an experiment involves sensitive materials.
 
+One possible complication with this approach is that if the computer hosting the experiment goes down 
+any participants currently taking the experiment may encounter connection problems.  Since \psiturk{} encourages
+a distributed model where the webserver runs on a local machine 
+this can happen accidentally (e.g., if a laptop computer running \psiturk{} loses a wifi connection).  Although this problem affects all
+approaches to web-based experimentation, the lack of a dedicated server model can exacerbate this concern.
+However, it should be possible in most cases to restart the server and allow participants to continue (assuming the server interruption is temporary).  If the local \psiturk{}  server is offline or unreachable, new participants will not be able to begin the experiment because he ad server communicates with the \psiturk{} researcher’s local machine during the display of the ad to verify it is still online.  
 
 \subsection{JavaScript library \psiturkjs{}}
 
@@ -891,13 +911,27 @@ As a result, existing experiments can serve as examples to help new researchers 
 
 \section{Adoption by the community}
 
-At the time of publication of this paper, there are 267 registered users accounts
-on \textsf{https://psiturk.org}.  So far 8,432 distinct Amazon workers have completely
-\textsf{psiTurk} tasks and 1,788 attempts to complete the same experiment more
-than once have been blocked.   The \textsf{psiTurk} command line tool itself has been
-launched 20,823 times.  In addition, the source code for six \textsf{psiTurk}-compatible experiments
+At the time of publication of this paper, there are 444 registered users accounts
+on \textsf{https://psiturk.org}.  So far 24,203 distinct Amazon workers have completely
+\textsf{psiTurk} tasks and 9,107 attempts to complete the same experiment more
+than once have been blocked.   The \psiturk{} command line tool itself has been
+launched 42,648 times.  In addition, the source code for ten \psiturk{}-compatible experiments
 have been published in the Experiment Exchange including some by researchers
 who are not authors of this article.
+
+\section{Related projects}
+
+There are a variety of software projects related to \psiturk{}.
+WEXTOR is a Javascript-based experiment generating system which helps
+researchers with little programming experience develop experiments~\citep{Reips:2002qf}.
+\psiturk{} has similar aims but allows for greater customization and more direct
+interfacing with Amazon Mechanical Turk.  TurkGate (\textsf{http://gideongoldin.github.io/TurkGate/}) is a project to help researchers
+group surveys together to prevent repeat participation by Mechanical Turk Workers.  However it
+doesn't directly deal with paying participants, providing a webserver, or storing participant data.
+Turkserver-meteor (\textsf{http://turkserver.meteor.com/}) is a framework for building real-time web apps
+that interface with Mechanical Turk and provides many similar features to \psiturk{} but is based
+on the Meteor development platform.
+
 
 \section{Limitations and future directions}
 
@@ -945,6 +979,7 @@ multiple free or low-cost options, such as Amazon Web Services (\textsf{https://
 The installation steps and setup may diverge slightly from the standard procedure but  the \psiturk{} documentation already contains 
 additional installation instructions for OpenShift. In the future, we hope to extend support  and documentation to a wider range of cloud 
 computing options.
+
 
 Another future direction is to extend the counterbalancing capabilities of \psiturk{}. Currently, the built-in counterbalancing algorithm
 simply aims to assign participants equally to different cells.  However, this equal assignment method can be problematic if, for instance, 

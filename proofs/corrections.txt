@@ -2,11 +2,21 @@ l.58 e-mail is “anna.coenen@nyu.edu”
 
 Q1: “PSITURK” should read “psiTurk”
 
+Fig 2: "conducting full experiments" should be "Conducting full experiments"
+
 l.93 “,” should be “ and”
+
+l.154 "Amazon mechanical turk" should be "Amazon Mechanical Turk"
 
 l.224 “participant’s” should be “a participant’s”
 
 l.390 delete “ server”
+
+l.399 "mechanical turk" should be "Mechanical Turk"; "amazon web services" should be "Amazon Web Services"
+
+l.597: "hit list--active" should be "hit list --active"
+
+l.621 "secure Ad server" should be "Secure Ad Server"
 
 l.781 “this data” should be “these data”
 

@@ -1,0 +1,22 @@
+l.58 e-mail is “anna.coenen@nyu.edu”
+
+Q1: “PSITURK” should read “psiTurk”
+
+l.93 “,” should be “ and”
+
+l.224 “participant’s” should be “a participant’s”
+
+l.390 delete “ server”
+
+l.781 “this data” should be “these data”
+
+l.839 “completely” should be “completed”
+
+l.908 “this” should be “these”
+
+l.926 turn url into hyperlink
+
+
+
+
+
